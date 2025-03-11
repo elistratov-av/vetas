@@ -1,0 +1,1855 @@
+openapi: 3.0.0
+info:
+  title: Документация для разработчика ВетАС
+  description: Эта документация предназначена для ознакомления с существующими ендпоинтами ВетАС.
+  version: 1.0.0
+tags:
+  - name: Аналитика
+    description: Раздел для запросов аналитики
+  - name: Приюты
+    description: Раздел для запросов по приютам
+  - name: Телеветеренария
+    description: Раздел для запросов по телевету
+  - name: Поиск питомцев
+    description: Раздел для запросов по поиску питомцев
+servers:
+  - url: https://backend.local/
+    description: Локальная среда разработки
+  - url: https://api-vetas-prod.starlink-soft.ru/
+    description: Тестовый стенд
+  - url: https://api-vetas-predprod.mos.ru/
+    description: Предпродакшен среда
+  - url: https://api-vetas.mos.ru/
+    description: Продакшен среда
+paths:
+  /v3/analytics/dictionary:
+    get:
+      summary: Справочник для аналитики
+      tags: 
+      - Аналитика
+      description: |
+        Этот запрос предназначен для получения справочника, содержащего информацию о доступных областях, каналах, районах, организациях, специалистах, видах, статусах и типах для аналитики.
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  is_success:
+                    type: boolean
+                    description: Признак успешности ответа
+                  data:
+                    type: object
+                    properties:
+                      areas:
+                        type: array
+                        description: Список округов
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: ID округа
+                            name:
+                              type: string
+                              description: Название округа
+                            area_id:
+                              type: integer
+                              description: ID округа
+                      channels:
+                        type: array
+                        description: Список каналов
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: ID канала
+                            name:
+                              type: string
+                              description: Название канала
+                      districts:
+                        type: array
+                        description: Список районов
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: ID района
+                            name:
+                              type: string
+                              description: Название района
+                            area_id:
+                              type: integer
+                              description: Родительский округ (ID)
+                      organizations:
+                        type: array
+                        description: Список организаций
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: ID организации
+                            name:
+                              type: string
+                              description: Название организации
+                            area_id:
+                              type: integer
+                              description: Родительский округ (ID)
+                            district_id:
+                              type: integer
+                              description: Родительский район (ID)
+                      specialists:
+                        type: array
+                        description: Список специалистов
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: ID специалиста
+                            name:
+                              type: string
+                              description: Имя специалиста
+                            organization_id:
+                              type: integer
+                              description: ID организации
+                      species:
+                        type: array
+                        description: Список видов
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: ID вида
+                            name:
+                              type: string
+                              description: Название вида
+                      statuses:
+                        type: array
+                        description: Список статусов
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: ID статуса
+                            name:
+                              type: string
+                              description: Название статуса
+                      types:
+                        type: array
+                        description: Список типов
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: ID типа
+                            name:
+                              type: string
+                              description: Название типа
+                      services:
+                        type: array
+                        description: Список категорий услуг
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: ID категории
+                            name:
+                              type: string
+                              description: Название категории
+                            services:
+                              type: array
+                              description: Список услуг в категории
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                    description: ID услуги
+                                  name:
+                                    type: string
+                                    description: Название услуги
+                                  code:
+                                    type: string
+                                    description: Код услуги
+  /v3/analytics/service/report:
+    post:
+      tags:
+        - Аналитика
+      summary: Отчет по количеству услуг
+      description: |
+        Этот эндпоинт принимает параметры для генерации отчета по количеству услуг, включая общую статистику по источникам записи на прием, суммарно по всем округам, суммарно по организациям и отдельно по услугам.<p>
+        В итоге выполнения запроса будет получена информация об общем количестве услуг и разделенных по каналам записи.
+        Аналогичная информация имеется для округа, организации, и отдельно взятой услуги, оказанной в каждой из организаций.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                from:
+                  $ref: '#/components/schemas/from'
+                to:
+                  $ref: '#/components/schemas/to'
+                excel:
+                  $ref: '#/components/schemas/excel'
+                areas:
+                  $ref: '#/components/schemas/areas'
+                organizations:
+                  $ref: '#/components/schemas/organizations'
+                services:
+                  $ref: '#/components/schemas/services'
+                statuses:
+                  $ref: '#/components/schemas/statuses'
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  is_success:
+                    type: boolean
+                    description: Признак успешности ответа
+                  data:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        description: Общее количество
+                      channels:
+                        type: array
+                        description: Статистика по каналам записи
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: ID канала
+                            type:
+                              type: string
+                              description: Код канала
+                            name:
+                              type: string
+                              description: Название канала
+                            count:
+                              type: integer
+                              description: Количество по каналу
+                      areas:
+                        type: array
+                        description: Статистика по административным округам
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: ID округа
+                            name:
+                              type: string
+                              description: Название округа
+                            count:
+                              type: integer
+                              description: Общее количество по округу
+                            channels:
+                              type: array
+                              description: Статистика по каналам записи в округе
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                    description: ID канала
+                                  type:
+                                    type: string
+                                    description: Код канала
+                                  name:
+                                    type: string
+                                    description: Название канала
+                                  count:
+                                    type: integer
+                                    description: Количество по каналу
+                            organizations:
+                              type: array
+                              description: Статистика по организациям в округе
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                    description: ID организации
+                                  name:
+                                    type: string
+                                    description: Название организации
+                                  count:
+                                    type: integer
+                                    description: Количество по организации
+                                  channels:
+                                    type: array
+                                    description: Статистика по каналам записи в организации
+                                    items:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: integer
+                                          description: ID канала
+                                        type:
+                                          type: string
+                                          description: Код канала
+                                        name:
+                                          type: string
+                                          description: Название канала
+                                        count:
+                                          type: integer
+                                          description: Количество по каналу
+                                  services:
+                                    type: array
+                                    description: Статистика по услугам в организации
+                                    items:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: integer
+                                          description: ID услуги
+                                        name:
+                                          type: string
+                                          description: Название услуги
+                                        count:
+                                          type: integer
+                                          description: Общее количество по услуге
+                                        channels:
+                                          type: array
+                                          description: Статистика по каналам записи для услуги
+                                          items:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: integer
+                                                description: ID канала
+                                              type:
+                                                type: string
+                                                description: Код канала
+                                              name:
+                                                type: string
+                                                description: Название канала
+                                              count:
+                                                type: integer
+                                                description: Количество по каналу
+  /v3/analytics/service/detail-report:
+    post:
+      summary: Детальный отчёт по количеству услуг
+      description: |
+        Этот запрос предназначен для получения количества оказанных. Принимает на вход даты ОТ и ДО, массивы в JSON - округа, организации, специалисты, типы примема, канал записи, вид животных, какие услуги учесть.<p>
+        В итоге выполнения запроса будет получена информация об общем количестве услуг и разделенных по статусам приема.<p>Аналогичная информация имеется для округа, организации, и отдельно взятой услуги, оказанной в каждой из организаций.
+      tags: 
+        - Аналитика
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                from:
+                  $ref: '#/components/schemas/from'
+                to:
+                  $ref: '#/components/schemas/to'
+                excel:
+                  $ref: '#/components/schemas/excel'
+                areas:
+                  $ref: '#/components/schemas/areas'
+                organizations:
+                  $ref: '#/components/schemas/organizations'
+                specialists:
+                  $ref: '#/components/schemas/specialists'
+                services:
+                  $ref: '#/components/schemas/services'
+                types:
+                  $ref: '#/components/schemas/types'
+                channels:
+                  $ref: '#/components/schemas/channels'
+                species:
+                  $ref: '#/components/schemas/species'
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  is_success:
+                    type: boolean
+                    description: Признак успешности ответа
+                  data:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        description: Сколько приемов всего
+                      statuses:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: Статус приема
+                            name:
+                              type: string
+                              description: Как отображается в отчете
+                            count:
+                              type: integer
+                              description: Число приемов
+                      areas:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: ID округа
+                            name:
+                              type: string
+                              description: Название округа
+                            count:
+                              type: integer
+                              description: Сколько приемов всего по округу
+                            statuses:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    description: Статус приема для текущего округа
+                                  name:
+                                    type: string
+                                    description: Как отображается в отчете
+                                  count:
+                                    type: integer
+                                    description: Число приемов для текущего округа
+                            organizations:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                    description: ID организации
+                                  name:
+                                    type: string
+                                    description: Название организации
+                                  count:
+                                    type: integer
+                                    description: Число приемов для текущей организации
+                                  statuses:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: string
+                                          description: Статус приема для текущей организации
+                                        name:
+                                          type: string
+                                          description: Как отображается в отчете
+                                        count:
+                                          type: integer
+                                          description: Число приемов для текущей организации
+                                    channels:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          id:
+                                            type: integer
+                                            description: ID канала записи
+                                          name:
+                                            type: string
+                                            description: Название канала
+                                          count:
+                                            type: integer
+                                            description: Число приемов для текущего канала записи
+                                          statuses:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                id:
+                                                  type: string
+                                                  description: Статус приема для текущего канала записи
+                                                name:
+                                                  type: string
+                                                  description: Как отображается в отчете
+                                                count:
+                                                  type: integer
+                                                  description: Число приемов для текущего канала записи
+                                                services:
+                                                  type: array
+                                                  items:
+                                                    type: object
+                                                    properties:
+                                                      id:
+                                                        type: integer
+                                                        description: ID услуги
+                                                      name:
+                                                        type: string
+                                                        description: Название услуги
+                                                      count:
+                                                        type: integer
+                                                        description: Число приемов для текущей услуги
+                                                      statuses:
+                                                        type: array
+                                                        items:
+                                                          type: object
+                                                          properties:
+                                                            id:
+                                                              type: string
+                                                              description: Статус приема для текущей услуги
+                                                            name:
+                                                              type: string
+                                                              description: Как отображается в отчете
+                                                            count:
+                                                              type: integer
+                                                              description: Число приемов для текущей услуги
+  /v3/analytics/service-price/report:
+    post:
+      tags:
+        - Аналитика
+      summary: Отчёт об оказании ветеринарных услуг
+      description: |
+        Этот эндпоинт получает на вход даты отчёта, распечатку в Excel, охват по округам, районам и организациям.<p>
+        Отдает суммарную статистику по сумме услуг, по их количеству, для льготных групп.<p>
+        Информация будет получена по всем округам, отдельно по каждому округу, району, организации и отдельно по каждой услуге.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                from:
+                  $ref: '#/components/schemas/from'
+                to:
+                  $ref: '#/components/schemas/to'
+                excel:
+                  $ref: '#/components/schemas/excel'
+                areas:
+                  $ref: '#/components/schemas/areas'
+                districts:
+                  $ref: '#/components/schemas/districts'
+                organizations:
+                  $ref: '#/components/schemas/organizations'
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  is_success:
+                    type: boolean
+                    description: Признак успешности ответа
+                  data:
+                    type: object
+                    properties:
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: ID признака данных
+                            name:
+                              type: string
+                              description: Название признака данных
+                            value:
+                              type: number
+                              format: float
+                              description: Сумма признака данных
+                      areas:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: ID области
+                            name:
+                              type: string
+                              description: Название области
+                            columns:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    description: ID признака данных
+                                  name:
+                                    type: string
+                                    description: Название признака данных
+                                  value:
+                                    type: number
+                                    format: float
+                                    description: Сумма признака данных
+                            districts:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                    description: ID района
+                                  name:
+                                    type: string
+                                    description: Название района
+                                  columns:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: string
+                                          description: ID признака данных
+                                        name:
+                                          type: string
+                                          description: Название признака данных
+                                        value:
+                                          type: number
+                                          format: float
+                                          description: Сумма признака данных
+                                  organizations:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: integer
+                                          description: ID организации
+                                        name:
+                                          type: string
+                                          description: Название организации
+                                        columns:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                                description: ID признака данных
+                                              name:
+                                                type: string
+                                                description: Название признака данных
+                                              value:
+                                                type: number
+                                                format: float
+                                                description: Сумма признака данных
+                                        services:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: integer
+                                                description: ID услуги
+                                              name:
+                                                type: string
+                                                description: Название услуги
+                                              columns:
+                                                type: array
+                                                items:
+                                                  type: object
+                                                  properties:
+                                                    id:
+                                                      type: string
+                                                      description: ID признака данных
+                                                    name:
+                                                      type: string
+                                                      description: Название признака данных
+                                                    value:
+                                                      type: number
+                                                      format: float
+                                                      description: Сумма признака данных
+  /v3/analytics/visit/report:
+      post:
+        summary: Общий отчет по приемам
+        tags: 
+        - Аналитика
+        description: |
+          Этот запрос предназначен для получения общего отчета по приемам, фильтруемого по датам, округам, районам и организациям.
+        requestBody:
+          required: true
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: object
+                properties:
+                  from:
+                    $ref: '#/components/schemas/from'
+                  to:
+                    $ref: '#/components/schemas/to'
+                  excel:
+                    $ref: '#/components/schemas/excel'
+                  areas:
+                    $ref: '#/components/schemas/areas'
+                  districts:
+                    $ref: '#/components/schemas/districts'
+                  organizations:
+                    $ref: '#/components/schemas/organizations'
+        responses:
+          '200':
+            description: Успешный ответ
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    is_success:
+                      type: boolean
+                      description: Флаг успешного выполнения запроса
+                    data:
+                      type: object
+                      properties:
+                        count:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                description: Название категории
+                              count:
+                                type: integer
+                                description: Количество визитов
+                              id:
+                                type: string
+                                description: ID категории
+                        areas:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                description: ID округа
+                              name:
+                                type: string
+                                description: Название округа
+                              count:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                      description: Название категории
+                                    count:
+                                      type: integer
+                                      description: Количество визитов
+                                    id:
+                                      type: string
+                                      description: ID категории
+                              districts:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: integer
+                                      description: ID района
+                                    name:
+                                      type: string
+                                      description: Название района
+                                    count:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          name:
+                                            type: string
+                                            description: Название категории
+                                          count:
+                                            type: integer
+                                            description: Количество визитов
+                                          id:
+                                            type: string
+                                            description: ID категории
+                                    organizations:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          id:
+                                            type: integer
+                                            description: ID организации
+                                          name:
+                                            type: string
+                                            description: Название организации
+                                          count:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                name:
+                                                  type: string
+                                                  description: Название категории
+                                                count:
+                                                  type: integer
+                                                  description: Количество визитов
+                                                id:
+                                                  type: string
+                                                  description: ID категории
+                                          channels:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                id:
+                                                  type: integer
+                                                  description: ID канала
+                                                name:
+                                                  type: string
+                                                  description: Название канала
+                                                count:
+                                                  type: array
+                                                  items:
+                                                    type: object
+                                                    properties:
+                                                      name:
+                                                        type: string
+                                                        description: Название категории
+                                                      count:
+                                                        type: integer
+                                                        description: Количество визитов
+                                                      id:
+                                                        type: string
+                                                        description: ID категории  
+  /v3/analytics/visit/detail-report:
+    post:
+      summary: Детальный отчет о визитах
+      tags: 
+      - Аналитика
+      description: |
+        Этот запрос предназначен для получения детального отчета о визитах, фильтруемого по датам, видам животных, округам, районам и организациям.
+      requestBody:
+              required: true
+              content:
+                application/x-www-form-urlencoded:
+                  schema:
+                    type: object
+                    properties:
+                      from:
+                        $ref: '#/components/schemas/from'
+                      to:
+                        $ref: '#/components/schemas/to'
+                      excel:
+                        $ref: '#/components/schemas/excel'
+                      areas:
+                        $ref: '#/components/schemas/areas'
+                      districts:
+                        $ref: '#/components/schemas/districts'
+                      organizations:
+                        $ref: '#/components/schemas/organizations'
+                      species:
+                        $ref: '#/components/schemas/species'
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  is_success:
+                    type: boolean
+                    description: Флаг успешного выполнения запроса
+                  data:
+                    type: object
+                    properties:
+                      count:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: Название категории
+                            count:
+                              type: integer
+                              description: Количество визитов
+                            id:
+                              type: string
+                              description: ID категории
+                      areas:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: ID округа
+                            name:
+                              type: string
+                              description: Название округа
+                            count:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                    description: Название категории
+                                  count:
+                                    type: integer
+                                    description: Количество визитов
+                                  id:
+                                    type: string
+                                    description: ID категории
+                            districts:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                    description: ID района
+                                  name:
+                                    type: string
+                                    description: Название района
+                                  count:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                          description: Название категории
+                                        count:
+                                          type: integer
+                                          description: Количество визитов
+                                        id:
+                                          type: string
+                                          description: ID категории
+                                  organizations:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: integer
+                                          description: ID организации
+                                        name:
+                                          type: string
+                                          description: Название организации
+                                        count:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              name:
+                                                type: string
+                                                description: Название категории
+                                              count:
+                                                type: integer
+                                                description: Количество визитов
+                                              id:
+                                                type: string
+                                                description: ID категории
+                                        species:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                                description: ID вида
+                                              name:
+                                                type: string
+                                                description: Название вида
+                                              count:
+                                                type: array
+                                                items:
+                                                  type: object
+                                                  properties:
+                                                    name:
+                                                      type: string
+                                                      description: Название категории
+                                                    count:
+                                                      type: integer
+                                                      description: Количество визитов
+                                                    id:
+                                                      type: string
+                                                      description: ID категории
+  /v3/shelters/dictionary:
+    get:
+      summary: Справочник приютов
+      tags: 
+      - Приюты
+      description: |
+        Этот запрос предназначен для получения справочника, содержащего информацию о доступных причинах смерти животных в приютах.
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  is_success:
+                    type: boolean
+                    description: Признак успешности ответа
+                  data:
+                    type: object
+                    properties:
+                      death_reasons:
+                        type: array
+                        description: Список причин смерти
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: ID причины смерти
+                            name:
+                              type: string
+                              description: Название причины смерти
+                            description:
+                              type: string
+                              description: Описание причины смерти
+  /v3/external-services/vks:
+    get:
+      summary: Получить информацию о визите по GUID
+      tags: 
+      - Телеветеренария
+      description: Возвращает информацию о визите, включая дату, время, длительность, организацию и специалиста, или ошибку 404, если визит не найден
+      parameters:
+        - in: query
+          name: guid
+          required: true
+          schema:
+            type: string
+          description: Уникальный идентификатор конференции (GUID)
+      responses:
+        '200':
+          description: Успешный ответ с информацией о визите
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sid_guid:
+                    type: string
+                    description: Уникальный идентификатор конференции
+                    example: s07-29f0b60c-11e2-4c22-b075-8d2beb8ce429
+                  date:
+                    type: string
+                    format: date
+                    description: Дата визита
+                    example: "2024-08-29"
+                  slot:
+                    type: string
+                    format: time
+                    description: Время начала визита
+                    example: "16:15:00"
+                  duration:
+                    type: integer
+                    description: Длительность визита в минутах
+                    example: 30
+                  organization:
+                    type: string
+                    description: Название организации
+                    example: "Бабушкинская ВЛ"
+                  specialist_fullname:
+                    type: string
+                    description: Полное имя специалиста
+                    example: "Петров Петр Иванович"
+                  service:
+                    type: string
+                    description: Название услуг
+                    example: "Видео-консультация"
+        '404':
+            description: Прием с указанным GUID не найден
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                            description: Код ошибки
+                            example: "404"
+                          status:
+                            type: string
+                            description: HTTP-статус ошибки
+                            example: "404"
+                          title:
+                            type: string
+                            description: Краткое описание ошибки
+                            example: "Not Found"
+                          detail:
+                            type: string
+                            description: Подробное описание ошибки
+                            example: "Не найдено приема с указанным GUID"
+  /found-pet/create-ad:
+    post:
+      summary: Создать объявление о пропаже питомца
+      tags:
+      - Поиск питомцев
+      description: Создает (обновляет) объявление о пропаже питомца и отправляет статус 1050 на ЕТП
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                service_number:
+                  type: string
+                  example: "0001-9000120-067901-00000569/24"
+                type:
+                  type: string
+                  example: "lost"
+                sso_id:
+                  type: string
+                  example: "abc54bee-test-4d9c-9a8f-966363ada92f"
+                id_species:
+                  type: integer
+                  example: 25
+                id_breeds:
+                  type: integer
+                  example: 1
+                id_color:
+                  type: integer
+                  example: 3
+                name:
+                  type: string
+                  example: "Шарик"
+                place:
+                  type: object
+                  properties:
+                    city:
+                      type: string
+                      example: "Москва"
+                    area:
+                      type: string
+                      example: "Центральный"
+                    street:
+                      type: string
+                      example: "Ленинградский проспект"
+                    is_map:
+                      type: boolean
+                      example: true
+                    is_manually_set:
+                      type: boolean
+                      example: false
+                    fias_id:
+                      type: string
+                      example: "fias_123"
+                    geo_lat:
+                      type: string
+                      example: "55.7558"
+                    geo_lon:
+                      type: string
+                      example: "37.6173"
+                chip:
+                  type: string
+                  example: "12345"
+                notice:
+                  type: string
+                  example: "Собака пропала в парке"
+                subscribe:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      example: "user@example.com"
+                    phone:
+                      type: string
+                      example: "79161234567"
+                    notify:
+                      type: boolean
+                      example: true
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id_ad:
+                    type: integer
+                    example: 4072
+                    description: Идентификатор созданного объявления
+  /found-pet/get-found:
+    post:
+      summary: Получение объявлений о найденных питомцах
+      tags:
+      - Поиск питомцев
+      description: Получает список объявлений о найденных питомцах
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                closed:
+                  type: boolean
+                  example: false
+                sort:
+                  type: boolean
+                  example: true
+                page:
+                  type: integer
+                  example: 1
+                limit:
+                  type: integer
+                  example: 10
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/found_pet_search_response'
+  /found-pet/get-lost:
+    post:
+      summary: Получение объявлений о пропавших питомцах
+      tags:
+      - Поиск питомцев
+      description: Получает список объявлений о пропавших питомцах
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                closed:
+                  type: boolean
+                  example: false
+                sort:
+                  type: boolean
+                  example: true
+                page:
+                  type: integer
+                  example: 1
+                limit:
+                  type: integer
+                  example: 10
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/found_pet_search_response'
+  /found-pet/get-ad:
+    post:
+      summary: Получение объявления по ID
+      tags:
+      - Поиск питомцев
+      description: Получает объявление по его ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 3697
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/found_pet_item'
+  /found-pet/get-contact:
+    post:
+      summary: Получение контактов автора объявления
+      tags:
+      - Поиск питомцев
+      description: Получает контактные данные автора объявления
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 3697
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1234
+                  phone:
+                    type: string
+                    example: "79161234567"
+                  email:
+                    type: string
+                    example: "user@example.com"
+                  name:
+                    type: string
+                    example: "Иванов Иван Иванович"
+  /found-pet/close-ad:
+    post:
+      summary: Закрыть объявление
+      tags:
+      - Поиск питомцев
+      description: Закрывает объявление о пропаже/находке питомца
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1234
+                service_number:
+                  type: string
+                  example: "0001-9000120-067901-00000569/24"
+                sso_id:
+                  type: string
+                  example: "abc54bee-test-4d9c-9a8f-966363ada92f"
+                reason:
+                  type: string
+                  example: "Истек срок размещения объявления"
+                notice:
+                  type: string
+                  example: "Питомец вернулся домой"
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/found_pet_sso_response'
+  /found-pet/extend-ad:
+    post:
+      summary: Продлить объявление
+      tags:
+      - Поиск питомцев
+      description: Продлевает объявление на 30 дней
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1234
+                service_number:
+                  type: string
+                  example: "0001-9000120-067901-00000569/24"
+                sso_id:
+                  type: string
+                  example: "abc54bee-test-4d9c-9a8f-966363ada92f"
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/found_pet_sso_response'
+  /found-pet/subscribe:
+    post:
+      summary: Назначение неизвестно
+      tags:
+      - Поиск питомцев
+      description: Меняет descriptions в таблице found_pet.ads
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/found_pet_subscribe_req'
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/found_pet_subscribe_res'
+  /found-pet/update-subscribe:
+    post:
+      summary: Назначение неизвестно
+      tags:
+      - Поиск питомцев
+      description: Меняет descriptions в таблице found_pet.ads
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/found_pet_subscribe_req'
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/found_pet_subscribe_res'
+  /found-pet/unsubscribe:
+    post:
+      summary: Назначение неизвестно
+      tags:
+      - Поиск питомцев
+      description: Меняет descriptions в таблице found_pet.ads на null
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_ad:
+                  type: integer
+                  example: 3745
+                sso_id:
+                  type: string
+                  example: "d6869e7b-4283-443b-9ec2-a8d3f85314f1"
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    example: "OK"
+  /found-pet/get-subscribe:
+    post:
+      summary: Назначение неизвестно
+      tags:
+      - Поиск питомцев
+      description: Извлекает descriptions из found_pet.ads по идентификатору
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subscribe_id:
+                  type: integer
+                  example: 237001
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  age:
+                    type: boolean
+                    example: true
+                  sex:
+                    type: boolean
+                    example: true
+                  breed:
+                    type: boolean
+                    example: true
+                  color:
+                    type: boolean
+                    example: true
+                  species:
+                    type: boolean
+                    example: true
+                  subscribe_id:
+                    type: integer
+                    example: 269001
+                  sso_id:
+                    type: string
+                    example: "9ae093f5-6ae7-4824-a777-e1869b66df4d"
+                  service_number:
+                    type: string
+                    example: "0001-9000120-067901-00000141/21"
+  /found-pet/get-species:
+    get:
+      summary: Получение справочника видов
+      tags:
+      - Поиск питомцев
+      description: Получает справочник видов животных
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 25
+                    name:
+                      type: string
+                      example: "Собака"
+  /found-pet/get-breeds:
+    get:
+      summary: Получение справочника пород
+      tags:
+      - Поиск питомцев
+      description: Получает справочник пород животных
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "Лабрадор"
+  /found-pet/get-colors:
+    get:
+      summary: Получение справочника цветов
+      tags:
+      - Поиск питомцев
+      description: Получает справочник цветов животных
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 3
+                    name:
+                      type: string
+                      example: "Черный"
+components:
+  schemas:
+    from:
+      type: string
+      description: Дата начала периода для отчета (YYYY-MM-DD)
+      default: "2024-03-01"
+      format: date
+      required: true
+    to:
+      type: string
+      description: Дата окончания периода для отчета (YYYY-MM-DD)
+      default: "2024-03-01"
+      format: date
+      required: true
+    excel:
+      type: boolean
+      description: Флаг для запроса отчета в формате Excel
+      default: false
+      required: true
+    areas:
+      type: string
+      description: Массив областей в формате JSON
+      default: ["1","2","3","4","5","6","7","8","9","10","11","12"]
+      format: JSON
+      required: true
+    districts:
+      type: string
+      description: Массив районов в формате JSON
+      default: ["123","138","102","74","18","20","21","30","41","42","43","48","61","69","73","83","90","98","100","115","127","137","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","19","22","23","24","25","26","27","28","29","31","32","33","34","35","36","37","38","39","40","44","45","46","47","49","50","51","52","53","54","55","56","57","58","59","60","62","63","64","65","66","67","68","70","71","72","75","76","77","78","79","80","81","82","84","85","86","87","88","89","91","92","93","94","95","96","97","99","101","103","104","105","106","107","108","109","110","111","112","113","114","116","117","118","119","120","121","122","124","125","126","128","129","130","131","132","133","134","135","136","139","140","141","142","143","144","145","146"]
+      format: JSON
+      required: true
+    organizations:
+      type: string
+      description: Массив организаций в формате JSON
+      default: ["711","714","710","700","702","699","695","701","692","644","578","580","715","698","697","713","703","519","525","681","630","690","704","529","570","668","679","670","673","672","685","466","445","640","521","687","705","638","680","456","642","628","632","716","458","674","720","688","689","678","676","646","683","682","684","677","686","717","515","675","721","574","523","513","707","517","527","634","662","718","706","708","572","719","665","636","709","576","307","533","666"]
+      format: JSON
+      required: true
+    specialists:
+      type: string
+      description: Массив специалистов в формате JSON
+      default: ["2964","2780","2507","2556","2505","2765","3016","85","3011","3094","3004","3000","435","2961","2768","3078","3070","2933","2960","91","368","2584","181","2985","3019","3052","3085","3014","389","245","2631","2723","26","2815","399","2538","3021","2615","3045","2994","3073","3069","3012","2537","2820","3055","114","3074","2776","3029","2710","2811","3068","2745","3075","2924","75","3098","2597","3061","3076","395","3066","2668","53","281","2721","2885","279","2547","3086","275","161","309","2747","2862","211","2859","2863","2502","3089","3059","3090","2887","2886","2654","2709","2506","2568","2644","2915","2919","2904","2890","3067","2727","78","2576","2690","2891","2889","2918","3002","2927","3093","2893","2660","2593","2665","2896","2923","2561","2569","69","2664","2708","2770","2726","2674","2672","2713","134","2578","2764","400","2669","2714","2585","2763","2628","2582","2583","436","2586","2587","2588","2590","2591","2592","2681","57","2595","2598","2596","2601","2603","2604","2606","2608","2609","2610","2611","2612","429","170","2639","199","2647","137","117","148","184","124","2925","208","417","2901","189","263","175","415","67","422","424","2534","428","244","397","2509","2510","352","378","2567","376","379","388","144","2903","146","76","97","130","77","135","122","102","118","152","296","353","2678","163","214","159","234","258","202","276","266","123","299","235","305","265","136","149","303","259","2635","2563","2658","2653","246","2633","212","375","2702","2535","166","2548","2908","171","385","206","2696","387","2677","187","2571","2634","2618","255","432","347","273","292","297","2750","2912","2531","2691","3032","164","2594","2755","3026","2693","2666","2573","2550","2549","2905","2530","2687","350","2762","277","2817","2809","2536","2990","192","2675","311","2630","2864","394","2873","2871","2816","349","2694","176","2929","58","2818","194","2620","314","51","416","2703","2640","2570","2882","3091","2663","2683","180","2746","2599","2564","2872","3048","2822","2931","2810","2898","79","2751","2740","3057","2722","2732","2574","2614","2879","93","178","23","2987","183","2819","370","177","271","73","2572","143","427","426","2685","2575","2877","2650","173","2661","2921","2781","423","410","24","3081","2626","2551","2813","239","2742","2730","2988","103","2602","162","2880","2878","3024","147","3013","2991","2899","3035","158","2543","2867","2720","2698","2655","291","2772","2881","2916","2814","2823","25","108","3046","3025","40","359","81","221","2775","2808","2718","3049","348","3050","157","2911","269","2642","2684","288","167","2707","2876","2729","2769","262","133","2731","219","3047","3033","2706","2648","270","2566","2704","193","2700","2861","2779","3023","2645","256","35","319","2883","2782","3056","2733","300","126","3668","3368","4439","4200","3401","4718","3404","3370","3320","3674","3318","4438","496","3311","3535","3304","3552","3903","3323","4849","4421","4712","3795","4313","4191","3714","3239","3205","4293","3140","3312","3817","3937","3244","4447","3704","4376","3322","3319","213","3984","3189","3310","4593","3257","3484","4681","4298","4201","4179","4445","3307","4682","3781","4118","3924","4259","3142","4198","4283","3104","4081","3128","3301","4426","4116","3254","4845","3835","3693","3723","3303","3553","4166","471","357","465","3850","3300","4008","3859","3326","4380","142","4306","4048","3247","3402","4258","4428","3465","3857","4550","442","109","3124","4026","3925","4666","4302","4028","3849","3450","3335","3241","4700","3439","3938","466","3259","4432","4082","4423","4304","3330","3470","3700","478","4997","4279","4270","4071","3262","3157","4199","3696","3541","4461","315","4782","3342","4851","3242","3475","4145","4462","3819","3337","4143","3492","473","3341","3490","4434","4463","4146","3544","46","3231","3724","3258","3491","3875","3593","3132","4449","468","3837","484","3193","485","5044","3224","4188","4301","3338","3511","3251","3594","3481","4453","3130","5297","3846","3683","4435","3232","3525","3112","3297","3794","3707","4436","4465","4169","3941","3531","3176","4158","3376","3749","3400","3375","4441","5335","4242","4460","3566","3669","3784","493","3106","3171","3812","3847","3429","3430","3156","3340","3249","3339","3261","3906","4300","3260","4425","3103","3782","4062","443","3373","3545","113","494","3739","3496","4070","4027","3443","3153","129","3162","483","3928","470","4303","3263","3754","4443","3143","4273","4099","3252","4427","4117","3933","313","4458","3504","3746","3596","4788","3554","3717","3225","4430","3398","3316","439","3253","3399","3313","3292","4065","3806","3333","3939","3745","4456","3305","4066","3476","3293","3710","4090","4422","4023","3957","3841","3893","4431","3228","4165","3194","3818","3756","3325","3488","3321","3567","4457","3306","4429","3329","3233","3557","3181","3332","3788","4307","4197","3487","4378","3597","3863","3755","4144","3816","457","3101","464","3334","3559","477","4045","3787","3790","3702","4299","3753","4025","4080","460","334","3314","441","3785","3255","4271","3324","3248","4654","4204","4455","3144","3874","3175","3372","3539","4433","4044","3256","3222","4844","116","4269","3855","4419","3250","3186","3309","4599","3789","463","29","488","354","4396","4088","467","3296","3695","3438","4049","3015","3295","3336","3540","3780","4288","4217","4221","3327","4097","236","3111","4467","3317","4420","5386","294","5385","5613","4497","3440","3374","4223","3860","3752","3315","4222","3940","3377","3397","4850","4448","4030","3711","3774","3294","4459","4077","4216","3137","3221","3917","3298","3877","3708","3907","3947","3636","4148","3563","3878","3127","3265","3100","495","4424","3308","3791","4078","3493","4147","3467","4050","4407","3213","469","5045","3165","3216","4444","220","5398","482","3206","3960","3558","3728","4442","3246","3592","4031","3506","3670","3240","4149","3945","3748","3182","4440","3848","3783","4699","4437","3245","3694","3913","3264","3331","3543","3469","3243","3786","3498","4522","3302","3750","3747","491","4161","4220","3918","4278","4168","3595","490","3114","4446","3486","445","3299","4403","3548","88","272","3719","3762","3448","4309","3751","3385","3328","5351","4305","3845","4464","3936"]
+      format: JSON
+      required: true
+    services:
+      type: string
+      description: Массив специалистов в формате JSON
+      default: ["1538","1539","1540","1542","1543","1544","1545","1547","1548","1550","1551","1566","1575","1578","1579","1571","1536","1537","1546","1549","1742","1562","1567","1802","1829","1830","1841","1842","1573","1535","1752","1534","1541","1552","1553","1554","1555","1556","1557","1558","1559","1560","1561","1577","1755","1756","1757","1758","1831","1832","1837","1838","1839","1840","1753","1754","1833","1834","1835","1836","1569","1676","1673","1674","1677","1678","1679","1680","1681","1682","1683","1684","1685","1686","1687","1688","1689","1690","1692","1693","1694","1695","1696","1697","1698","1699","1700","1701","1702","1703","1704","1705","1706","1708","1709","1710","1711","1712","1713","1714","1715","1716","1717","1718","1719","1720","1721","1722","1723","1724","1826","1568","1570","1691","1572","1707","1564","1565","1675","1574","1576","1581","1582","1584","1585","1587","1590","1592","1594","1595","1598","1599","1600","1601","1603","1604","1605","1606","1607","1608","1609","1610","1611","1651","1616","1617","1620","1621","1622","1623","1624","1615","1626","1627","1628","1629","1630","1631","1632","1633","1634","1635","1636","1637","1638","1639","1640","1643","1644","1645","1646","1647","1648","1649","1652","1653","1654","1655","1656","1657","1843","1580","1583","1586","1588","1589","1591","1593","1596","1597","1602","1612","1613","1614","1618","1619","1625","1641","1642","1796","1794","1795","1798","1799","1800","1801","1797","1739","1725","1727","1728","1730","1732","1733","1734","1736","1737","1738","1740","1741","1563","1828","1743","1729","1731","1735","1726","1658","1659","1660","1661","1662","1663","1846","1847","1848","1849","1850","1851","1664","1665","1666","1667","1668","1670","1671","1672","1669","1744","1745","1746","1747","1513","1749","1748","1750","1751","1759","1760","1761","1763","1764","1765","1766","1767","1768","1769","1770","1771","1772","1774","1775","1776","1777","1778","1779","1780","1781","1782","1783","1784","1785","1786","1787","1788","1789","1790","1791","1793","1762","1773","1792","1805","1803","1804","1806","1807","1808","1809","1810","1811","1812","1813","1814","1815","1816","1817","1818","1819","1820","1821","1822","1823","1824","1825"]
+      format: JSON
+      required: true
+    types:
+      type: string
+      description: Массив типов приема в формате JSON
+      default: ["VISIT","CALL_TO_HOME","AMBULANCE","DETOUR","SHELTER"]
+      format: JSON
+      required: true
+    channels:
+      type: string
+      description: Массив каналов записи в формате JSON
+      default: ["2","3","4","9","10","14","11","12","13","1"]
+      format: JSON
+      required: true
+    species:
+      type: string
+      description: Массив видов животных в формате JSON
+      default: ["9","25","0"]
+      format: JSON
+      required: true
+    statuses:
+      type: string
+      description: Массив статусов приема в формате JSON
+      default: ["N","F","A","W","T","C","D","P","O"]
+      format: JSON
+      required: true
+    found_pet_search_response:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/found_pet_item'
+        total:
+          type: integer
+          example: 15
+    found_pet_item:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 3741
+            date_ad:
+              type: string
+              format: date
+              example: "2024-05-15"
+            time_ad:
+              type: string
+              format: time
+              example: "09:07:13"
+            is_active:
+              type: boolean
+              example: true
+            type:
+              type: string
+              example: "found"
+            date_event:
+              type: string
+              format: date
+              example: "2024-05-14"
+            time_event:
+              type: string
+              format: time
+              example: "09:07:13"
+            chip:
+              type: string
+              nullable: true
+              example: null
+            stamp:
+              type: string
+              nullable: true
+              example: null
+            species:
+              type: string
+              example: "кошки"
+            id_species:
+              type: integer
+              example: 9
+            breed:
+              type: string
+              nullable: true
+              example: "другая"
+            id_breed:
+              type: integer
+              nullable: true
+              example: 1044
+            sex:
+              type: string
+              example: "2"
+            color:
+              type: string
+              example: "тигровый"
+            id_color:
+              type: integer
+              example: 39
+            age:
+              type: string
+              nullable: true
+              example: "13"
+            notice:
+              type: string
+              nullable: true
+              example: null
+            photo:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "6C6D196E-2882-4CB0-A480-35FD4637AF4A"
+                  is_main:
+                    type: boolean
+                    example: true
+            stamp_photo:
+              type: string
+              nullable: true
+              example: null
+            address:
+              type: object
+              properties:
+                city:
+                  type: string
+                  example: "Москва"
+                settlement:
+                  type: string
+                  nullable: true
+                  example: null
+                area:
+                  type: string
+                  example: "Москва"
+                street:
+                  type: string
+                  example: "Поселение Филимонковское"
+                house:
+                  type: string
+                  nullable: true
+                  example: null
+                geo_lat:
+                  type: string
+                  example: "4155866.8959222287"
+                geo_lon:
+                  type: string
+                  example: "7470811.825165091"
+                postcode:
+                  type: string
+                  nullable: true
+                  example: null
+                radius:
+                  type: integer
+                  example: 30
+                fias_id:
+                  type: string
+                  nullable: true
+                  example: null
+                kladr_id:
+                  type: string
+                  nullable: true
+                  example: null
+                is_map:
+                  type: boolean
+                  example: true
+                is_manually_set:
+                  type: boolean
+                  example: false
+                pobox:
+                  type: string
+                  example: "Город Москва, Поселение Филимонковское, Деревня Марьино Дом 27А/1 Строение 1"
+            service_number:
+              type: string
+              example: "0001-9000120-067901-00000205/24"
+            is_shelter:
+              type: boolean
+              example: false
+    found_pet_sso_response:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3745
+        service_number:
+          type: string
+          example: "0001-9000120-067901-00090123/20"
+    found_pet_subscribe_req:
+      type: object
+      properties:
+        id_ad:
+          type: integer
+          example: 3745
+        service_number:
+          type: string
+          example: "0001-9000120-067901-00090123/20"
+        sso_id:
+          type: string
+          example: "d6869e7b-4283-443b-9ec2-a8d3f85314f1"
+        subscribe_id:
+          type: integer
+          example: 237001
+        age:
+          type: boolean
+          example: true
+        sex:
+          type: boolean
+          example: true
+        breed:
+          type: boolean
+          example: true
+        color:
+          type: boolean
+          example: true
+        species:
+          type: boolean
+          example: true
+    found_pet_subscribe_res:
+      type: object
+      properties:
+        subscribe_id:
+          type: integer
+          example: 3745001
+        age:
+          type: boolean
+          example: true
+        sex:
+          type: boolean
+          example: true
+        breed:
+          type: boolean
+          example: true
+        color:
+          type: boolean
+          example: true
+        species:
+          type: boolean
+          example: true
+        sso_id:
+          type: string
+          example: "d6869e7b-4283-443b-9ec2-a8d3f85314f1"

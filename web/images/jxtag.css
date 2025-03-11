@@ -1,0 +1,100 @@
+﻿@charset "utf-8";
+/*!
+ * JxTag v1.00b (https://jxtag.jas.ru/)
+ */
+
+.JxTag{
+	background: transparent;
+    padding: 10px;
+    border-radius: 4px;
+    max-width: 400px;
+    border: 1px solid #ccc;
+	width: 500px;
+	height: 200px;
+	font-size: 8px;
+	z-index: 0;
+	position: relative;
+}
+
+.JxTag .tag, .JxTag .bond, .JxTag .separator{
+	display: inline-block;
+    background-color: #049ce9;
+    color: white;
+    font-size: 11px;
+    border-radius: 3px;
+    padding: 7px;
+    margin-right: 5px;
+    margin-bottom:7px;
+}
+
+.JxTag.disabled .tag{
+	background-color: #6f7279;
+}
+.JxTag.disabled .tag a{
+	cursor: auto;
+	color: #929395;
+}
+
+.JxTag .tag.new{
+	background-color: #64b71a;
+}
+.JxTag .tag.text{
+	background-color: #f3f3f3;
+    color: #333333;
+}
+.JxTag .tag.text a{
+	color: #333333;
+}
+.JxTag .tag.disabled{
+	background-color: #6f7279;
+}
+
+.JxTag .bond, .JxTag .separator{
+	color:#6f7279;
+	background: none;
+	margin-right: 0px;
+    margin-left: -7px;
+	font-size: 14px;
+}
+
+.JxTag .tag a{
+	text-decoration: none;
+	color: #fff;
+	margin-left: 5px;
+}
+
+.JxTag input {
+	border: none;
+	background: transparent;
+	outline: none;
+	width: 150px;
+}
+
+.JxTagWindow{
+	display: block;
+	position: absolute;
+	padding: 10px;
+    border-radius: 4px;
+    max-width: 400px;
+	/* width: 400px; */
+	height: auto;
+	font-size: 8px;
+	background: #049ce9;
+	z-index: 10;
+}
+
+.JxTagWindow .tag{
+	display: inline-block;
+    background-color: #fff;
+    color: #049ce9;
+    font-size: 11px;
+    border-radius: 3px;
+    padding: 7px;
+    margin-right: 5px;
+    margin-bottom:7px;
+	cursor: pointer;
+}
+
+.JxTagWindow.hidden{
+	display: none;
+}

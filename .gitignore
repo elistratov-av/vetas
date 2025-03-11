@@ -1,0 +1,58 @@
+# phpstorm project files
+.idea
+.idea/
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# composer vendor dir
+/vendor
+
+# composer itself is not needed
+composer.phar
+
+# Mac DS_Store Files
+.DS_Store
+
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml
+
+tests/_output/*
+tests/_support/_generated
+
+#vagrant folder
+/.vagrant
+
+#config
+/config/entities_test.php
+/config/entities_tmp.php
+/config/monitoring.php
+/config/entity_cache.php
+/config/params-local.php
+/config/rabbit-local.php
+/config/fias-local.php
+keys/*
+.env.override
+
+web/.htaccess
+web/upload/file
+web/assets/*
+!web/assets/.gitkeep
+
+#ansible
+ansible/.ansible_vault_pass
+.osp
+.env
+
+#Убрать после демонстрации
+/web/etp_log.txt

@@ -1,0 +1,18 @@
+species.name (NOT NULL);species.description;species.tech_name;species.flag_mos_ru (boolean, default false)
+Грызуны;;;false
+Ежи;;;false
+Иные животные;;;true
+Кошки;;CAT;true
+Кролики;;;false
+Лошади;;HORSE;false
+Моллюски;;;false
+Насекомые энтомофаги;;;false
+Обезьяны;;;false
+Паукообразные;;;false
+Птицы;;;false
+Пчелы;;;false
+Рептилии;;;false
+Рыбы;;;false
+Собаки;;DOG;true
+Хищные;;;false
+Хорьки;;;false

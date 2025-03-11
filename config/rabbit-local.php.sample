@@ -1,0 +1,33 @@
+<?php
+return [
+    'local_rabbit' => [
+        'host' => 'localhost',
+        'port' => 5671,
+        'user' => 'rabbitmq',
+        'password' => 'rabbitmq',
+        'queue_name' => 'ainmalid_inbox',
+    ],
+    'remote_rabbit' => [
+        'host' => '185.58.205.18',
+        'port' => 5671,
+        'user' => 'aid_producer',
+        'password' => 'R2*)*@X',
+        'queue_name' => '', //set to empty string
+        'exchange' => 'animalid_exchange',
+    ],
+    'spk_rabbit' => [
+        'host' => 'localhost',
+        'port' => '5672',
+        'user' => 'guest',
+        'password' => 'guest',
+        'vhost' => '/',
+        'name' => 'spk_rabbit_connection',
+        'heartbeat' => 60,
+        'read_write_timeout' => 120,
+        'channel_rpc_timeout' => 120,
+        'keepalive' => false,
+    ],
+    'spk_rabbit_queues' => [
+        'spk_event_status_queue' => 'external.pcs.stats.product.11',
+    ],
+];

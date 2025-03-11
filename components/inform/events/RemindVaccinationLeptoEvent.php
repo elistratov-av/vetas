@@ -1,0 +1,54 @@
+<?php
+
+namespace app\common\components\inform\events;
+
+use app\models\db\PetOwners;
+use app\models\db\Pets;
+
+/**
+ * Событие: Напоминание о вакцинации от лептоспироза
+ *
+ * Class RemindVaccinationEvent
+ * @package app\common\components\inform\events
+ */
+class RemindVaccinationLeptoEvent extends ElkEvent
+{
+    const EVENT_CODE = 'remind_vaccination_lepto';
+
+    /**
+     * @var PetOwners
+     */
+    public $owner;
+    /**
+     * @var Pets
+     */
+    public $pet;
+
+    /**
+     * @inheritDoc
+     */
+    public function init()
+    {
+        parent::init();
+        $this->sso_id = $this->owner->sso_id;
+    }
+
+    /**
+     * @param $token
+     * @return array
+     */
+    public function getEventData($token): array
+    {
+        $data = [
+            'io' => $this->owner->getNameForInformation(),
+            'link' => $this->getUnsubscribeLink($token),
+        ];
+
+        $pet_name = trim($this->pet->name);
+        if (!empty($pet_name)) {
+            $data['pet_name'] = $pet_name;
+        }
+
+        return $data;
+    }
+}

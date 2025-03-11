@@ -1,0 +1,8 @@
+<?php
+
+return [
+    'soapServiceUrl' => null,
+    'wsdlUrl' => null,
+    'allowedIPs' => ['*'],
+    'enableLog' => false
+];

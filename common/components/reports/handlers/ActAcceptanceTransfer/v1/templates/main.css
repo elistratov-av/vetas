@@ -1,0 +1,43 @@
+body {
+    color: #000;
+    font-size: 14px;
+}
+
+.head1 {
+    float: right;
+    width: 250px;
+    padding-top: 10px;
+}
+
+.head2 {
+    float: right;
+    width: 180px;
+    padding-top: 10px;
+}
+
+
+.title1 {
+    clear: both;
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.title2 {
+    clear: both;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    font-weight: bold;
+}
+
+.clear {
+    clear: both;
+}
+
+div {
+    color: #000;
+    font-size: 14px;
+}
+

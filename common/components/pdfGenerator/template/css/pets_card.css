@@ -1,0 +1,254 @@
+@charset "UTF-8";
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Light"), local("OpenSans-Light"),
+        url("./assets/fonts/opensanslight.woff2") format("woff2"),
+        url("./assets/fonts/opensanslight.woff") format("woff"),
+        url("./assets/fonts/opensanslight.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Light Italic"), local("OpenSansLight-Italic"),
+        url("./assets/fonts/opensanslightitalic.woff2") format("woff2"),
+        url("./assets/fonts/opensanslightitalic.woff") format("woff"),
+        url("./assets/fonts/opensanslightitalic.ttf") format("truetype");
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans"), local("OpenSans"),
+        url("./assets/fonts/opensans.woff2") format("woff2"),
+        url("./assets/fonts/opensans.woff") format("woff"),
+        url("assets/fonts/opensans.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Italic"), local("OpenSans-Italic"),
+        url("./assets/fonts/opensansitalic.woff2") format("woff2"),
+        url("./assets/fonts/opensansitalic.woff") format("woff"),
+        url("./assets/fonts/opensansitalic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Semibold"), local("OpenSans-Semibold"),
+        url("./assets/fonts/opensanssemibold.woff2") format("woff2"),
+        url("./assets/fonts/opensanssemibold.woff") format("woff"),
+        url("./assets/fonts/opensanssemibold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Semibold Italic"), local("OpenSans-SemiboldItalic"),
+        url("./assets/fonts/opensanssemibolditalic.woff2") format("woff2"),
+        url("./assets/fonts/opensanssemibolditalic.woff") format("woff"),
+        url("./assets/fonts/opensanssemibolditalic.ttf") format("truetype");
+    font-weight: 600;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Bold"), local("OpenSans-Bold"),
+        url("./assets/fonts/opensansbold.woff2") format("woff2"),
+        url("./assets/fonts/opensansbold.woff") format("woff"),
+        url("./assets/fonts/opensansbold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Bold Italic"), local("OpenSans-BoldItalic"),
+        url("./assets/fonts/opensansbolditalic.woff2") format("woff2"),
+        url("./assets/fonts/opensansbolditalic.woff") format("woff"),
+        url("./assets/fonts/opensansbolditalic.ttf") format("truetype");
+    font-weight: 700;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Extrabold"), local("OpenSans-Extrabold"),
+        url("./assets/fonts/opensansextrabold.woff2") format("woff2"),
+        url("./assets/fonts/opensansextrabold.woff") format("woff"),
+        url("./assets/fonts/opensansextrabold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Extrabold Italic"), local("OpenSans-ExtraboldItalic"),
+        url("./assets/fonts/opensansextrabolditalic.woff2") format("woff2"),
+        url("./assets/fonts/opensansextrabolditalic.woff") format("woff"),
+        url("./assets/fonts/opensansextrabolditalic.ttf") format("truetype");
+    font-weight: 800;
+    font-style: italic;
+}
+@font-face {
+    font-family: "PT Sans";
+    src: local("PT Sans"), local("PTSans-Bold"),
+        url('./assets/fonts/pt-sans-blod.woff2') format('woff2'),
+        url("./assets/fonts/pt-sans-blod.woff") format("woff"),
+        url("./assets/fonts/pt-sans-blod.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "PT Sans";
+    src: local("PT Sans"), local("PTSans-Regular"),
+        url('./assets/fonts/pt-sans-regular.woff2') format('woff2'),
+        url("./assets/fonts/pt-sans-regular.woff") format("woff"),
+        url("./assets/fonts/pt-sans-regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+.wrapper {
+    display: table;
+    min-height: 100%;
+    max-width: 90%;
+}
+
+.content {
+    display: table-row;
+    /*height: 100%;*/
+    height: auto;
+}
+
+.header__img {
+    float: left;
+    width: 30px;
+    height: 32px;
+    margin-right: 10px;
+}
+.header__title {
+    font-family: OpenSans;
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: -0.23px;
+    color: #000000;
+    float: end;
+}
+
+.header__page-num {
+    font-family: OpenSans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 6px;
+    text-align: right;
+    color: #000000;
+}
+
+.title_vd {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: PT Sans;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: center;
+    color: #000000;
+}
+.table-container{
+    padding-bottom: 70px;
+}
+.table {
+    margin: 0;
+    padding: 0;
+    height: auto;
+}
+.table__caption {
+    font-family: PT Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: left;
+    color: #000000;
+}
+.table-value, .table-value-description, .table-key, .table-vsd-p, .table-vsd-key {
+    width: 50%;
+    vertical-align: top;
+    font-family: PT Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 1.2;
+    color: #000000;
+    padding-bottom: 5px;
+    height: 30px;
+}
+.table-value-description {
+    width: 50%;
+    height: auto;
+}
+
+.table-key {
+    vertical-align: center;
+    font-size: 12px;
+    width: 50%;
+    padding-right: 5px;
+}
+.table-vsd-p {
+    width: 5px;
+}
+.table-vsd-key {
+    width: 100px;
+}
+.table-td {
+    vertical-align: top;
+}
+/** футер */
+.footer {
+    position: absolute;
+    padding-right: 20px;
+    bottom: 16px;
+}
+.footer__title {
+    font-family: OpenSans;
+    font-size: 7px;
+    line-height: 1.25;
+    color: #7a8599;
+}
+.footer__table {
+    width: 100%;
+    margin-top: 10px;
+}
+.footer__table--right, .footer__sign--right {
+    text-align: right;
+}
+.footer__sign, .footer__sign--right {
+    height: 30px;
+}
+.footer__sign-name {
+    font-family: OpenSans;
+    font-size: 7px;
+    line-height: 1.25;
+    color: #3d424d;
+}
+.footer__sign-title {
+    font-family: OpenSans;
+    font-size: 7px;
+    line-height: 1.25;
+    color: #7a8599;
+}
+* {
+    font-size: 14px!important;
+}

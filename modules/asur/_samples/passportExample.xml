@@ -1,0 +1,70 @@
+<CoordinateSendTaskStatusesMessage xmlns="http://asguf.mos.ru/rkis_gu/coordinate/v6_1/">
+    <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:SignedInfo>
+            <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+            <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#gostr34102001-gostr3411" />
+            <ds:Reference URI="#b9bab130-776b-41ad-8680-971953e4c43c">
+                <ds:Transforms>
+                    <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+                </ds:Transforms>
+                <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#gostr3411" />
+                <ds:DigestValue>fX+LmLvC7AdY99leAWa6UgsGSCextz6h9NstyT5y/zg=</ds:DigestValue>
+            </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>16Wm3XxbspVorbogyrSH0UA/xiozFpyuDn2+SrS42/mK1QYsbILo2pm0y4aa9wrcBYGjsD6snRfkTVvnvonfaw==</ds:SignatureValue>
+        <ds:KeyInfo>
+            <ds:X509Data>
+                <ds:X509Certificate>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</ds:X509Certificate>
+            </ds:X509Data>
+        </ds:KeyInfo>
+    </ds:Signature>
+    <CoordinateTaskStatusDataMessage xmlns:ns1="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" ns1:Id="b9bab130-776b-41ad-8680-971953e4c43c">
+        <MessageId>da12e4e6-28c2-43c7-8634-d926007548fc</MessageId>
+        <TaskId>626e76da-8b62-4566-84c8-ee76cd7f4ada</TaskId>
+        <Status>
+            <StatusCode>1004</StatusCode>
+            <StatusDate>2019-08-13T11:19:02.723Z</StatusDate>
+        </Status>
+        <StatusNote>Получен ответ из ФОИВ/ОИВ по запросу документа</StatusNote>
+        <Result>
+            <ResultType>PositiveAnswer</ResultType>
+            <ResultCode>1</ResultCode>
+            <XmlView>
+                <ns1:OutPassport xmlns:ns1="http://asur/fms/">
+                    <State>READY</State>
+                    <BirthDate>1990-03-19T00:00:00</BirthDate>
+                    <FirstName>Тест</FirstName>
+                    <Patronymic>Тестович</Patronymic>
+                    <LastName>Тестов</LastName>
+                    <SNILS>766-468-599 79</SNILS>
+                    <Documents>
+                        <DocumentFMS>
+                            <InvaliditySince/>
+                            <IssueDate>2010-04-26T00:00:00</IssueDate>
+                            <Issue>770051</Issue>
+                            <Number>111111</Number>
+                            <Series>4545</Series>
+                            <StatusCode>301</StatusCode>
+                            <Status>Не действителен</Status>
+                            <CodeDocument>01</CodeDocument>
+                            <NameDocument>Паспорт гражданина РФ</NameDocument>
+                            <InvalidityReasonCode>604</InvalidityReasonCode>
+                            <InvalidityReason>Числится в розыске</InvalidityReason>
+                        </DocumentFMS>
+                        <DocumentFMS>
+                            <InvaliditySince/>
+                            <IssueDate>2008-04-23T00:00:00</IssueDate>
+                            <Issue>770051</Issue>
+                            <Number>111111</Number>
+                            <Series>0407</Series>
+                            <StatusCode>300</StatusCode>
+                            <Status>Действителен</Status>
+                            <CodeDocument>01</CodeDocument>
+                            <NameDocument>Паспорт гражданина РФ</NameDocument>
+                        </DocumentFMS>
+                    </Documents>
+                </ns1:OutPassport>
+            </XmlView>
+        </Result>
+    </CoordinateTaskStatusDataMessage>
+</CoordinateSendTaskStatusesMessage>

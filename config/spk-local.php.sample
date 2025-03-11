@@ -1,0 +1,18 @@
+<?php
+
+return [
+    'class' => \app\common\components\inform\SpkService::class,
+    'eventUrl' => 'http://test.pcs.px-l.ru/magic-receiver/get-event', // URL для отправки событий в ИС ПК
+    'subscriptionsUrl' => 'http://test.pcs.pxl.alx:/app', // URL для работы с API подписок  ИС ПК
+    'serviceName' => 'vetas', // название сервиса в ИС ПК
+    'eventAccessToken' => '66dc1c1c-9a5d-40d1-b5ae-3828b9bbceb8', // токен для событий, для отправки в ИС ПК
+    'subscriptionsAccessToken' => 'b5c75d60-c750-45ba-a715-17668ee8bf4e', // токен для подписок, для отправки в ИС ПК
+    'tokenTtl' => 3600, // время жизни токена для подписки
+    'linkToSubscribe' => 'https://somedomain.com/subscription/confirm?token=%s',
+    'linkToUnsubscribe' => 'https://somedomain.com/subscription/unsubscribe?token=%s',
+    'linkRegistration' => 'https://www.mos.ru/pgu/ru/services/link/2500/', // ссылка для записи на приём
+    'fileRepositoryDomain' => 'https://somedomain.com/', //домен для файлов
+    'linkToVaccineFeedbackForm' => 'https://somedomain.com/feedback/vaccination/public/%s', //ссылка на форму обратной связи на фронте
+    'linkToFilePage' => 'https://somedomain.com/attached-files/%s', // ссылка на страницу с файлами
+    'enableELK' => false, // включить отправку уведомлений в ЕЛК по sso_id
+];

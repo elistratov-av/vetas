@@ -1,0 +1,19 @@
+.multiselect-container.checkbox-list {
+    position: static;
+}
+.checkbox-list > li {
+    float: left;
+    width: 33%;
+}
+.checkbox-list > .active > a,
+.checkbox-list > .active > a:hover,
+.checkbox-list > .active > a:focus {
+    color: #333;
+    text-decoration: none;
+    background-color: transparent;
+    outline: 0;
+}
+.checkbox-list > li > a > label {
+    padding: 3px 0 3px 20px;
+
+}

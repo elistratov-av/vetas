@@ -1,0 +1,156 @@
+<CoordinateSendTaskStatusesMessage xmlns="http://asguf.mos.ru/rkis_gu/coordinate/v6_1/">
+    <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:SignedInfo>
+            <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+            <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#gostr34102001-gostr3411" />
+            <ds:Reference URI="#b9bab130-776b-41ad-8680-971953e4c43c">
+                <ds:Transforms>
+                    <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+                </ds:Transforms>
+                <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#gostr3411" />
+                <ds:DigestValue>fX+LmLvC7AdY99leAWa6UgsGSCextz6h9NstyT5y/zg=</ds:DigestValue>
+            </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>16Wm3XxbspVorbogyrSH0UA/xiozFpyuDn2+SrS42/mK1QYsbILo2pm0y4aa9wrcBYGjsD6snRfkTVvnvonfaw==</ds:SignatureValue>
+        <ds:KeyInfo>
+            <ds:X509Data>
+                <ds:X509Certificate>MIIJ0DCCCX+gAwIBAgIQSCtPdxUA+43oEeLSpBxzmTAIBgYqhQMCAgMwggFbMRgwFgYFKoUDZAESDTEwMjc3MDcwMTM4MDYxGjAYBggqhQMDgQMBARIMMDA3NzA3MzE0MDI5MSIwIAYJKoZIhvcNAQkBFhNzdXBwb3J0QGUtbW9za3ZhLnJ1MQswCQYDVQQGEwJSVTEcMBoGA1UECAwTNzcg0LMuINCc0L7RgdC60LLQsDEVMBMGA1UEBwwM0JzQvtGB0LrQstCwMU8wTQYDVQQJDEbQkdC+0LvRjNGI0L7QuSDQodGD0YXQsNGA0LXQstGB0LrQuNC5INC/0LXRgC4sINC0LjExLCDRgdGC0YAuMSwg0L7RhC42MTUwMwYDVQQKDCzQkNCeIMKr0K3Qu9C10LrRgtGA0L7QvdC90LDRjyDQnNC+0YHQutCy0LDCuzE1MDMGA1UEAwws0JDQniDCq9Ct0LvQtdC60YLRgNC+0L3QvdCw0Y8g0JzQvtGB0LrQstCwwrswHhcNMTgxMDE4MTQyMjE2WhcNMjAwMTE4MTQzMjE2WjCCAcwxGDAWBgUqhQNkARINMTEwNzc0Njk0MzM0NzEaMBgGCCqFAwOBAwEBEgwwMDc3MTA4NzgwMDAxHTAbBgkqhkiG9w0BCQEWDlRFUF9ESVRATU9TLlJVMQswCQYDVQQGEwJSVTEcMBoGA1UECAwTNzcg0LMuINCc0L7RgdC60LLQsDEVMBMGA1UEBwwM0JzQvtGB0LrQstCwMWswaQYDVQQKDGLQlNC10L/QsNGA0YLQsNC80LXQvdGCINC40L3RhNC+0YDQvNCw0YbQuNC+0L3QvdGL0YUg0YLQtdGF0L3QvtC70L7Qs9C40Lkg0LPQvtGA0L7QtNCwINCc0L7RgdC60LLRizFrMGkGA1UEAwxi0JTQtdC/0LDRgNGC0LDQvNC10L3RgiDQuNC90YTQvtGA0LzQsNGG0LjQvtC90L3Ri9GFINGC0LXRhdC90L7Qu9C+0LPQuNC5INCz0L7RgNC+0LTQsCDQnNC+0YHQutCy0YsxQjBABgNVBAkMOdCj0LvQuNGG0LAg0J3QvtCy0LDRjyDQkdCw0YHQvNCw0L3QvdCw0Y8sINC0LjEwLCDRgdGC0YAuMTEVMBMGCSqGSIb3DQEJAgwGTVNLUzAyMGMwHAYGKoUDAgITMBIGByqFAwICJAAGByqFAwICHgEDQwAEQFdMy2+ikfmqHNPEXLcxeheJdfccc0s/j1+1rki4h/xGuAi77kbnd1fMwhvDR10VP+Jtdt/LYZ10sGK1kzwI8FGjggWmMIIFojAOBgNVHQ8BAf8EBAMCBPAwHQYDVR0OBBYEFKbqjFuoBgzg7UGoMKxu1EpVRqxvMDQGCSsGAQQBgjcVBwQnMCUGHSqFAwICMgEJn/YihrTKI4XZgxWGkcBogcMdg98rAgEBAgEAMIIBhQYDVR0jBIIBfDCCAXiAFC91JnKzzsSNbDzFIWsHK9gGnAGuoYIBUqSCAU4wggFKMR4wHAYJKoZIhvcNAQkBFg9kaXRAbWluc3Z5YXoucnUxCzAJBgNVBAYTAlJVMRwwGgYDVQQIDBM3NyDQsy4g0JzQvtGB0LrQstCwMRUwEwYDVQQHDAzQnNC+0YHQutCy0LAxPzA9BgNVBAkMNjEyNTM3NSDQsy4g0JzQvtGB0LrQstCwLCDRg9C7LiDQotCy0LXRgNGB0LrQsNGPLCDQtC4gNzEsMCoGA1UECgwj0JzQuNC90LrQvtC80YHQstGP0LfRjCDQoNC+0YHRgdC40LgxGDAWBgUqhQNkARINMTA0NzcwMjAyNjcwMTEaMBgGCCqFAwOBAwEBEgwwMDc3MTA0NzQzNzUxQTA/BgNVBAMMONCT0L7Qu9C+0LLQvdC+0Lkg0YPQtNC+0YHRgtC+0LLQtdGA0Y/RjtGJ0LjQuSDRhtC10L3RgtGAggosfyTSAAAAAAKtMDgGA1UdJQQxMC8GCSqFAwNYAQEBCAYGKoUDZAICBgcqhQMCAiIZBgcqhQMCAiIaBggqhQMDBAMDAjATBgNVHSAEDDAKMAgGBiqFA2RxATArBgNVHRAEJDAigA8yMDE4MTAxODE0MjIxNVqBDzIwMTkxMjMxMTQyMjE1WjCCAQgGBSqFA2RwBIH+MIH7DCsi0JrRgNC40L/RgtC+0J/RgNC+IENTUCIgKNCy0LXRgNGB0LjRjyA0LjApDCoi0JrRgNC40L/RgtC+0J/RgNC+INCj0KYiINCy0LXRgNGB0LjQuCAyLjAMT9Ch0LXRgNGC0LjRhNC40LrQsNGCINGB0L7QvtGC0LLQtdGC0YHRgtCy0LjRjyDihJYg0KHQpC8xMjQtMjg2NCDQvtGCIDIwLjAzLjIwMTYMT9Ch0LXRgNGC0LjRhNC40LrQsNGCINGB0L7QvtGC0LLQtdGC0YHRgtCy0LjRjyDihJYg0KHQpC8xMjgtMjk4MyDQvtGCIDE4LjExLjIwMTYwPwYFKoUDZG8ENgw00KHQmtCX0JggItCa0YDQuNC/0YLQvtCf0YDQviBDU1AiICjQstC10YDRgdC40LggNC4wKTBuBgNVHR8EZzBlMDOgMaAvhi1odHRwOi8vd3d3LnVjLWVtLnJ1L2NlcnQvY3JscXVhbC1nb3N0MjAwMS5jcmwwLqAsoCqGKGh0dHA6Ly9jcmwudWMtZW0ucnUvY3JscXVhbC1nb3N0MjAwMS5jcmwwgYMGCCsGAQUFBwEBBHcwdTA6BggrBgEFBQcwAYYuaHR0cDovL29jc3AudWMtZW0ucnU6NDA0MC9vY3NwLXEtMjAxOC9vY3NwLnNyZjA3BggrBgEFBQcwAoYraHR0cDovL3d3dy51Yy1lbS5ydS9jZXJ0L3F1YWxfcm9vdF8yMDE4LmNlcjCB8gYHKoUDAgIxAgSB5jCB4zCB0hYaaHR0cDovL3VjLWVtLnJ1L3VzYWdlLmh0bWwMga/Qv9C+0LvRjNC30L7QstCw0L3QuNGPINC4INC/0YDQtdC00L7RgdGC0LDQstC70LXQvdC40Y8g0LPQvtGB0YPQtNCw0YDRgdGC0LLQtdC90L3Ri9GFINGD0YHQu9GD0LMg0Lgg0LjRgdC/0L7Qu9C90LXQvdC40Y8g0LjQvdGL0YUg0LPQvtGB0YPQtNCw0YDRgdGC0LLQtdC90L3Ri9GFINGE0YPQvdC60YbQuNC5AwIF4AQM+09WOA6Jf60GUL5aMAgGBiqFAwICAwNBAGalogQ+lil9BBfWTIVpn8hfgQM2Gs8Lubj7bF3Kxm2ebUZUrGhNHIij62aI0DJ6MWkvxRgzX5W3HzftFtG2qWs=</ds:X509Certificate>
+            </ds:X509Data>
+        </ds:KeyInfo>
+    </ds:Signature>
+    <CoordinateTaskStatusDataMessage xmlns:ns1="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" ns1:Id="b9bab130-776b-41ad-8680-971953e4c43c">
+        <MessageId>da12e4e6-28c2-43c7-8634-d926007548fc</MessageId>
+        <TaskId>626e76da-8b62-4566-84c8-ee76cd7f4ada</TaskId>
+        <Status>
+            <StatusCode>1004</StatusCode>
+            <StatusDate>2019-08-13T11:19:02.723Z</StatusDate>
+        </Status>
+        <StatusNote>Получен ответ из ФОИВ/ОИВ по запросу документа</StatusNote>
+        <Result>
+            <ResultType>PositiveAnswer</ResultType>
+            <ResultCode>1</ResultCode>
+            <XmlView>
+                <ns1:FNSVipULResponse xmlns:ns1="urn://x-artefacts-fns-vipul-tosmv-ru/311-14/4.0.5" xmlns="urn://x-artefacts-smev-gov-ru/services/message-exchange/types/basic/1.1" xmlns:a="urn://x-artefacts-smev-gov-ru/services/message-exchange/types/1.2" xmlns:b="urn://x-artefacts-smev-gov-ru/services/message-exchange/types/basic/1.2" xmlns:c="urn://x-artefacts-smev-gov-ru/services/message-exchange/types/faults/1.2" xmlns:d="http://asur.mos.ru/isur/documents" xmlns:i="http://asur.mos.ru/isur" xmlns:in="wsdl.urn://x-artefacts-smev-gov-ru/services/message-exchange/1.2" xmlns:in2="urn://x-artefacts-fns-vipul-tosmv-ru/311-14/4.0.5" xmlns:in3="http://ws.unisoft/EGRNXX/ResponseVIPUL" xmlns:in4="http://ws.unisoft/EGRNXX/ResponseKSUL" xmlns:io10="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:io11="urn://x-artefacts-smev-gov-ru/services/message-exchange/types/1.2" xmlns:io12="http://www.ibm.com/websphere/sibx/smo/v6.0.1" xmlns:io13="http://asur.mos.ru/isur" xmlns:io15="http://Smev3Library/data/isur/mos/ru/IDocumentsCallbackSmev3" xmlns:io17="urn://x-artefacts-smev-gov-ru/services/message-exchange/types/1.2" xmlns:io18="wsdl.http://Smev3Library/data/isur/mos/ru/IDocumentsCallbackSmev3" xmlns:io4="http://asur.mos.ru/isur" xmlns:io5="http://asur.mos.ru/isur/documents" xmlns:io6="urn://x-artefacts-smev-gov-ru/services/message-exchange/types/basic/1.2" xmlns:io7="urn://x-artefacts-smev-gov-ru/services/message-exchange/types/1.2" xmlns:io8="http://www.ibm.com/xmlns/prod/websphere/mq/sca/6.0.0" xmlns:io9="urn://x-artefacts-smev-gov-ru/services/message-exchange/types/basic/1.2" xmlns:ns0="wsdl.urn://x-artefacts-smev-gov-ru/services/message-exchange/1.2" xmlns:ns2="urn://x-artefacts-smev-gov-ru/services/message-exchange/types/1.1" xmlns:ns3="urn://x-artefacts-smev-gov-ru/services/message-exchange/types/faults/1.1" xmlns:out="wsdl.http://smev.data.isur.mos.ru" xmlns:out2="wsdl.http://Smev3Library/data/isur/mos/ru/IDocumentsCallbackSmev3" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xci0="http://Smev3Library/data/isur/mos/ru/IDocumentsCallbackSmev3" ИдДок="c5df5b16-d0be-46d7-b360-289d8fcefdc2">
+                    <in2:СвЮЛ xmlns:fnst="urn://x-artefacts-fns/vipul-types/4.0.5" ДатаВып="2015-04-16" ДатаОГРН="2008-11-18" ИНН="7730592673" КПП="773001001" КодОПФ="12345" ОГРН="5087746429843" ПолнНаимОПФ="ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ" СпрОПФ="ОКОПФ">
+                        <in2:СвНаимЮЛ НаимЮЛПолн="НАИМЕНОВАНИЕ 5087746429843" НаимЮЛСокр="СОКРАЩЕННОЕ НАИМЕНОВАНИЕ 5087746429843">
+                            <in2:ГРНДата ГРН="5087746429843" ДатаЗаписи="2008-11-18" />
+                        </in2:СвНаимЮЛ>
+                        <in2:СвАдресЮЛ>
+                            <in2:АдресРФ Дом="7" КодАдрКладр="770000000002990" КодРегион="77" Корпус="6">
+                                <fnst:Регион НаимРегион="МОСКВА" ТипРегион="ГОРОД" />
+                                <fnst:Улица НаимУлица="ФИЛЕВСКАЯ 2-Я" ТипУлица="УЛИЦА" />
+                                <fnst:ГРНДата ГРН="5087746429843" ДатаЗаписи="2008-11-18" />
+                            </in2:АдресРФ>
+                        </in2:СвАдресЮЛ>
+                        <in2:СвОбрЮЛ ДатаОГРН="2008-11-18" ОГРН="5087746429843">
+                            <in2:СпОбрЮЛ КодСпОбрЮЛ="11" НаимСпОбрЮЛ="ГОСУДАРСТВЕННАЯ РЕГИСТРАЦИЯ ЮРИДИЧЕСКОГО ЛИЦА ПРИ СОЗДАНИИ" />
+                            <in2:ГРНДата ГРН="5087746429843" ДатаЗаписи="2008-11-18" />
+                        </in2:СвОбрЮЛ>
+                        <in2:СвРегОрг АдрРО="125373, Г.МОСКВА, ПОХОДНЫЙ ПРОЕЗД, ДОМОВЛАДЕНИЕ 3, СТР.2" КодНО="7733" НаимНО="МЕЖРАЙОННАЯ ИНСПЕКЦИЯ ФЕДЕРАЛЬНОЙ НАЛОГОВОЙ СЛУЖБЫ № 46 ПО Г. МОСКВЕ">
+                            <in2:ГРНДата ГРН="5087746429843" ДатаЗаписи="2008-11-18" />
+                        </in2:СвРегОрг>
+                        <in2:СвУчетНО ДатаПостУч="2008-11-18" ИНН="7730592673" КПП="773001001">
+                            <in2:СвНО КодНО="7730" НаимНО="ИНСПЕКЦИЯ ФЕДЕРАЛЬНОЙ НАЛОГОВОЙ СЛУЖБЫ № 30 ПО Г. МОСКВЕ" />
+                            <in2:ГРНДата ГРН="2087764197948" ДатаЗаписи="2008-11-18" />
+                        </in2:СвУчетНО>
+                        <in2:СвРегПФ ДатаРег="2008-11-19" РегНомПФ="087806035495">
+                            <in2:СвОргПФ КодПФ="087806" НаимПФ="ГОСУДАРСТВЕННОЕ УЧРЕЖДЕНИЕ - ГЛАВНОЕ УПРАВЛЕНИЕ ПЕНСИОННОГО ФОНДА РФ №2 УПРАВЛЕНИЕ №2 МУНИЦИПАЛЬНЫЙ РАЙОН ФИЛЕВСКИЙ ПАРК" />
+                            <in2:ГРНДата ГРН="2087764333402" ДатаЗаписи="2008-11-20" />
+                        </in2:СвРегПФ>
+                        <in2:СвРегФСС ДатаРег="2008-11-19" РегНомФСС="772803546077281">
+                            <in2:СвОргФСС КодФСС="7728" НаимФСС="ФИЛИАЛ №28 ГОСУДАРСТВЕННОГО УЧРЕЖДЕНИЯ - МОСКОВСКОГО РЕГИОНАЛЬНОГО ОТДЕЛЕНИЯ ФОНДА СОЦИАЛЬНОГО СТРАХОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ" />
+                            <in2:ГРНДата ГРН="2087764310490" ДатаЗаписи="2008-11-20" />
+                        </in2:СвРегФСС>
+                        <in2:СвУстКап НаимВидКап="УСТАВНЫЙ КАПИТАЛ" СумКап="10000.0000">
+                            <in2:ГРНДата ГРН="5087746429843" ДатаЗаписи="2008-11-18" />
+                        </in2:СвУстКап>
+                        <in2:СведДолжнФЛ>
+                            <in2:ГРНДатаПерв ГРН="5087746429843" ДатаЗаписи="2008-11-18" />
+                            <in2:СвФЛ Имя="ИМЯ 87746823009337" Отчество="ОТЧЕСТВО 87746823009337" Фамилия="ФАМИЛИЯ 87746823009337">
+                                <fnst:ГРНДата ГРН="5087746429843" ДатаЗаписи="2008-11-18" />
+                            </in2:СвФЛ>
+                            <in2:СвДолжн ВидДолжн="02" НаимВидДолжн="РУКОВОДИТЕЛЬ ЮРИДИЧЕСКОГО ЛИЦА" НаимДолжн="ГЕНЕРАЛЬНЫЙ ДИРЕКТОР">
+                                <in2:ГРНДата ГРН="5087746429843" ДатаЗаписи="2008-11-18" />
+                            </in2:СвДолжн>
+                        </in2:СведДолжнФЛ>
+                        <in2:СвУчредит>
+                            <in2:УчрФЛ>
+                                <in2:СвФЛ Имя="ИМЯ 87746823009338" Отчество="ОТЧЕСТВО 87746823009338" Фамилия="ФАМИЛИЯ 87746823009338">
+                                    <fnst:ГРНДата ГРН="5087746429843" ДатаЗаписи="2008-11-18" />
+                                </in2:СвФЛ>
+                            </in2:УчрФЛ>
+                        </in2:СвУчредит>
+                        <in2:СвОКВЭД>
+                            <in2:СвОКВЭДОсн КодОКВЭД="17.30" НаимОКВЭД="ОТДЕЛКА ТКАНЕЙ И ТЕКСТИЛЬНЫХ ИЗДЕЛИЙ">
+                                <fnst:ГРНДата ГРН="5087746429843" ДатаЗаписи="2008-11-18" />
+                            </in2:СвОКВЭДОсн>
+                            <in2:СвОКВЭДДоп КодОКВЭД="18.22" НаимОКВЭД="ПРОИЗВОДСТВО ВЕРХНЕЙ ОДЕЖДЫ">
+                                <fnst:ГРНДата ГРН="5087746429843" ДатаЗаписи="2008-11-18" />
+                            </in2:СвОКВЭДДоп>
+                        </in2:СвОКВЭД>
+                        <in2:СвЗапЕГРЮЛ ГРН="5087746429843" ДатаЗап="2008-11-18" ИдЗап="87746823009334">
+                            <in2:ВидЗап КодСПВЗ="11201" НаимВидЗап="ГОСУДАРСТВЕННАЯ РЕГИСТРАЦИЯ ЮРИДИЧЕСКОГО ЛИЦА ПРИ СОЗДАНИИ" />
+                            <in2:СвРегОрг КодНО="7746" НаимНО="МЕЖРАЙОННАЯ ИНСПЕКЦИЯ ФЕДЕРАЛЬНОЙ НАЛОГОВОЙ СЛУЖБЫ № 46 ПО Г. МОСКВЕ" />
+                            <in2:СведПредДок>
+                                <in2:НаимДок>ЗАЯВЛЕНИЕ (С ПРИЛОЖЕНИЯМИ)</in2:НаимДок>
+                                <in2:ДатаДок>2008-11-11</in2:ДатаДок>
+                            </in2:СведПредДок>
+                            <in2:СведПредДок>
+                                <in2:НаимДок>УСТАВ</in2:НаимДок>
+                                <in2:ДатаДок>2008-11-11</in2:ДатаДок>
+                            </in2:СведПредДок>
+                            <in2:СведПредДок>
+                                <in2:НаимДок>ПРОТОКОЛ</in2:НаимДок>
+                                <in2:ДатаДок>2008-11-11</in2:ДатаДок>
+                            </in2:СведПредДок>
+                            <in2:СведПредДок>
+                                <in2:НаимДок>
+ЗАЯВЛЕНИЕ О ПЕРЕХОДЕ НА УПРОЩЕННУЮ СИСТЕМУ НАЛОГООБЛОЖЕНИЯ
+</in2:НаимДок>
+                                <in2:ДатаДок>2008-11-11</in2:ДатаДок>
+                            </in2:СведПредДок>
+                            <in2:СведПредДок>
+                                <in2:НаимДок>ЗАПРОС, КВИТАНЦИЯ</in2:НаимДок>
+                                <in2:ДатаДок>2008-11-11</in2:ДатаДок>
+                            </in2:СведПредДок>
+                            <in2:СведПредДок>
+                                <in2:НаимДок>КОП. УСТ</in2:НаимДок>
+                                <in2:ДатаДок>2008-11-11</in2:ДатаДок>
+                            </in2:СведПредДок>
+                            <in2:СведПредДок>
+                                <in2:НаимДок>УВЕД</in2:НаимДок>
+                                <in2:ДатаДок>2008-11-11</in2:ДатаДок>
+                            </in2:СведПредДок>
+                            <in2:СведПредДок>
+                                <in2:НаимДок>ДОКУМЕНТ ОБ УПЛАТЕ ГОСУДАРСТВЕННОЙ ПОШЛИНЫ</in2:НаимДок>
+                                <in2:ДатаДок>2008-11-11</in2:ДатаДок>
+                            </in2:СведПредДок>
+                            <in2:СвСвид ДатаВыдСвид="2008-11-18" Номер="010419289" Серия="77" />
+                        </in2:СвЗапЕГРЮЛ>
+                        <in2:СвЗапЕГРЮЛ ГРН="2087764197948" ДатаЗап="2008-11-18" ИдЗап="87746823009339">
+                            <in2:ВидЗап КодСПВЗ="13200" НаимВидЗап="ВНЕСЕНИЕ В ЕДИНЫЙ ГОСУДАРСТВЕННЫЙ РЕЕСТР ЮРИДИЧЕСКИХ ЛИЦ СВЕДЕНИЙ ОБ УЧЕТЕ ЮРИДИЧЕСКОГО ЛИЦА В НАЛОГОВОМ ОРГАНЕ" />
+                            <in2:СвРегОрг КодНО="7746" НаимНО="МЕЖРАЙОННАЯ ИНСПЕКЦИЯ ФЕДЕРАЛЬНОЙ НАЛОГОВОЙ СЛУЖБЫ № 46 ПО Г. МОСКВЕ" />
+                        </in2:СвЗапЕГРЮЛ>
+                        <in2:СвЗапЕГРЮЛ ГРН="2087764310490" ДатаЗап="2008-11-20" ИдЗап="87746825001847">
+                            <in2:ВидЗап КодСПВЗ="13400" НаимВидЗап="ВНЕСЕНИЕ В ЕДИНЫЙ ГОСУДАРСТВЕННЫЙ РЕЕСТР ЮРИДИЧЕСКИХ ЛИЦ СВЕДЕНИЙ О РЕГИСТРАЦИИ ЮРИДИЧЕСКОГО ЛИЦА В КАЧЕСТВЕ СТРАХОВАТЕЛЯ В ИСПОЛНИТЕЛЬНОМ ОРГАНЕ ФОНДА СОЦИАЛЬНОГО СТРАХОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ" />
+                            <in2:СвРегОрг КодНО="7746" НаимНО="МЕЖРАЙОННАЯ ИНСПЕКЦИЯ ФЕДЕРАЛЬНОЙ НАЛОГОВОЙ СЛУЖБЫ № 46 ПО Г. МОСКВЕ" />
+                        </in2:СвЗапЕГРЮЛ>
+                        <in2:СвЗапЕГРЮЛ ГРН="2087764333402" ДатаЗап="2008-11-20" ИдЗап="87746825004279">
+                            <in2:ВидЗап КодСПВЗ="13300" НаимВидЗап="ВНЕСЕНИЕ В ЕДИНЫЙ ГОСУДАРСТВЕННЫЙ РЕЕСТР ЮРИДИЧЕСКИХ ЛИЦ СВЕДЕНИЙ О РЕГИСТРАЦИИ ЮРИДИЧЕСКОГО ЛИЦА В КАЧЕСТВЕ СТРАХОВАТЕЛЯ В ТЕРРИТОРИАЛЬНОМ ОРГАНЕ ПЕНСИОННОГО ФОНДА РОССИЙСКОЙ ФЕДЕРАЦИИ" />
+                            <in2:СвРегОрг КодНО="7746" НаимНО="МЕЖРАЙОННАЯ ИНСПЕКЦИЯ ФЕДЕРАЛЬНОЙ НАЛОГОВОЙ СЛУЖБЫ № 46 ПО Г. МОСКВЕ" />
+                        </in2:СвЗапЕГРЮЛ>
+                    </in2:СвЮЛ>
+                </ns1:FNSVipULResponse>
+            </XmlView>
+            <BinaryView>
+                <CoordinateFile>
+                    <Id>0a1871d4-5e93-4886-8e05-0b9aa4b75ac3</Id>
+                    <FileIdInStore>bd756cbd-3417-4e4c-bf23-6eb8dee3054e</FileIdInStore>
+                    <StoreName>Isur</StoreName>
+                    <FileName>document.pdf</FileName>
+                    <FileHash>SkllEtzyVysODMP6e51o1g==</FileHash>
+                </CoordinateFile>
+            </BinaryView>
+        </Result>
+    </CoordinateTaskStatusDataMessage>
+</CoordinateSendTaskStatusesMessage>

@@ -1,0 +1,9 @@
+<?php
+
+return [
+    'etp' => [
+        'class' => \app\modules\soap\models\etp\ETP::class,
+        'schemePath' => '@app/modules/soap/config/scheme.xsd',
+        'sendUrl' => 'localhost:8081/api/send'
+    ],
+];

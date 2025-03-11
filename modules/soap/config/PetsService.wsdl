@@ -1,0 +1,2784 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://vetas.mos.ru" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://vetas.mos.ru" targetNamespace="http://vetas.mos.ru">
+  <wsdl:types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://vetas.mos.ru">
+    <!-- Elements -->
+    <xsd:element name="putApplicationRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="ApplicationData" type="tns:ApplicationData" minOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putApplicationResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Status" type="xsd:string"/>
+                <xsd:element name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putRefundDataRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="RefundData" type="tns:RefundData" minOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putRefundDataResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Status" type="xsd:string"/>
+                <xsd:element name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putBookingRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="BookingData" type="tns:BookingData" minOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putBookingResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Status" type="xsd:string"/>
+                <xsd:element name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putStatusRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="ApplicationStatusData" type="tns:ApplicationStatusData"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putStatusResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Status" type="xsd:string"/>
+                <xsd:element name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceOrgsRequest">
+        <xsd:complexType>
+            <xsd:sequence/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceOrgsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="OrgsList" type="tns:OrgsList"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceSpeciesRequest">
+        <xsd:complexType>
+            <xsd:sequence/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceSpeciesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="SpeciesList" type="tns:SpeciesList"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceMosruErrorsRequest">
+        <xsd:complexType>
+            <xsd:sequence/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceMosruDeleteReasonsRequest">
+        <xsd:complexType>
+            <xsd:sequence/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceMosruErrorsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="MosruErrorsList" type="tns:MosruErrorsList"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceMosruDeleteReasonsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="MosruDeleteReasonsList" type="tns:MosruDeleteReasonsList"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceServicesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="SpeciesId" type="xsd:integer"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceServicesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="ServicesTypeList" type="tns:ServicesTypeList"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="referenceServicesClinicRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="SpeciesId" type="xsd:integer"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceServicesClinicResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="ServicesTypeList" type="tns:ServicesTypeListNew"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceServicesHomeRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="SpeciesId" type="xsd:integer"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceServicesHomeResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="ServicesTypeList" type="tns:ServicesTypeListNew"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceServicesOnlineRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="SpeciesId" type="xsd:integer"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="referenceServicesOnlineResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="ServicesTypeList" type="tns:ServicesTypeListNew"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="infoblockServicesListRequest">
+        <xsd:complexType>
+            <xsd:sequence/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="infoblockServicesListResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="ServicesList" type="tns:infoblockServicesList"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="infoblockServicesList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Service" type="tns:infoblockService"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="infoblockService">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Price" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Type" type="xsd:integer"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="orgSpecListRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="Services" type="tns:ServicesIdType"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="CallToHome" nillable="true" type="xsd:boolean"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="FiasCode" nillable="true" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="orgSpecListResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" name="OrgSpecList" type="tns:OrgList"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="orgSpecListByDateRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="Services" type="tns:ServicesIdType"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="DateHours" type="tns:DateHoursType"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="CallToHome" nillable="true" type="xsd:boolean"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="FiasCode" nillable="true" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="orgSpecListByDateResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" name="OrgSpecList" type="tns:OrgList"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getCurrentRegistrationsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="LastName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="FirstName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="MiddleName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="Phone" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getCurrentRegistrationsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="CurrentRegistrationsList" type="tns:CurrentRegistrationsRegistration"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="timeSlotListRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="1" name="Services" type="tns:TimeSlotRQServicesIdType"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="Specialist" type="tns:TimeSlotRQSpecialistIdType"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="OrgId" type="xsd:integer"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="DateHours" type="tns:TimeSlotRQDateHoursType"/>
+                <xsd:element name="CallToHome" type="xsd:boolean"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="timeSlotListResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="TimeSlotList" type="tns:TimeSlotListCT"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="petOutpatientCardRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="PetId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="petOutpatientCardResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="PetId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="PetOutpatientCardLink" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetEctoparasitesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetEctoparasitesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" xmlns="" minOccurs="0" name="EctoparasitesList" type="tns:PetEctoparasitesConfig"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="PetEctoparasitesConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Ectoparasite" type="tns:EctoparasitesConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="EctoparasitesConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DrugName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ProducerName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Editable" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="getPetVisitsPastRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetVisitsPastResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" xmlns="" minOccurs="0" name="RegistrationsList" type="tns:PetsListVisitsPastConfig"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="PetsListVisitsPastConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Registration" type="tns:RegistrationVisitsPastConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RegistrationVisitsPastConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Slot" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Channel" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Editable" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Duration" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Organization" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Address" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Latitude" type="xsd:float"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Longitude" type="xsd:float"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="FullNameDoctor" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="TicketNumber" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServicesList" type="tns:ServicesVisitsPastConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesVisitsPastConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" xmlns="" minOccurs="0" name="Service" type="tns:ServicesVisitsPastArr"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesVisitsPastArr">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceId" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceType" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceName" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="getPetVisitsHistoryRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetVisitsHistoryResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" xmlns="" minOccurs="0" name="RegistrationsList" type="tns:PetsListVisitsHistoryConfig"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="PetsListVisitsHistoryConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Registration" type="tns:RegistrationVisitsHistoryConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RegistrationVisitsHistoryConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Slot" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Animal" type="tns:ServicesVisitsHistoryAnimal"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServicesList" type="tns:ServicesVisitsHistoryConfig"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Organization" type="tns:ServicesVisitsHistoryOrganization"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Specialist" type="tns:ServicesVisitsHistorySpecialist"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesVisitsHistoryConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" xmlns="" minOccurs="0" name="Service" type="tns:ServicesVisitsHistoryArr"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesVisitsHistoryArr">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceId" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceType" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceName" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesVisitsHistoryAnimal">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="SpeciesId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="SpeciesName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" nillable="true" name="NicknameAnimal" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesVisitsHistoryOrganization">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Address" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Latitude" type="xsd:float"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Longitude" type="xsd:float"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesVisitsHistorySpecialist">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="getPetVaccinationsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="PetId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetVaccinationsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" xmlns="" minOccurs="0" name="VaccinationsList" type="tns:PetVaccinationsConfig"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="PetVaccinationsConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Vaccination" type="tns:VaccinationsConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="VaccinationsConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Type" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DrugName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ProducerName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Organization" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Batch" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ValidUntil" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Editable" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="GUID" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="getPetLRServicesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="PetId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetLRServicesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" xmlns="" minOccurs="0" name="ServicesList" type="tns:LRServicesConfig"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="LRServicesConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Service" type="tns:ServiceLRServicesConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServiceLRServicesConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceId" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceType" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Organization" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Address" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Date" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="FullNameDoctor" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Editable" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="GUID" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Channel" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="getPetLRPrintServicesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="RecId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="ServiceId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetLRPrintServicesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="ServiceLink" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetVisitsPrintRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="RecId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetVisitsPrintResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="ServiceLink" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="postPetLRAddingServicesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="ServiceId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Address" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="NameDoctor" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="LastNameDoctor" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="PatrNameDoctor" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="postPetLRAddingServicesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putPetErrorRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="IntId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Comment" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putPetErrorResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putPetLRAddingServicesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="RecId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="ServiceId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Address" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="NameDoctor" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="LastNameDoctor" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="PatrNameDoctor" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putPetLRAddingServicesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="deletePetLRAddingServicesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="PetId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="RecId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="deletePetLRAddingServicesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetCDSServicesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="PetId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetCDSServicesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" xmlns="" minOccurs="0" name="ServicesList" type="tns:CDSServicesConfig"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="CDSServicesConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Service" type="tns:ServiceCDSServicesConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServiceCDSServicesConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceId" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceType" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Organization" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Address" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Date" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="FullNameDoctor" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Editable" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="GUID" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Channel" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="getPetCDSPrintServicesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="RecId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="ServiceId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetCDSPrintServicesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="ServiceLink" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="postPetCDSAddingServicesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="ServiceId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Address" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="NameDoctor" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="LastNameDoctor" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="PatrNameDoctor" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="postPetCDSAddingServicesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putPetCDSAddingServicesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="RecId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="ServiceId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Address" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="NameDoctor" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="LastNameDoctor" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="PatrNameDoctor" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putPetCDSAddingServicesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="deletePetCDSAddingServicesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="PetId" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="RecId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="deletePetCDSAddingServicesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+              <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="postPetVisitsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Date" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Address" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="NameDoctor" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="LastNameDoctor" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="PatrNameDoctor" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="postPetVisitsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putPetVisitsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="RecId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Date" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="AddressOrganization" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="NameDoctor" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="LastNameDoctor" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="PatrNameDoctor" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putPetVisitsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="postPetEctoparasitesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="DrugName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="ProducerName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="postPetEctoparasitesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="postPetVaccinationsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="DrugName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="VaccinationType" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="ProducerName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Batch" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="ValidUntil" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="postPetVaccinationsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putPetEctoparasitesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="RecId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="DrugName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="ProducerName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putPetEctoparasitesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="deletePetEctoparasitesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="PetId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="RecId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="deletePetEctoparasitesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="deletePetVisitsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="PetId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="RecId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="deletePetVisitsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putPetVaccinationsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="RecId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="DrugName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="VaccinationType" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="ProducerName" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Batch" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="ValidUntil" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="putPetVaccinationsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="deletePetVaccinationsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="RecId" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="VaccinationType" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="deletePetVaccinationsResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="Note" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetVisitsFutureRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+               <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetVisitsFutureResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" xmlns="" minOccurs="0" name="RegistrationsList" type="tns:PetsListVisitsFutureConfig"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="PetsListVisitsFutureConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Registration" type="tns:RegistrationVisitsFutureConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RegistrationVisitsFutureConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Date" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Slot" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Channel" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Editable" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Duration" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Address" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Latitude" type="xsd:float"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Longitude" type="xsd:float"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="FullNameDoctor" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="TicketNumber" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="ServicesList" type="tns:ServicesVisitsFutureConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesVisitsFutureConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" xmlns="" minOccurs="0" name="Service" type="tns:ServicesVisitsFutureArr"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesVisitsFutureArr">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceId" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceType" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceName" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="getPetListFullRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="1" name="SsoId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPetListFullResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" xmlns="" minOccurs="1" name="PetsListFull" type="tns:PetsListFullConfig"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="PetsListFullConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" xmlns="" minOccurs="1" name="Pet" type="tns:PetListFullArr"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PetListFullArr">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" name="PetId" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="IntId" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="NickName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Sex" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Species" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Breed" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Birthday" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="VaccinationStatus" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="City" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Street" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="House" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Room" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="IdentificationCode" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="IdentificationType" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="RegistrationsList" type="tns:RegistrationsListFullConfig"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="VaccinationsList" type="tns:VaccinationsListFullConfig"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="EctoparasitesList" type="tns:EctoparasitesListFullConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RegistrationsListFullConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Registration" type="tns:RegistrationFullConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RegistrationFullConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Date" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Slot" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Channel" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Editable" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Duration" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Address" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Latitude" type="xsd:float"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Longitude" type="xsd:float"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="FullNameDoctor" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="TicketNumber" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="GUID" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="ServicesList" type="tns:ServicesFullConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="VaccinationsListFullConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Vaccination" type="tns:VaccinationsFullConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="VaccinationsFullConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Type" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="DrugName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="ProducerName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Batch" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="ValidUntil" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Editable" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="GUID" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="EctoparasitesListFullConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Ectoparasite" type="tns:EctoparasitesFullConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="EctoparasitesFullConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="DrugName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ProducerName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Organization" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Date" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Editable" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesFullConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" xmlns="" minOccurs="0" name="Service" type="tns:ServicesFullArr"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesFullArr">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceId" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceType" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceName" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="petListRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="SsoId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="petListResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" xmlns="" minOccurs="0" name="PetsList" type="tns:PetsListConfig"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="PetsListConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" xmlns="" minOccurs="0" name="Pet" type="tns:PetListArr"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PetListArr">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="NickName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="VaccinationStatus" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="RegistrationsList" type="tns:RegistrationsListConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RegistrationsListConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Registration" type="tns:RegistrationConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="RegistrationConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Slot" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Channel" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Duration" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="NameClinic" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="AddressClinic" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="LatitudeClinic" type="xsd:float"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="LongitudeClinic" type="xsd:float"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="FullNameDoctor" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="TicketNumber" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Services" type="tns:ServicesConfig"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ServicesConfig">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceValue" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="getRegistrationByServiceNumberRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="ServiceNumber" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getRegistrationByServiceNumberResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="1" minOccurs="1" name="RegistrationByServiceNumber" type="tns:RegByServiceNumberRegistration"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <!--          -->
+    <!-- Complex types -->
+    <xsd:complexType name="SpeciesList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Species" type="tns:Species"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Species">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="BreedsList" type="tns:BreedsList"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MosruErrorsList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Error" type="tns:MosruErrors"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MosruDeleteReasonsList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="DeleteReason" type="tns:MosruDeleteReasons"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MosruErrors">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MosruDeleteReasons">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="BreedsList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Breed" type="tns:Breed"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Breed">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OrgsList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Orgs" type="tns:OrgOrg"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OrgOrg">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Type" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Address" type="tns:OrgAddress"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Specialists" type="tns:OrgSpecialistList"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OrgAddress">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Latitude" type="xsd:float"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Longitude" type="xsd:float"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OrgSpecialistList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Specialist" type="tns:OrgSpecialist"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OrgSpecialist">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesTypeList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServicesType" type="tns:ServicesType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesType">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="TypeId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="TypeValue" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceList" type="tns:ServicesList"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Service" type="tns:Service"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Service">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceValue" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Price" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="AtHome" type="xsd:boolean"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="AtClinic" type="xsd:boolean"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ServicesTypeListNew">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ServicesType" type="tns:ServicesTypeNew"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesTypeNew">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="TypeId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="TypeValue" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceList" type="tns:ServicesListNew"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServicesListNew">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Service" type="tns:ServiceNew"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServiceNew">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceValue" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Price" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Rating" nillable="true" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Hint" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ServicesIdType">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="Id" type="xsd:integer"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OrgList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Org" type="tns:Org"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Org">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Specialists" type="tns:SpecialistIdList"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SpecialistIdList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="Id" type="xsd:integer"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DateHoursType">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:date"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="HoursSince" nillable="true" type="xsd:time"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="HoursTill" nillable="true" type="xsd:time"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RegByServiceNumberRegistration">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceNumber" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="TicketNumber" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ChangesAvailable" type="xsd:boolean"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="CancelAvailable" type="xsd:boolean"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="SpecialistId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="OrgId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceList" type="tns:RegByServiceNumberServiceWrapper"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Date" type="xsd:date"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Slot" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Duration" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="CallToHome" type="xsd:boolean"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="AddressCall" type="tns:RegByServiceNumberAddressCall"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Animal" type="tns:RegByServiceNumberAnimal"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Owner" type="tns:RegByServiceNumberOwner"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RegByServiceNumberServiceWrapper">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Service" type="tns:RegByServiceNumberService"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RegByServiceNumberService">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RegByServiceNumberAddressCall">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" name="FiasCode" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="AddressName" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RegByServiceNumberAnimal">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="PetId" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="SpeciesId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="SpeciesName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" nillable="true" name="BreedId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="1" nillable="true" name="BreedName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" nillable="true" name="NicknameAnimal" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" nillable="true" name="ChipAnimal" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" nillable="true" name="BirthdateAnimal" type="xsd:date"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="SexAnimal" type="xsd:integer"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RegByServiceNumberOwner">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="FirstName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="LastName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="MiddleName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="MobilePhone" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CurrentRegistrationsRegistration">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Registration" type="tns:RegByServiceNumberRegistration"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TimeSlotRQServicesIdType">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="Id" type="xsd:integer"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TimeSlotRQSpecialistIdType">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Id" type="xsd:integer"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TimeSlotRQDateHoursType">
+        <xsd:sequence>
+            <xsd:element name="Date" type="xsd:date"/>
+            <xsd:element name="HoursSince" nillable="true" type="xsd:time"/>
+            <xsd:element name="HoursTill" nillable="true" type="xsd:time"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TimeSlotListCT">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Duration" type="xsd:integer"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Org" type="tns:TimeSlotOrg"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TimeSlotOrg">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="OrgId" type="xsd:integer"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Dates" type="tns:TimeSlotDates"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TimeSlotDates">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Date" type="tns:TimeSlotDate"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TimeSlotDate">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="Value" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="SlotList" type="tns:TimeSlotSlot"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TimeSlotSlot">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Slot" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ApplicationData">
+        <xsd:annotation>
+            <xsd:documentation>Обращение</xsd:documentation>
+        </xsd:annotation>
+        <xsd:all>
+            <xsd:element name="RegNum" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Регистрационный номер</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="RegDate" type="xsd:dateTime" nillable="true">
+                <xsd:annotation>
+                    <xsd:documentation>Регистрационная дата</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ServiceNumber" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Единый номер обращения</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="GUID" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>GUID прикрепленного файла</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Files" nillable="true" type="tns:Files" />
+            <xsd:element name="Description" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Описание обращения</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PrepareFactDate" type="xsd:dateTime" nillable="true" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Дата фактической подготовки (на стороне ОИВ)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ServiceType" type="tns:DictionaryItem">
+                <xsd:annotation>
+                    <xsd:documentation>Код гос. услуги</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Declarant" type="tns:Declarant" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Данные заявителя</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ServiceProperties" type="tns:ServiceProperties" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Дополнительные атрибуты обращения</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:all>
+        <xsd:attribute name="Id" type="xsd:string" use="required">
+            <xsd:annotation>
+                <xsd:documentation>Единый номер обращения в качестве идентификатора</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    <xsd:complexType name="BookingData">
+        <xsd:annotation>
+            <xsd:documentation>Обращение</xsd:documentation>
+        </xsd:annotation>
+        <xsd:all>
+            <xsd:element name="ServiceNumber" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Единый номер обращения</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ServiceProperties" type="tns:ServiceProperties" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Дополнительные атрибуты обращения</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:all>
+        <xsd:attribute name="Id" type="xsd:string" use="required">
+            <xsd:annotation>
+                <xsd:documentation>Единый номер обращения в качестве идентификатора</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    <xsd:complexType name="Files">
+        <xsd:annotation>
+            <xsd:documentation>Набор документов</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="File" minOccurs="0" maxOccurs="5" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Идентификатор прикреплённого документа в ЦХЭД</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RefundData">
+        <xsd:annotation>
+            <xsd:documentation>Данные для оформления возврата средств</xsd:documentation>
+        </xsd:annotation>
+        <xsd:all>
+            <xsd:element name="ServiceNumber" type="xsd:string" use="required">
+                <xsd:annotation>
+                    <xsd:documentation>Единый номер обращения</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BankName" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Наименование банка</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CorrespondedAccount" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Корресподентский счёт</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="OrganizationName" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Наименование организации</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Bik" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Бик</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ClientAccount" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Пользовательский счёт</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ClientFio" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>ФИО клиента</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:all>
+        <xsd:attribute name="Id" type="xsd:string" use="required">
+            <xsd:annotation>
+                <xsd:documentation>Единый номер обращения в качестве идентификатора</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    <xsd:complexType name="Declarant">
+        <xsd:annotation>
+            <xsd:documentation>Заявитель</xsd:documentation>
+        </xsd:annotation>
+        <xsd:all>
+            <xsd:element name="LastName" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Фамилия</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FirstName" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Имя</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MiddleName" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Отчество</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BirthDate" type="xsd:date" nillable="true" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Дата рождения</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Snils" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>СНИЛС</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FactAddress" type="tns:Address" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Фактический адрес</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MobilePhone" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Мобильный телефон</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="EMail" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Адрес электронной почты</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="SsoId" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Идентификатор СУДИР</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="ApplicationStatusData">
+        <xsd:annotation>
+            <xsd:documentation>Статус обращения</xsd:documentation>
+        </xsd:annotation>
+        <xsd:all>
+            <xsd:element name="ResponseDate" type="xsd:dateTime" nillable="true" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Срок подготовки и направления ответа</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Status" type="tns:StatusType">
+                <xsd:annotation>
+                    <xsd:documentation>Статус</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Declarant" type="tns:Declarant" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Данные заявителя</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ServiceProperties" type="tns:ServiceProperties" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Дополнительные атрибуты обращения</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Note" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Примечание</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ServiceNumber" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Единый номер обращения</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Reason" type="tns:DictionaryItem" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Код причины</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="StatusId" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Внешний идентификатор статуса</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="StatusType">
+        <xsd:annotation>
+            <xsd:documentation>Статус</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="StatusCode" type="xsd:int">
+                <xsd:annotation>
+                    <xsd:documentation>Код</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="StatusTitle" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Наименование</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="StatusDate" type="xsd:dateTime">
+                <xsd:annotation>
+                    <xsd:documentation>Дата</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DictionaryItem">
+        <xsd:annotation>
+            <xsd:documentation>Справочное значение</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Code" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Код</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Name" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Наименование</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Address">
+        <xsd:annotation>
+            <xsd:documentation>Адрес</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Country" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Государство</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CountryCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Код страны по ОКСМ</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PostalCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Почтовый индекс</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Locality" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Субъект государства</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Region" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Район</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="City" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Город</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Town" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Населенный пункт</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Street" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Улица</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="House" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Дом</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Building" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Корпус</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Structure" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Строение</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Facility" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Сооружение</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Ownership" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Владение</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Flat" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Квартира (офис)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="POBox" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Абонентский ящик</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Okato" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>ОКАТО</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="KladrCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Код из КЛАДР</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="KladrStreetCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Код улицы из КЛАДР</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BTIDistrictCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Код округа согласно БТИ</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BTIRegionCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Код района согласно БТИ</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BTIStreetCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Код улицы согласно адресному реестру БТИ</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BTIBuildingCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Код строения согласно адресному реестру БТИ (UNOM)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BTIAltCode" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="BTIFlatCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Код помещения согласно адресному реестру БТИ (UNKV)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FiasCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Код по ФИАС</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Litera" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Литер</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ServiceProperties">
+        <xsd:all>
+            <xsd:element maxOccurs="1" minOccurs="0" name="ServiceList" type="tns:StatusServicesList"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="SpeciesId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="SpeciesName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="BreedId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="BreedName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="NicknameAnimal" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="ChipAnimal" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="BirthdateAnimal" type="xsd:date"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="SexAnimal" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="SpecialistId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="SpecialistName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="OrgId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="OrgName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="OrgAddressName" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="OrgLatitude" type="xsd:float"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="OrgLongitude" type="xsd:float"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="OrgPhone" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Date" type="xsd:date"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Slot" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="TicketNumber" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="CallToHome" type="xsd:boolean"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="AddressCall" type="tns:RegByServiceNumberAddressCall"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="PetId" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="StatusServicesList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Service" type="tns:StatusService"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="StatusService">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ServiceId" type="xsd:integer"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="TypeValue" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Complex types -->
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getCurrentRegistrationsResponse">
+    <wsdl:part element="tns:getCurrentRegistrationsResponse" name="getCurrentRegistrationsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="orgSpecListRequest">
+    <wsdl:part element="tns:orgSpecListRequest" name="orgSpecListRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRegistrationByServiceNumberResponse">
+    <wsdl:part element="tns:getRegistrationByServiceNumberResponse" name="getRegistrationByServiceNumberResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceOrgsResponse">
+    <wsdl:part element="tns:referenceOrgsResponse" name="referenceOrgsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceSpeciesRequest">
+    <wsdl:part element="tns:referenceSpeciesRequest" name="referenceSpeciesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceMosruErrorsRequest">
+    <wsdl:part element="tns:referenceMosruErrorsRequest" name="referenceMosruErrorsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceMosruDeleteReasonsRequest">
+    <wsdl:part element="tns:referenceMosruDeleteReasonsRequest" name="referenceMosruDeleteReasonsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putStatusRequest">
+    <wsdl:part element="tns:putStatusRequest" name="putStatusRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="timeSlotListRequest">
+    <wsdl:part element="tns:timeSlotListRequest" name="timeSlotListRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="petOutpatientCardRequest">
+    <wsdl:part element="tns:petOutpatientCardRequest" name="petOutpatientCardRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPetEctoparasitesRequest"><wsdl:part element="tns:getPetEctoparasitesRequest" name="getPetEctoparasitesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="getPetVisitsPastRequest"><wsdl:part element="tns:getPetVisitsPastRequest" name="getPetVisitsPastRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="getPetVisitsHistoryRequest"><wsdl:part element="tns:getPetVisitsHistoryRequest" name="getPetVisitsHistoryRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="infoblockServicesListRequest"><wsdl:part element="tns:infoblockServicesListRequest" name="infoblockServicesListRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="getPetVisitsPrintRequest"><wsdl:part element="tns:getPetVisitsPrintRequest" name="getPetVisitsPrintRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="getPetVaccinationsRequest"><wsdl:part element="tns:getPetVaccinationsRequest" name="getPetVaccinationsRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="getPetLRServicesRequest"><wsdl:part element="tns:getPetLRServicesRequest" name="getPetLRServicesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="getPetLRPrintServicesRequest"><wsdl:part element="tns:getPetLRPrintServicesRequest" name="getPetLRPrintServicesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="postPetLRAddingServicesRequest"><wsdl:part element="tns:postPetLRAddingServicesRequest" name="postPetLRAddingServicesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="putPetErrorRequest"><wsdl:part element="tns:putPetErrorRequest" name="putPetErrorRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="putPetLRAddingServicesRequest"><wsdl:part element="tns:putPetLRAddingServicesRequest" name="putPetLRAddingServicesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="deletePetLRAddingServicesRequest"><wsdl:part element="tns:deletePetLRAddingServicesRequest" name="deletePetLRAddingServicesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="getPetCDSServicesRequest"><wsdl:part element="tns:getPetCDSServicesRequest" name="getPetCDSServicesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="getPetCDSPrintServicesRequest"><wsdl:part element="tns:getPetCDSPrintServicesRequest" name="getPetCDSPrintServicesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="postPetCDSAddingServicesRequest"><wsdl:part element="tns:postPetCDSAddingServicesRequest" name="postPetCDSAddingServicesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="putPetCDSAddingServicesRequest"><wsdl:part element="tns:putPetCDSAddingServicesRequest" name="putPetCDSAddingServicesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="deletePetCDSAddingServicesRequest"><wsdl:part element="tns:deletePetCDSAddingServicesRequest" name="deletePetCDSAddingServicesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="postPetVisitsRequest"><wsdl:part element="tns:postPetVisitsRequest" name="postPetVisitsRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="putPetVisitsRequest"><wsdl:part element="tns:putPetVisitsRequest" name="putPetVisitsRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="postPetEctoparasitesRequest"><wsdl:part element="tns:postPetEctoparasitesRequest" name="postPetEctoparasitesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="putPetEctoparasitesRequest"><wsdl:part element="tns:putPetEctoparasitesRequest" name="putPetEctoparasitesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="deletePetEctoparasitesRequest"><wsdl:part element="tns:deletePetEctoparasitesRequest" name="deletePetEctoparasitesRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="deletePetVisitsRequest"><wsdl:part element="tns:deletePetVisitsRequest" name="deletePetVisitsRequest"></wsdl:part></wsdl:message>
+  <wsdl:message name="postPetVaccinationsRequest"><wsdl:part element="tns:postPetVaccinationsRequest" name="postPetVaccinationsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putPetVaccinationsRequest">
+    <wsdl:part element="tns:putPetVaccinationsRequest" name="putPetVaccinationsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deletePetVaccinationsRequest">
+    <wsdl:part element="tns:deletePetVaccinationsRequest" name="deletePetVaccinationsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPetVisitsFutureRequest">
+    <wsdl:part element="tns:getPetVisitsFutureRequest" name="getPetVisitsFutureRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPetListFullRequest">
+    <wsdl:part element="tns:getPetListFullRequest" name="getPetListFullRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="petListRequest">
+    <wsdl:part element="tns:petListRequest" name="petListRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceServicesRequest">
+    <wsdl:part element="tns:referenceServicesRequest" name="referenceServicesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  
+  <wsdl:message name="referenceServicesClinicRequest">
+    <wsdl:part element="tns:referenceServicesClinicRequest" name="referenceServicesClinicRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceServicesHomeRequest">
+    <wsdl:part element="tns:referenceServicesHomeRequest" name="referenceServicesHomeRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceServicesOnlineRequest">
+    <wsdl:part element="tns:referenceServicesOnlineRequest" name="referenceServicesOnlineRequest">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="putStatusResponse">
+    <wsdl:part element="tns:putStatusResponse" name="putStatusResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="orgSpecListResponse">
+    <wsdl:part element="tns:orgSpecListResponse" name="orgSpecListResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="timeSlotListResponse">
+    <wsdl:part element="tns:timeSlotListResponse" name="timeSlotListResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="petOutpatientCardResponse">
+    <wsdl:part element="tns:petOutpatientCardResponse" name="petOutpatientCardResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPetEctoparasitesResponse"><wsdl:part element="tns:getPetEctoparasitesResponse" name="getPetEctoparasitesResponse"></wsdl:part></wsdl:message>
+  <wsdl:message name="getPetVisitsPastResponse"><wsdl:part element="tns:getPetVisitsPastResponse" name="getPetVisitsPastResponse"></wsdl:part></wsdl:message>
+  <wsdl:message name="getPetVisitsHistoryResponse"><wsdl:part element="tns:getPetVisitsHistoryResponse" name="getPetVisitsHistoryResponse"></wsdl:part></wsdl:message>
+  <wsdl:message name="infoblockServicesListResponse"><wsdl:part element="tns:infoblockServicesListResponse" name="infoblockServicesListResponse"></wsdl:part></wsdl:message>
+  <wsdl:message name="getPetVisitsPrintResponse">
+    <wsdl:part element="tns:getPetVisitsPrintResponse" name="getPetVisitsPrintResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPetVaccinationsResponse"><wsdl:part element="tns:getPetVaccinationsResponse" name="getPetVaccinationsResponse"></wsdl:part></wsdl:message>
+  <wsdl:message name="getPetLRServicesResponse">
+    <wsdl:part element="tns:getPetLRServicesResponse" name="getPetLRServicesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPetLRPrintServicesResponse">
+    <wsdl:part element="tns:getPetLRPrintServicesResponse" name="getPetLRPrintServicesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="postPetLRAddingServicesResponse">
+    <wsdl:part element="tns:postPetLRAddingServicesResponse" name="postPetLRAddingServicesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putPetLRAddingServicesResponse">
+    <wsdl:part element="tns:putPetLRAddingServicesResponse" name="putPetLRAddingServicesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putPetErrorResponse"><wsdl:part element="tns:putPetErrorResponse" name="putPetErrorResponse"></wsdl:part></wsdl:message>
+  <wsdl:message name="deletePetLRAddingServicesResponse">
+    <wsdl:part element="tns:deletePetLRAddingServicesResponse" name="deletePetLRAddingServicesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPetCDSServicesResponse">
+    <wsdl:part element="tns:getPetCDSServicesResponse" name="getPetCDSServicesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPetCDSPrintServicesResponse">
+    <wsdl:part element="tns:getPetCDSPrintServicesResponse" name="getPetCDSPrintServicesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="postPetCDSAddingServicesResponse">
+    <wsdl:part element="tns:postPetCDSAddingServicesResponse" name="postPetCDSAddingServicesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putPetCDSAddingServicesResponse">
+    <wsdl:part element="tns:putPetCDSAddingServicesResponse" name="putPetCDSAddingServicesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deletePetCDSAddingServicesResponse">
+    <wsdl:part element="tns:deletePetCDSAddingServicesResponse" name="deletePetCDSAddingServicesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="postPetVisitsResponse">
+    <wsdl:part element="tns:postPetVisitsResponse" name="postPetVisitsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putPetVisitsResponse">
+    <wsdl:part element="tns:putPetVisitsResponse" name="putPetVisitsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="postPetEctoparasitesResponse">
+    <wsdl:part element="tns:postPetEctoparasitesResponse" name="postPetEctoparasitesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putPetEctoparasitesResponse">
+    <wsdl:part element="tns:putPetEctoparasitesResponse" name="putPetEctoparasitesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deletePetEctoparasitesResponse">
+    <wsdl:part element="tns:deletePetEctoparasitesResponse" name="deletePetEctoparasitesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deletePetVisitsResponse">
+    <wsdl:part element="tns:deletePetVisitsResponse" name="deletePetVisitsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="postPetVaccinationsResponse">
+    <wsdl:part element="tns:postPetVaccinationsResponse" name="postPetVaccinationsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putPetVaccinationsResponse">
+    <wsdl:part element="tns:putPetVaccinationsResponse" name="putPetVaccinationsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deletePetVaccinationsResponse">
+    <wsdl:part element="tns:deletePetVaccinationsResponse" name="deletePetVaccinationsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPetVisitsFutureResponse">
+    <wsdl:part element="tns:getPetVisitsFutureResponse" name="getPetVisitsFutureResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPetListFullResponse">
+    <wsdl:part element="tns:getPetListFullResponse" name="getPetListFullResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="petListResponse">
+    <wsdl:part element="tns:petListResponse" name="petListResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putApplicationRequest">
+    <wsdl:part element="tns:putApplicationRequest" name="putApplicationRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putRefundDataRequest">
+    <wsdl:part element="tns:putRefundDataRequest" name="putRefundDataRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putRefundDataResponse">
+    <wsdl:part element="tns:putRefundDataResponse" name="putRefundDataResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putBookingRequest">
+    <wsdl:part element="tns:putBookingRequest" name="putBookingRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceSpeciesResponse">
+    <wsdl:part element="tns:referenceSpeciesResponse" name="referenceSpeciesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceMosruErrorsResponse">
+    <wsdl:part element="tns:referenceMosruErrorsResponse" name="referenceMosruErrorsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceMosruDeleteReasonsResponse">
+    <wsdl:part element="tns:referenceMosruDeleteReasonsResponse" name="referenceMosruDeleteReasonsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="orgSpecListByDateRequest">
+    <wsdl:part element="tns:orgSpecListByDateRequest" name="orgSpecListByDateRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceOrgsRequest">
+    <wsdl:part element="tns:referenceOrgsRequest" name="referenceOrgsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRegistrationByServiceNumberRequest">
+    <wsdl:part element="tns:getRegistrationByServiceNumberRequest" name="getRegistrationByServiceNumberRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="orgSpecListByDateResponse">
+    <wsdl:part element="tns:orgSpecListByDateResponse" name="orgSpecListByDateResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceServicesResponse">
+    <wsdl:part element="tns:referenceServicesResponse" name="referenceServicesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceServicesClinicResponse">
+    <wsdl:part element="tns:referenceServicesClinicResponse" name="referenceServicesClinicResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceServicesHomeResponse">
+    <wsdl:part element="tns:referenceServicesHomeResponse" name="referenceServicesHomeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenceServicesOnlineResponse">
+    <wsdl:part element="tns:referenceServicesOnlineResponse" name="referenceServicesOnlineResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCurrentRegistrationsRequest">
+    <wsdl:part element="tns:getCurrentRegistrationsRequest" name="getCurrentRegistrationsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putApplicationResponse">
+    <wsdl:part element="tns:putApplicationResponse" name="putApplicationResponse">
+    </wsdl:part>
+  </wsdl:message>
+    <wsdl:message name="putBookingResponse">
+        <wsdl:part element="tns:putBookingResponse" name="putBookingResponse">
+        </wsdl:part>
+    </wsdl:message>
+  <wsdl:portType name="PetsPortType">
+    <wsdl:operation name="getCurrentRegistrations">
+      <wsdl:input message="tns:getCurrentRegistrationsRequest" name="getCurrentRegistrationsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getCurrentRegistrationsResponse" name="getCurrentRegistrationsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="orgSpecList">
+      <wsdl:input message="tns:orgSpecListRequest" name="orgSpecListRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:orgSpecListResponse" name="orgSpecListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRegistrationByServiceNumber">
+      <wsdl:input message="tns:getRegistrationByServiceNumberRequest" name="getRegistrationByServiceNumberRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getRegistrationByServiceNumberResponse" name="getRegistrationByServiceNumberResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceOrgs">
+      <wsdl:input message="tns:referenceOrgsRequest" name="referenceOrgsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:referenceOrgsResponse" name="referenceOrgsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceSpecies">
+      <wsdl:input message="tns:referenceSpeciesRequest" name="referenceSpeciesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:referenceSpeciesResponse" name="referenceSpeciesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceMosruErrors">
+      <wsdl:input message="tns:referenceMosruErrorsRequest" name="referenceMosruErrorsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:referenceMosruErrorsResponse" name="referenceMosruErrorsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceMosruDeleteReasons">
+      <wsdl:input message="tns:referenceMosruDeleteReasonsRequest" name="referenceMosruDeleteReasonsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:referenceMosruDeleteReasonsResponse" name="referenceMosruDeleteReasonsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putStatus">
+      <wsdl:input message="tns:putStatusRequest" name="putStatusRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:putStatusResponse" name="putStatusResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeSlotList">
+      <wsdl:input message="tns:timeSlotListRequest" name="timeSlotListRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:timeSlotListResponse" name="timeSlotListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="petOutpatientCard">
+      <wsdl:input message="tns:petOutpatientCardRequest" name="petOutpatientCardRequest"></wsdl:input>
+      <wsdl:output message="tns:petOutpatientCardResponse" name="petOutpatientCardResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetEctoparasites">
+      <wsdl:input message="tns:getPetEctoparasitesRequest" name="getPetEctoparasitesRequest"></wsdl:input>
+      <wsdl:output message="tns:getPetEctoparasitesResponse" name="getPetEctoparasitesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetVisitsPast">
+      <wsdl:input message="tns:getPetVisitsPastRequest" name="getPetVisitsPastRequest"></wsdl:input>
+      <wsdl:output message="tns:getPetVisitsPastResponse" name="getPetVisitsPastResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetVisitsHistory">
+      <wsdl:input message="tns:getPetVisitsHistoryRequest" name="getPetVisitsHistoryRequest"></wsdl:input>
+      <wsdl:output message="tns:getPetVisitsHistoryResponse" name="getPetVisitsHistoryResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="infoblockServicesList">
+      <wsdl:input message="tns:infoblockServicesListRequest" name="infoblockServicesListRequest"></wsdl:input>
+      <wsdl:output message="tns:infoblockServicesListResponse" name="infoblockServicesListResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetVisitsPrint">
+        <wsdl:input message="tns:getPetVisitsPrintRequest" name="getPetVisitsPrintRequest"></wsdl:input>
+        <wsdl:output message="tns:getPetVisitsPrintResponse" name="getPetVisitsPrintResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetVaccinations">
+      <wsdl:input message="tns:getPetVaccinationsRequest" name="getPetVaccinationsRequest"></wsdl:input>
+      <wsdl:output message="tns:getPetVaccinationsResponse" name="getPetVaccinationsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetLRServices">
+      <wsdl:input message="tns:getPetLRServicesRequest" name="getPetLRServicesRequest"></wsdl:input>
+      <wsdl:output message="tns:getPetLRServicesResponse" name="getPetLRServicesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetLRPrintServices">
+        <wsdl:input message="tns:getPetLRPrintServicesRequest" name="getPetLRPrintServicesRequest"></wsdl:input>
+        <wsdl:output message="tns:getPetLRPrintServicesResponse" name="getPetLRPrintServicesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postPetLRAddingServices">
+        <wsdl:input message="tns:postPetLRAddingServicesRequest" name="postPetLRAddingServicesRequest"></wsdl:input>
+        <wsdl:output message="tns:postPetLRAddingServicesResponse" name="postPetLRAddingServicesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putPetError">
+        <wsdl:input message="tns:putPetErrorRequest" name="putPetErrorRequest"></wsdl:input>
+        <wsdl:output message="tns:putPetErrorResponse" name="putPetErrorResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putPetLRAddingServices">
+        <wsdl:input message="tns:putPetLRAddingServicesRequest" name="putPetLRAddingServicesRequest"></wsdl:input>
+        <wsdl:output message="tns:putPetLRAddingServicesResponse" name="putPetLRAddingServicesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePetLRAddingServices">
+        <wsdl:input message="tns:deletePetLRAddingServicesRequest" name="deletePetLRAddingServicesRequest"></wsdl:input>
+        <wsdl:output message="tns:deletePetLRAddingServicesResponse" name="deletePetLRAddingServicesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetCDSServices">
+        <wsdl:input message="tns:getPetCDSServicesRequest" name="getPetCDSServicesRequest"></wsdl:input>
+        <wsdl:output message="tns:getPetCDSServicesResponse" name="getPetCDSServicesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetCDSPrintServices">
+        <wsdl:input message="tns:getPetCDSPrintServicesRequest" name="getPetCDSPrintServicesRequest"></wsdl:input>
+        <wsdl:output message="tns:getPetCDSPrintServicesResponse" name="getPetCDSPrintServicesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postPetCDSAddingServices">
+        <wsdl:input message="tns:postPetCDSAddingServicesRequest" name="postPetCDSAddingServicesRequest"></wsdl:input>
+        <wsdl:output message="tns:postPetCDSAddingServicesResponse" name="postPetCDSAddingServicesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putPetCDSAddingServices">
+        <wsdl:input message="tns:putPetCDSAddingServicesRequest" name="putPetCDSAddingServicesRequest"></wsdl:input>
+        <wsdl:output message="tns:putPetCDSAddingServicesResponse" name="putPetCDSAddingServicesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePetCDSAddingServices">
+        <wsdl:input message="tns:deletePetCDSAddingServicesRequest" name="deletePetCDSAddingServicesRequest"></wsdl:input>
+        <wsdl:output message="tns:deletePetCDSAddingServicesResponse" name="deletePetCDSAddingServicesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postPetVisits">
+      <wsdl:input message="tns:postPetVisitsRequest" name="postPetVisitsRequest"></wsdl:input>
+      <wsdl:output message="tns:postPetVisitsResponse" name="postPetVisitsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putPetVisits">
+      <wsdl:input message="tns:putPetVisitsRequest" name="putPetVisitsRequest"></wsdl:input>
+      <wsdl:output message="tns:putPetVisitsResponse" name="putPetVisitsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postPetEctoparasites">
+      <wsdl:input message="tns:postPetEctoparasitesRequest" name="postPetEctoparasitesRequest"></wsdl:input>
+      <wsdl:output message="tns:postPetEctoparasitesResponse" name="postPetEctoparasitesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putPetEctoparasites">
+      <wsdl:input message="tns:putPetEctoparasitesRequest" name="putPetEctoparasitesRequest"></wsdl:input>
+      <wsdl:output message="tns:putPetEctoparasitesResponse" name="putPetEctoparasitesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePetEctoparasites">
+      <wsdl:input message="tns:deletePetEctoparasitesRequest" name="deletePetEctoparasitesRequest"></wsdl:input>
+      <wsdl:output message="tns:deletePetEctoparasitesResponse" name="deletePetEctoparasitesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePetVisits">
+      <wsdl:input message="tns:deletePetVisitsRequest" name="deletePetVisitsRequest"></wsdl:input>
+      <wsdl:output message="tns:deletePetVisitsResponse" name="deletePetVisitsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postPetVaccinations">
+      <wsdl:input message="tns:postPetVaccinationsRequest" name="postPetVaccinationsRequest"></wsdl:input>
+      <wsdl:output message="tns:postPetVaccinationsResponse" name="postPetVaccinationsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putPetVaccinations">
+      <wsdl:input message="tns:putPetVaccinationsRequest" name="putPetVaccinationsRequest"></wsdl:input>
+      <wsdl:output message="tns:putPetVaccinationsResponse" name="putPetVaccinationsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePetVaccinations">
+      <wsdl:input message="tns:deletePetVaccinationsRequest" name="deletePetVaccinationsRequest"></wsdl:input>
+      <wsdl:output message="tns:deletePetVaccinationsResponse" name="deletePetVaccinationsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putRefundData">
+      <wsdl:input message="tns:putRefundDataRequest" name="putRefundDataRequest"></wsdl:input>
+      <wsdl:output message="tns:putRefundDataResponse" name="putRefundDataResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetVisitsFuture">
+      <wsdl:input message="tns:getPetVisitsFutureRequest" name="getPetVisitsFutureRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getPetVisitsFutureResponse" name="getPetVisitsFutureResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetListFull">
+      <wsdl:input message="tns:getPetListFullRequest" name="getPetListFullRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getPetListFullResponse" name="getPetListFullResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="petList">
+      <wsdl:input message="tns:petListRequest" name="petListRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:petListResponse" name="petListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceServices">
+      <wsdl:input message="tns:referenceServicesRequest" name="referenceServicesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:referenceServicesResponse" name="referenceServicesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="referenceServicesClinic">
+      <wsdl:input message="tns:referenceServicesClinicRequest" name="referenceServicesClinicRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:referenceServicesClinicResponse" name="referenceServicesClinicResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceServicesHome">
+      <wsdl:input message="tns:referenceServicesHomeRequest" name="referenceServicesHomeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:referenceServicesHomeResponse" name="referenceServicesHomeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceServicesOnline">
+      <wsdl:input message="tns:referenceServicesOnlineRequest" name="referenceServicesOnlineRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:referenceServicesOnlineResponse" name="referenceServicesOnlineResponse">
+    </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="putApplication">
+      <wsdl:input message="tns:putApplicationRequest" name="putApplicationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:putApplicationResponse" name="putApplicationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putBooking">
+      <wsdl:input message="tns:putBookingRequest" name="putBookingRequest">
+      </wsdl:input>
+      <wsdl:output message="tns:putBookingResponse" name="putBookingResponse">
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="orgSpecListByDate">
+      <wsdl:input message="tns:orgSpecListByDateRequest" name="orgSpecListByDateRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:orgSpecListByDateResponse" name="orgSpecListByDateResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PetsBinding" type="tns:PetsPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getCurrentRegistrations">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getCurrentRegistrationsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCurrentRegistrationsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="orgSpecList">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="orgSpecListRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="orgSpecListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRegistrationByServiceNumber">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getRegistrationByServiceNumberRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRegistrationByServiceNumberResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceOrgs">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="referenceOrgsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="referenceOrgsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceSpecies">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="referenceSpeciesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="referenceSpeciesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceMosruErrors">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="referenceMosruErrorsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="referenceMosruErrorsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceMosruDeleteReasons">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="referenceMosruDeleteReasonsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="referenceMosruDeleteReasonsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putStatus">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="putStatusRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="putStatusResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeSlotList">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="timeSlotListRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="timeSlotListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="petOutpatientCard">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="petOutpatientCardRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="petOutpatientCardResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetEctoparasites">
+    <soap:operation soapAction=""/>
+      <wsdl:input name="getPetEctoparasitesRequest"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="getPetEctoparasitesResponse"><soap:body use="literal"/></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetVisitsPast">
+    <soap:operation soapAction=""/>
+      <wsdl:input name="getPetVisitsPastRequest"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="getPetVisitsPastResponse"><soap:body use="literal"/></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetVisitsHistory">
+    <soap:operation soapAction=""/>
+      <wsdl:input name="getPetVisitsHistoryRequest"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="getPetVisitsHistoryResponse"><soap:body use="literal"/></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="infoblockServicesList">
+    <soap:operation soapAction=""/>
+      <wsdl:input name="infoblockServicesListRequest"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="infoblockServicesListResponse"><soap:body use="literal"/></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetVisitsPrint">
+    <soap:operation soapAction=""/>
+      <wsdl:input name="getPetVisitsPrintRequest"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="getPetVisitsPrintResponse"><soap:body use="literal"/></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetVaccinations">
+    <soap:operation soapAction=""/>
+      <wsdl:input name="getPetVaccinationsRequest"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="getPetVaccinationsResponse"><soap:body use="literal"/></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetLRServices">
+    <soap:operation soapAction=""/>
+    <wsdl:input name="getPetLRServicesRequest">
+      <soap:body use="literal"/>
+    </wsdl:input>
+    <wsdl:output name="getPetLRServicesResponse">
+      <soap:body use="literal"/>
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetLRPrintServices">
+        <soap:operation soapAction=""/>
+        <wsdl:input name="getPetLRPrintServicesRequest">
+        <soap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="getPetLRPrintServicesResponse">
+        <soap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postPetLRAddingServices">
+        <soap:operation soapAction=""/>
+        <wsdl:input name="postPetLRAddingServicesRequest">
+        <soap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="postPetLRAddingServicesResponse">
+        <soap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putPetError">
+        <soap:operation soapAction=""/>
+        <wsdl:input name="putPetErrorRequest">
+        <soap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="putPetErrorResponse">
+        <soap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putPetLRAddingServices">
+        <soap:operation soapAction=""/>
+        <wsdl:input name="putPetLRAddingServicesRequest">
+        <soap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="putPetLRAddingServicesResponse">
+        <soap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePetLRAddingServices">
+        <soap:operation soapAction=""/>
+        <wsdl:input name="deletePetLRAddingServicesRequest">
+        <soap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="deletePetLRAddingServicesResponse">
+        <soap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetCDSServices">
+        <soap:operation soapAction=""/>
+        <wsdl:input name="getPetCDSServicesRequest">
+        <soap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="getPetCDSServicesResponse">
+        <soap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetCDSPrintServices">
+        <soap:operation soapAction=""/>
+        <wsdl:input name="getPetCDSPrintServicesRequest">
+        <soap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="getPetCDSPrintServicesResponse">
+        <soap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postPetCDSAddingServices">
+        <soap:operation soapAction=""/>
+        <wsdl:input name="postPetCDSAddingServicesRequest">
+        <soap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="postPetCDSAddingServicesResponse">
+        <soap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putPetCDSAddingServices">
+        <soap:operation soapAction=""/>
+        <wsdl:input name="putPetCDSAddingServicesRequest">
+        <soap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="putPetCDSAddingServicesResponse">
+        <soap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePetCDSAddingServices">
+        <soap:operation soapAction=""/>
+        <wsdl:input name="deletePetCDSAddingServicesRequest">
+        <soap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="deletePetCDSAddingServicesResponse">
+        <soap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postPetVisits">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="postPetVisitsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="postPetVisitsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putPetVisits">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="putPetVisitsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="putPetVisitsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postPetEctoparasites">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="postPetEctoparasitesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="postPetEctoparasitesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putPetEctoparasites">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="putPetEctoparasitesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="putPetEctoparasitesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePetEctoparasites">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="deletePetEctoparasitesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deletePetEctoparasitesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePetVisits">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="deletePetVisitsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deletePetVisitsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postPetVaccinations">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="postPetVaccinationsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="postPetVaccinationsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putPetVaccinations">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="putPetVaccinationsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="putPetVaccinationsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePetVaccinations">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="deletePetVaccinationsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deletePetVaccinationsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetVisitsFuture">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getPetVisitsFutureRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPetVisitsFutureResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPetListFull">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getPetListFullRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPetListFullResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="petList">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="petListRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="petListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceServices">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="referenceServicesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="referenceServicesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="referenceServicesClinic">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="referenceServicesClinicRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="referenceServicesClinicResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceServicesHome">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="referenceServicesHomeRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="referenceServicesHomeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenceServicesOnline">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="referenceServicesOnlineRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="referenceServicesOnlineResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="putApplication">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="putApplicationRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="putApplicationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putRefundData">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="putRefundDataRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="putRefundDataResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="putBooking">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="putBookingRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="putBookingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="orgSpecListByDate">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="orgSpecListByDateRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="orgSpecListByDateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PetsService">
+    <wsdl:port name="PetsPort" binding="tns:PetsBinding">
+      <soap:address location="{{serviceUrl}}"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

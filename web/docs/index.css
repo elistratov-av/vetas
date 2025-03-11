@@ -1,0 +1,31 @@
+html {
+    box-sizing: border-box;
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    background: #fafafa;
+}
+
+.sw-header {
+    background-color: #3C8DBC;
+    height: 80px;
+    width: 100%;
+    padding: 10px 20px 10px 20px;
+}
+
+.topbar {
+    display: none;
+}
+
+.version-stamp {
+    display: none!important;
+}

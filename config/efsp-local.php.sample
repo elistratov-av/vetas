@@ -1,0 +1,11 @@
+<?php
+
+return [
+    // dev
+    'baseUrl' => 'http://efp6.sm-soft.ru:8280/address/1.0',
+    'tokenUrl' => 'http://efp6.sm-soft.ru:8280/token',
+    'auth' => [
+        'clientId' => 'abVe_zoGIiLfwMItcI044ZqqsPUa',
+        'clientSecret' => 'QiZut1fQFC7J2iDojf4OabGaN2Qa',
+    ],
+];

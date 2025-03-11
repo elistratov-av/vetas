@@ -1,0 +1,9 @@
+<?php
+
+return [
+    'url' => 'http://212.11.151.48:80/custom-api-2.0/rest/api',
+    //'url' => 'http://10.127.131.38:80/custom-api-2.0/rest/api',
+    'login' => 'login',
+    'password' => 'password'
+];
+

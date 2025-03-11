@@ -1,0 +1,114 @@
+﻿@charset "utf-8";
+/*!
+ * JxSelect v1.00a (https://jxselect.jas.ru/)
+ */
+
+ :root {
+	--marker: url(data:image/svg+xml;utf8;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjcxNjYgNS4yMTg2MUMxMS44NTggNS4wNzg1NiAxMi4wNDkgNSAxMi4yNDggNUMxMi40NDcxIDUgMTIuNjM4MSA1LjA3ODU2IDEyLjc3OTUgNS4yMTg2MUMxMi44NDkzIDUuMjg3MzggMTIuOTA0OCA1LjM2OTM1IDEyLjk0MjcgNS40NTk3NUMxMi45ODA1IDUuNTUwMTYgMTMgNS42NDcxOSAxMyA1Ljc0NTJDMTMgNS44NDMyIDEyLjk4MDUgNS45NDAyMyAxMi45NDI3IDYuMDMwNjRDMTIuOTA0OCA2LjEyMTA0IDEyLjg0OTMgNi4yMDMwMSAxMi43Nzk1IDYuMjcxNzhMOC41MzIwMiAxMC40MzQ1QzguMzkwMjYgMTAuNTc0NCA4LjE5OTEzIDEwLjY1MjggOCAxMC42NTI4QzcuODAwODYgMTAuNjUyOCA3LjYwOTc0IDEwLjU3NDQgNy40Njc5OCAxMC40MzQ1TDMuMjIwNDkgNi4yNzE3OEMzLjE1MDY1IDYuMjAzMDEgMy4wOTUyIDYuMTIxMDQgMy4wNTczNSA2LjAzMDY0QzMuMDE5NDkgNS45NDAyMyAzIDUuODQzMiAzIDUuNzQ1MkMzIDUuNjQ3MTkgMy4wMTk0OSA1LjU1MDE2IDMuMDU3MzUgNS40NTk3NUMzLjA5NTIgNS4zNjkzNSAzLjE1MDY1IDUuMjg3MzggMy4yMjA0OSA1LjIxODYxQzMuMzYxOTIgNS4wNzg1NiAzLjU1MjkyIDUgMy43NTE5NyA1QzMuOTUxMDEgNSA0LjE0MjAxIDUuMDc4NTYgNC4yODM0NSA1LjIxODYxTDguMDAxNjMgOC42MzI0N0wxMS43MTY2IDUuMjE4NjFaIiBmaWxsPSIjMzMzMzMzIi8+Cjwvc3ZnPg==);
+	--selected: url(data:image/svg+xml;utf8;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMC45NyA0Ljk3MDI4QzExLjExIDQuODMxNTUgMTEuMjk4OSA0Ljc1MzQ4IDExLjQ5NTkgNC43NTI5M0MxMS42OTMgNC43NTIzOSAxMS44ODIzIDQuODI5NDIgMTIuMDIzMSA0Ljk2NzM3QzEyLjE2MzggNS4xMDUzMyAxMi4yNDQ1IDUuMjkzMTIgMTIuMjQ3OSA1LjQ5MDE1QzEyLjI1MTMgNS42ODcxOCAxMi4xNzY5IDUuODc3NjEgMTIuMDQxIDYuMDIwMjhMOC4wNDkwMSAxMS4wMTAzQzcuOTgwNCAxMS4wODQyIDcuODk3NTkgMTEuMTQzNSA3LjgwNTU0IDExLjE4NDZDNy43MTM0OCAxMS4yMjU4IDcuNjE0MDggMTEuMjQ4IDcuNTEzMjYgMTEuMjQ5OUM3LjQxMjQ0IDExLjI1MTcgNy4zMTIyOCAxMS4yMzMyIDcuMjE4NzYgMTEuMTk1NUM3LjEyNTI1IDExLjE1NzggNy4wNDAzIDExLjEwMTYgNi45NjkwMSAxMS4wMzAzTDQuMzI0MDEgOC4zODQyOEM0LjI1MDMyIDguMzE1NjIgNC4xOTEyMiA4LjIzMjgyIDQuMTUwMjIgOC4xNDA4MkM0LjEwOTIzIDguMDQ4ODIgNC4wODcxOSA3Ljk0OTUxIDQuMDg1NDEgNy44NDg4QzQuMDgzNjQgNy43NDgxIDQuMTAyMTYgNy42NDgwNyA0LjEzOTg4IDcuNTU0NjhDNC4xNzc2IDcuNDYxMjkgNC4yMzM3NSA3LjM3NjQ2IDQuMzA0OTcgNy4zMDUyNEM0LjM3NjE5IDcuMjM0MDIgNC40NjEwMiA3LjE3Nzg4IDQuNTU0NDEgNy4xNDAxNkM0LjY0NzggNy4xMDI0NCA0Ljc0NzgyIDcuMDgzOTEgNC44NDg1MyA3LjA4NTY5QzQuOTQ5MjMgNy4wODc0NyA1LjA0ODU0IDcuMTA5NTEgNS4xNDA1NCA3LjE1MDVDNS4yMzI1NCA3LjE5MTQ5IDUuMzE1MzQgNy4yNTA1OSA1LjM4NCA3LjMyNDI4TDcuNDc4MDEgOS40MTcyOEwxMC45NTEgNC45OTIyOEMxMC45NTcyIDQuOTg0NTMgMTAuOTYzOSA0Ljk3NzE5IDEwLjk3MSA0Ljk3MDI4SDEwLjk3WiIgZmlsbD0iIzMzMzMzMyIvPgo8L3N2Zz4=);
+ }
+
+.JxSelect{
+	background: transparent;
+    padding: 10px;
+	padding-top: 4px;
+    border-radius: 4px;
+    max-width: 400px;
+    border: 1px solid #ccc;
+	width: 250px;
+	height: 35px;
+	z-index: 0;
+	position: relative;
+	cursor: pointer;
+}
+.JxSelect:after{
+	content: '';
+    background-image: var(--marker);
+	background-repeat: no-repeat;
+    position: absolute;
+	width: 14px;
+    height: 14px;
+    right: 15px;
+    top: calc(50% - 7px);
+	opacity: 0.6;
+	transition: .3s ease-in-out;
+}
+.JxSelect:hover:after{
+	opacity: 1;
+}
+
+.JxSelect input {
+	border: none;
+	background: transparent;
+	outline: none;
+	width: 150px;
+}
+
+.JxSelectWindow{
+	border: 1px solid #ccc;
+	display: block;
+	position: absolute;
+    border-radius: 4px;
+    
+	background: #fff;
+	
+	z-index: 10;
+}
+.JxSelectWindow .options{
+	max-width: 400px;
+	max-height: 300px;
+	height: auto;
+	overflow-y: auto;
+}
+.JxSelectWindow .option{
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+	cursor: pointer;
+}
+.JxSelectWindow .option.hidden{
+	display: none;
+}
+.JxSelectWindow .search{
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+}
+.JxSelectWindow .option.disabled{
+	background: #ebebeb !important;
+	cursor: default !important;
+}
+.JxSelectWindow .option:hover{
+	background: #ebebeb;
+}
+
+.JxSelectWindow .option > .icon, .JxSelectWindow .option > .marker, .JxSelect > .icon{
+	width: 16px;
+	height: 16px;
+	margin-right: 8px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+
+.JxSelectWindow .option > .marker.selected{
+	background-image: var(--selected);
+}
+
+.JxSelectWindow .option > .multiple{
+	width: calc(100% - 24px);
+}
+
+.JxSelectWindow .option > div, .JxSelect > div{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.JxSelect > div{
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 200px;
+}
+
+.JxSelectWindow.hidden{
+	display: none;
+}

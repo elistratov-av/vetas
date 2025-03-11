@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://asguf.mos.ru/rkis_gu/coordinate/v6_1/" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://asguf.mos.ru/rkis_gu/coordinate/v6_1/" elementFormDefault="qualified">
+	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="https://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd#" />
+	<xs:element name="CoordinateSendTaskStatusesMessage">
+		<xs:annotation>
+			<xs:documentation>Ответ</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="ds:Signature" />
+				<xs:element name="CoordinateTaskStatusDataMessage" type="tns:CoordinateTaskStatusData">
+					<xs:annotation>
+						<xs:documentation>Запрос с передачей данных о текущем состоянии исполнения запроса</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CoordinateTaskMessage">
+		<xs:annotation>
+			<xs:documentation>Запрос</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="ds:Signature" />
+				<xs:element name="CoordinateTaskDataMessage" type="tns:CoordinateTaskData">
+					<xs:annotation>
+						<xs:documentation>Запрос с передачей данных об обращении заявителя</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="CoordinateTaskData">
+		<xs:annotation>
+			<xs:documentation>Запрос</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Task" type="tns:TaskType">
+				<xs:annotation>
+					<xs:documentation>Информация о запросе</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Data" type="tns:TaskDataType">
+				<xs:annotation>
+					<xs:documentation>Параметры запроса на сбор сведений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:anyAttribute namespace="##any" processContents="skip"/>
+	</xs:complexType>
+	<xs:complexType name="CoordinateTaskStatusData">
+		<xs:annotation>
+			<xs:documentation>Статус запроса</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MessageId" type="tns:guid">
+				<xs:annotation>
+					<xs:documentation>Идентификатор сообщения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaskId" type="tns:guid">
+				<xs:annotation>
+					<xs:documentation>Идентификатор запроса</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="tns:StatusType">
+				<xs:annotation>
+					<xs:documentation>Статус</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StatusNote" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Примечание</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AsyncTicket" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор асинхронного запроса, полученный от поставщика сведений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Result" type="tns:TaskResult" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Результат сбора сведений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:anyAttribute namespace="##any" processContents="skip"/>
+	</xs:complexType>
+	<xs:complexType name="ArrayOfCoordinateFile">
+		<xs:sequence>
+			<xs:element name="CoordinateFile" type="tns:CoordinateFile" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:anyAttribute namespace="##any" processContents="skip"/>
+	</xs:complexType>
+	<xs:complexType name="CoordinateFile">
+		<xs:annotation>
+			<xs:documentation>Файл обращения</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Id" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Идентификатор файла</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FileIdInStore" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Идентификатор файла в файловом хранилище АС УР (ЦХЭД)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StoreName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя файлового хранилища АС УР (ЦХЭД)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FileName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Имя файла</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CmsSignature" type="xs:base64Binary" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Подпись файла</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FileHash" type="xs:base64Binary">
+				<xs:annotation>
+					<xs:documentation>Хэш файла</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Department">
+		<xs:annotation>
+			<xs:documentation>Подразделение</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Code" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Код органа власти</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Inn" type="xs:string" >
+				<xs:annotation>
+					<xs:documentation>ИНН</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Ogrn" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>ОГРН</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RegDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата регистрации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SystemCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Код информационной системы по справочнику НСИ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Person">
+		<xs:annotation>
+			<xs:documentation>Лицо</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="LastName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Фамилия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FirstName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MiddleName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Отчество</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="JobTitle" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Должность</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Phone" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер служебного телефона</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Email" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Адрес электронной почты</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StatusType">
+		<xs:annotation>
+			<xs:documentation>Статус</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="StatusCode" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Код</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StatusDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TaskDataType">
+		<xs:annotation>
+			<xs:documentation>Параметры запроса на сбор сведений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="DocumentTypeCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Код типа документа (в соответствии со справочником типов документов в системе НСИ)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Parameter">
+				<xs:annotation>
+					<xs:documentation>Значение параметра для сбора документов, заданное в соответствии с XSD-схемой описания типа параметра</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IncludeXmlView" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Включить в результат машиночитаемое представление документов (xml)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IncludeBinaryView" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Включить в результат человекочитаемое представление документов (бинарное)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TaskResult">
+		<xs:annotation>
+			<xs:documentation>Результат сбора сведений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ResultType" type="tns:TaskResultType">
+				<xs:annotation>
+					<xs:documentation>Тип результата сбора сведений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ResultCode" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Код результата сбора сведений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="XmlView" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Машиночитаемое представление документа (xml)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="BinaryView" type="tns:ArrayOfCoordinateFile" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Человекочитаемое представление документа (бинарное)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TaskType">
+		<xs:annotation>
+			<xs:documentation>Информация о запросе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MessageId" type="tns:guid">
+				<xs:annotation>
+					<xs:documentation>Идентификатор сообщения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaskId" type="tns:guid">
+				<xs:annotation>
+					<xs:documentation>Идентификатор запроса на сбор сведений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaskNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Единый номер запроса на сбор сведений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaskDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата/время формирования запроса на сбор сведений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Responsible" type="tns:Person">
+				<xs:annotation>
+					<xs:documentation>Ответственный</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Department" type="tns:Department">
+				<xs:annotation>
+					<xs:documentation>Ответственное подразделение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="ServiceNumber" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Единый номер обращения на оказание ГУ. Указывается в случае, если запрос на сбор сведений поступает в рамках оказания ГУ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ServiceTypeCode" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Код гос. услуги. Указывается в случае, если запрос на сбор сведений поступает в рамках оказания ГУ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:element name="FunctionTypeCode" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>Код гос. функции. Указывается в случае, если запрос на сбор сведений поступает в рамках ГФ</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="guid">
+		<xs:annotation>
+			<xs:documentation>GUID</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TaskResultType">
+		<xs:annotation>
+			<xs:documentation>Результат запроса</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PositiveAnswer">
+				<xs:annotation>
+					<xs:documentation>Положительное решение</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NegativeAnswer">
+				<xs:annotation>
+					<xs:documentation>Отрицательное решение</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Error">
+				<xs:annotation>
+					<xs:documentation>Ошибка</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

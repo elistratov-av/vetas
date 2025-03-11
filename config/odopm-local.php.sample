@@ -1,0 +1,9 @@
+<?php
+
+return [
+    'class' => \app\common\components\odopm\ODOPMService::class,
+    'wsdl' => '',
+    'username' => '',
+    'password' => '',
+    'environment' => 'test' // prod|test
+];

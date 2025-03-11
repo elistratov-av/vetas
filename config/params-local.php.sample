@@ -1,0 +1,21 @@
+<?php
+
+return [
+    'unsubscribeValidationKey' => 'y1QcHxiKgWhCzwYa1Uw1NQIzbFhPSZlq',
+    'logging' => [
+        'targets' => [
+            'soap' => [
+                // добавить уровни отладки
+                'levels' => [
+                    'info',
+                    'trace',
+                ],
+                // ... или заменить
+                'levels' => new \yii\helpers\ReplaceArrayValue([
+                    'info',
+                    'trace',
+                ])
+            ],
+        ]
+    ],
+];

@@ -1,0 +1,9 @@
+<?php
+
+
+$config = [
+    'class' => 'app\common\components\jcpSign\JcpSignService',
+    'uri' => 'localhost:8080/brogisign-1.0/signature/sign'
+];
+
+return $config;

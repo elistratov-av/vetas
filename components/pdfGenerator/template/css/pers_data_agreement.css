@@ -1,0 +1,196 @@
+@charset "UTF-8";
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Light"), local("OpenSans-Light"),
+        url("./assets/fonts/opensanslight.woff2") format("woff2"),
+        url("./assets/fonts/opensanslight.woff") format("woff"),
+        url("./assets/fonts/opensanslight.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Light Italic"), local("OpenSansLight-Italic"),
+        url("./assets/fonts/opensanslightitalic.woff2") format("woff2"),
+        url("./assets/fonts/opensanslightitalic.woff") format("woff"),
+        url("./assets/fonts/opensanslightitalic.ttf") format("truetype");
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans"), local("OpenSans"),
+        url("./assets/fonts/opensans.woff2") format("woff2"),
+        url("./assets/fonts/opensans.woff") format("woff"),
+        url("assets/fonts/opensans.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Italic"), local("OpenSans-Italic"),
+        url("./assets/fonts/opensansitalic.woff2") format("woff2"),
+        url("./assets/fonts/opensansitalic.woff") format("woff"),
+        url("./assets/fonts/opensansitalic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Semibold"), local("OpenSans-Semibold"),
+        url("./assets/fonts/opensanssemibold.woff2") format("woff2"),
+        url("./assets/fonts/opensanssemibold.woff") format("woff"),
+        url("./assets/fonts/opensanssemibold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Semibold Italic"), local("OpenSans-SemiboldItalic"),
+        url("./assets/fonts/opensanssemibolditalic.woff2") format("woff2"),
+        url("./assets/fonts/opensanssemibolditalic.woff") format("woff"),
+        url("./assets/fonts/opensanssemibolditalic.ttf") format("truetype");
+    font-weight: 600;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Bold"), local("OpenSans-Bold"),
+        url("./assets/fonts/opensansbold.woff2") format("woff2"),
+        url("./assets/fonts/opensansbold.woff") format("woff"),
+        url("./assets/fonts/opensansbold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Bold Italic"), local("OpenSans-BoldItalic"),
+        url("./assets/fonts/opensansbolditalic.woff2") format("woff2"),
+        url("./assets/fonts/opensansbolditalic.woff") format("woff"),
+        url("./assets/fonts/opensansbolditalic.ttf") format("truetype");
+    font-weight: 700;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Extrabold"), local("OpenSans-Extrabold"),
+        url("./assets/fonts/opensansextrabold.woff2") format("woff2"),
+        url("./assets/fonts/opensansextrabold.woff") format("woff"),
+        url("./assets/fonts/opensansextrabold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Extrabold Italic"), local("OpenSans-ExtraboldItalic"),
+        url("./assets/fonts/opensansextrabolditalic.woff2") format("woff2"),
+        url("./assets/fonts/opensansextrabolditalic.woff") format("woff"),
+        url("./assets/fonts/opensansextrabolditalic.ttf") format("truetype");
+    font-weight: 800;
+    font-style: italic;
+}
+@font-face {
+    font-family: "PT Sans";
+    src: local("PT Sans"), local("PTSans-Bold"),
+        url('./assets/fonts/pt-sans-blod.woff2') format('woff2'),
+        url("./assets/fonts/pt-sans-blod.woff") format("woff"),
+        url("./assets/fonts/pt-sans-blod.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "PT Sans";
+    src: local("PT Sans"), local("PTSans-Regular"),
+        url('./assets/fonts/pt-sans-regular.woff2') format('woff2'),
+        url("./assets/fonts/pt-sans-regular.woff") format("woff"),
+        url("./assets/fonts/pt-sans-regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.wrapper {
+    display: table;
+    height: 100%;
+    margin-top: 3cm;
+    margin-left: 2cm;
+    margin-bottom: 2cm;
+}
+
+.content {
+    display: table-row;
+    height: auto;
+}
+
+.header__title {
+    text-align: center;
+    font-family: "Times New Roman", Times, OpenSans, serif;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.0;
+    letter-spacing: -0.23pt;
+    color: #000000;
+    float: end;
+    font-size: 12pt;
+}
+
+.header_city_date {
+    width: 100%;
+}
+
+.header__left {
+    text-align: left;
+    font-family: "Times New Roman", Times, OpenSans, serif;
+    color: #000000;
+    font-size: 12pt;
+}
+
+.header__right {
+    text-align: right;
+    font-family: "Times New Roman", Times, OpenSans, serif;
+    color: #000000;
+    font-size: 12pt;
+}
+
+.body_prefilled_fields {
+    font-family: "Times New Roman", Times, OpenSans, serif;
+    font-size: 12pt;
+}
+
+.body_comments {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    font-family: "Times New Roman", Times, OpenSans, serif;
+    text-align: center;
+    position: relative;
+    font-size: 8pt;
+    vertical-align: text-before-edge;
+    line-height: 0.75;
+}
+
+.body__content {
+    text-align: justify;
+    text-indent: 1.25cm;
+    font-family: "Times New Roman", Times, OpenSans, serif;
+    font-style: normal;
+    font-stretch: normal;
+    font-size: 12pt;
+    line-height: 1.15;
+    color: #000000;
+    float: end;
+}
+
+.footer__content {
+    font-family: "Times New Roman", Times, OpenSans, serif;
+    font-size: 12pt;
+    color: #000000;
+}

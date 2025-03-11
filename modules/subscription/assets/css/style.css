@@ -1,0 +1,125 @@
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans Light'), local('OpenSans-Light'), url('../fonts/opensanslight.woff2') format('woff2'), url('../fonts/opensanslight.woff') format('woff'), url('../fonts/opensanslight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans Light Italic'), local('OpenSansLight-Italic'), url('../fonts/opensanslightitalic.woff2') format('woff2'), url('../fonts/opensanslightitalic.woff') format('woff'), url('../fonts/opensanslightitalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans'), local('OpenSans'), url('../fonts/opensans.woff2') format('woff2'), url('../fonts/opensans.woff') format('woff'), url('assets/fonts/opensans.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans Italic'), local('OpenSans-Italic'), url('../fonts/opensansitalic.woff2') format('woff2'), url('../fonts/opensansitalic.woff') format('woff'), url('../fonts/opensansitalic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans Semibold'), local('OpenSans-Semibold'), url('../fonts/opensanssemibold.woff2') format('woff2'), url('../fonts/opensanssemibold.woff') format('woff'), url('../fonts/opensanssemibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans Semibold Italic'), local('OpenSans-SemiboldItalic'), url('../fonts/opensanssemibolditalic.woff2') format('woff2'), url('../fonts/opensanssemibolditalic.woff') format('woff'), url('../fonts/opensanssemibolditalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans Bold'), local('OpenSans-Bold'), url('../fonts/opensansbold.woff2') format('woff2'), url('../fonts/opensansbold.woff') format('woff'), url('../fonts/opensansbold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans Bold Italic'), local('OpenSans-BoldItalic'), url('../fonts/opensansbolditalic.woff2') format('woff2'), url('../fonts/opensansbolditalic.woff') format('woff'), url('../fonts/opensansbolditalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans Extrabold'), local('OpenSans-Extrabold'), url('../fonts/opensansextrabold.woff2') format('woff2'), url('../fonts/opensansextrabold.woff') format('woff'), url('../fonts/opensansextrabold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans Extrabold Italic'), local('OpenSans-ExtraboldItalic'), url('../fonts/opensansextrabolditalic.woff2') format('woff2'), url('../fonts/opensansextrabolditalic.woff') format('woff'), url('../fonts/opensansextrabolditalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.content {
+    max-width: 600px
+}
+
+/*header*/
+.header {
+    display: flex;
+}
+.header--img {
+    width: 28px;
+    height: 32px;
+}
+
+.header--title   {
+    width: 95px;
+    margin-left: 16px;
+    font-family: OpenSans;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.14;
+    color: #525866;
+}
+
+/*message*/
+.message  {
+    width: 520px;
+    height: 24px;
+    margin-top: 48px;
+    font-family: OpenSans;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+    color: #525866;
+}
+
+/*link*/
+.link {
+    font-weight: 600;
+    color: #45cbe6;
+    text-decoration-line: blink;
+}
+
+/*description*/
+.description  {
+    width: 600px;
+    height: 80px;
+    margin-top: 24px;
+    font-family: OpenSans;
+    font-size: 13px;
+    line-height: 1.54;
+    color: #525866;
+}

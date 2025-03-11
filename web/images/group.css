@@ -1,0 +1,37 @@
+.group {
+  display: flex;
+  flex-direction: column;
+}
+.group__title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 25px;
+  border-bottom: 1px #e3e4e8 dotted;
+}
+.group__title__text {
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 21px;
+}
+.group__title__add {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+.group__title__add__icon {
+  margin-right: 8px;
+  color: #2a8ea2;
+}
+.group__title__add__title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2a8ea2;
+}
+.group__title__add__icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  background-image: url("/images/ic-plus.svg");
+}

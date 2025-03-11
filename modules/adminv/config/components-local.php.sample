@@ -1,0 +1,9 @@
+<?php
+
+return [
+    'biApi' => [
+        'username' => '*************************',
+        'password' => '*************************',
+        'location' => 'https://bi.mos.ru/',
+    ],
+];

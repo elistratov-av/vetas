@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Entity",
+  "description": "Entity api schema",
+  "type": "object",
+  "patternProperties" : {
+    "^[a-z-]+$": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "type": "object",
+          "properties": {
+            "parent": {"type": ["string","boolean"]},
+            "virtual": {"type": "boolean"},
+            "active": {"type": "boolean"},
+            "class": {"type": "string"},
+            "access": {"type": ["array", "object"]}
+          },
+          "additionalProperties": false,
+          "required": ["parent"]
+        },
+        "attributes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "name" : {"type": "string"},
+              "type" : {"type": "string"},
+              "unique" : {"type": "boolean"},
+              "required" : {"type": "boolean"},
+              "format" : {"type": "string"},
+              "max" : {"type": "integer"},
+              "rules" : {"type": ["array","object"]},
+              "composite_unique" : {"type": "boolean"}
+            },
+            "additionalProperties": false,
+            "required": ["name","type"]
+          }
+        },
+        "relations" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "link" : {"type": "string"},
+              "property" : {"type": "string"},
+              "propname" : {"type": "string"},
+              "value" : {"type": "string"},
+              "required" : {"type": "boolean"},
+              "composite_unique" : {"type": "boolean"},
+              "rules" : {"type": ["array","object"]},
+              "usePropname": {"type":  "boolean"}
+            },
+            "additionalProperties": false,
+            "required": ["link","property"]
+          }
+        },
+        "plural_relations" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "link" : {"type": "string"},
+              "property" : {"type": "string"},
+              "additional_fields": {"type": "object"},
+              "required" : {"type": "boolean"}
+            },
+            "additionalProperties": false,
+            "required": ["link","property"]
+          }
+        }
+      },
+      "required": ["meta"],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

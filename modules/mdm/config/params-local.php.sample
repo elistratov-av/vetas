@@ -1,0 +1,19 @@
+<?php
+
+return [
+    'allowedIPs' => ['*'],
+    'enabled' => true,
+    'enableLog' => false,
+    'auth' => [
+        // HTTP Header authorization
+        'class' => \app\common\filters\auth\ExternalServiceHttpHeaderAuth::class,
+        'pattern' => '*************************************',
+        // HTTP Bearer authorization
+        // 'class' => \app\common\filters\auth\ExternalServiceHttpBearerAuth::class,
+        // 'token' => '*************************************',
+        // HTTP Basic authorization
+        // 'class' => \app\common\filters\auth\ExternalServiceHttpBasicAuth::class,
+        // 'username' => '**********',
+        // 'password' => '**********',
+    ],
+];

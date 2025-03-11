@@ -1,0 +1,7 @@
+<?php
+
+return [
+    // 'class' => 'yii\caching\DummyCache',
+    'class' => 'yii\caching\FileCache',
+    'cachePath' => '@runtime/cache/entities',
+];

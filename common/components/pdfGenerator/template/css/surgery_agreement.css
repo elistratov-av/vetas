@@ -1,0 +1,262 @@
+@charset "UTF-8";
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Light"), local("OpenSans-Light"),
+        url("./assets/fonts/opensanslight.woff2") format("woff2"),
+        url("./assets/fonts/opensanslight.woff") format("woff"),
+        url("./assets/fonts/opensanslight.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Light Italic"), local("OpenSansLight-Italic"),
+        url("./assets/fonts/opensanslightitalic.woff2") format("woff2"),
+        url("./assets/fonts/opensanslightitalic.woff") format("woff"),
+        url("./assets/fonts/opensanslightitalic.ttf") format("truetype");
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans"), local("OpenSans"),
+        url("./assets/fonts/opensans.woff2") format("woff2"),
+        url("./assets/fonts/opensans.woff") format("woff"),
+        url("assets/fonts/opensans.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Italic"), local("OpenSans-Italic"),
+        url("./assets/fonts/opensansitalic.woff2") format("woff2"),
+        url("./assets/fonts/opensansitalic.woff") format("woff"),
+        url("./assets/fonts/opensansitalic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Semibold"), local("OpenSans-Semibold"),
+        url("./assets/fonts/opensanssemibold.woff2") format("woff2"),
+        url("./assets/fonts/opensanssemibold.woff") format("woff"),
+        url("./assets/fonts/opensanssemibold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Semibold Italic"), local("OpenSans-SemiboldItalic"),
+        url("./assets/fonts/opensanssemibolditalic.woff2") format("woff2"),
+        url("./assets/fonts/opensanssemibolditalic.woff") format("woff"),
+        url("./assets/fonts/opensanssemibolditalic.ttf") format("truetype");
+    font-weight: 600;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Bold"), local("OpenSans-Bold"),
+        url("./assets/fonts/opensansbold.woff2") format("woff2"),
+        url("./assets/fonts/opensansbold.woff") format("woff"),
+        url("./assets/fonts/opensansbold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Bold Italic"), local("OpenSans-BoldItalic"),
+        url("./assets/fonts/opensansbolditalic.woff2") format("woff2"),
+        url("./assets/fonts/opensansbolditalic.woff") format("woff"),
+        url("./assets/fonts/opensansbolditalic.ttf") format("truetype");
+    font-weight: 700;
+    font-style: italic;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Extrabold"), local("OpenSans-Extrabold"),
+        url("./assets/fonts/opensansextrabold.woff2") format("woff2"),
+        url("./assets/fonts/opensansextrabold.woff") format("woff"),
+        url("./assets/fonts/opensansextrabold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: "OpenSans";
+    src: local("OpenSans Extrabold Italic"), local("OpenSans-ExtraboldItalic"),
+        url("./assets/fonts/opensansextrabolditalic.woff2") format("woff2"),
+        url("./assets/fonts/opensansextrabolditalic.woff") format("woff"),
+        url("./assets/fonts/opensansextrabolditalic.ttf") format("truetype");
+    font-weight: 800;
+    font-style: italic;
+}
+@font-face {
+    font-family: "PT Sans";
+    src: local("PT Sans"), local("PTSans-Bold"),
+        url('./assets/fonts/pt-sans-blod.woff2') format('woff2'),
+        url("./assets/fonts/pt-sans-blod.woff") format("woff"),
+        url("./assets/fonts/pt-sans-blod.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "PT Sans";
+    src: local("PT Sans"), local("PTSans-Regular"),
+        url('./assets/fonts/pt-sans-regular.woff2') format('woff2'),
+        url("./assets/fonts/pt-sans-regular.woff") format("woff"),
+        url("./assets/fonts/pt-sans-regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.wrapper {
+    display: table;
+    height: 100%;
+    max-width: 595pt;
+    margin-left: 2cm;
+    margin-bottom: 2cm;
+}
+
+.content {
+    display: table-row;
+    height: auto;
+}
+
+.header_table {
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.header__right {
+    text-align: right;
+    font-family: "Times New Roman", Times, OpenSans, serif;
+    color: #000000;
+    font-size: 7pt;
+}
+
+.strong_text {
+    font-weight: bold;
+}
+
+.header__img {
+    padding-left: 1.3cm;
+    float: left;
+    width: 30px;
+    height: 32px;
+    margin-right: 10pt;
+}
+
+.header__title {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    font-size: 11pt;
+    line-height: 1.5;
+    letter-spacing: -0.23pt;
+    color: #000000;
+    float: end;
+}
+
+.header_site {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    /*font-weight: 800;*/
+    font-size: 8pt;
+    padding-left: 1.7cm;
+    color: #000000;
+}
+
+.body_title {
+    text-align: center;
+    font-family: "Times New Roman", Times, OpenSans, serif;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: -0.23pt;
+    color: #000000;
+    float: end;
+    font-size: 10.5pt;
+}
+
+.body__content {
+    text-align: justify;
+    text-indent: 1.25cm;
+    font-family: "Times New Roman", Times, OpenSans, serif;
+    font-style: normal;
+    font-stretch: normal;
+    font-size: 10.5pt;
+    line-height: 1.15;
+    color: #000000;
+    float: end;
+}
+
+.body_prefilled_fields {
+    font-family: "Times New Roman", Times, OpenSans, serif;
+    font-size: 10.5pt;
+    color: #000000;
+}
+
+.body_comments {
+    display: flex;
+    margin-left: 2cm;
+    justify-content: center;
+    width: 500px;
+    font-family: "Times New Roman", Times, OpenSans, serif;
+    text-align: center;
+    position: relative;
+    font-size: 8pt;
+    vertical-align: text-before-edge;
+    line-height: 0.75;
+}
+
+.footer_table {
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+}
+
+.footer__table__left {
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-stretch: normal;
+    font-size: 7pt;
+    padding-left: 2cm;
+    color: #000000;
+}
+
+.footer__img {
+    width: 0.7cm;
+    height: 1cm;
+    vertical-align: center;
+}
+
+.footer__gov {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    font-size: 7pt;
+    color: #000000;
+}
+
+.footer__msk {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    font-size: 8pt;
+    color: #000000;
+}

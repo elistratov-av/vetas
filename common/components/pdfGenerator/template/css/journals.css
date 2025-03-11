@@ -1,0 +1,117 @@
+/*header*/
+.registry-paid-services__logo-img {
+    width: 30pt;
+    height: 32pt;
+    margin-right: 12pt;
+    float: left;
+}
+
+.registry-paid-services__logo-text {
+    width: 160pt;
+    height: 24pt;
+    font-family: OpenSans;
+    font-size: 8pt;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: -0.2pt;
+    color: #525866;
+    float: none;
+    padding-top: 5pt;
+}
+
+.registry-paid-services__title {
+    font-family: OpenSans;
+    font-size: 10pt;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.2pt;
+    text-align: center;
+    color: #525866;
+    margin: 34pt;
+}
+
+/*container*/
+.registry-paid-services__container {
+    margin: 0 30px;
+}
+
+/*table*/
+.registry-paid-services__table {
+    margin-bottom: 20px;
+    border-spacing: 0 10px;
+}
+
+.registry-paid-services__key {
+    width: 159px;
+    font-family: OpenSans;
+    font-size: 8pt;
+    line-height: 1.25;
+    color: #7a8599;
+}
+
+.registry-paid-services__value {
+    font-family: OpenSans;
+    font-size: 8pt;
+    line-height: 1.25;
+    color: #3d424d;
+    vertical-align: baseline;
+    padding-left: 20px;
+}
+
+.registry-paid-services__caption {
+    text-align: left;
+    font-family: OpenSans;
+    font-size: 10pt;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.2px;
+    color: #525866;
+}
+
+/* footer */
+.registry-paid-services__footer {
+    margin-top: 52px;
+}
+
+.registry-paid-services__footer-title {
+    font-family: OpenSans;
+    font-size: 8pt;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.25;
+    letter-spacing: normal;
+    color: #7a8599;
+}
+
+.registry-paid-services__footer-table {
+    border-spacing: 0;
+    width: 100%;
+}
+
+.registry-paid-services__footer-table td {
+    width: 50%;
+}
+
+.registry-paid-services__footer-right .registry-paid-services__footer-sign {
+    margin-left: auto;
+}
+
+.registry-paid-services__footer-sign {
+    width: 177px;
+}
+
+.registry-paid-services__footer-sign-owner {
+    font-family: OpenSans;
+    font-size: 8pt;
+    line-height: 1.25;
+    color: #7a8599;
+    margin-bottom: 20pt;
+}
+
+.registry-paid-services__footer-name {
+    font-family: OpenSans;
+    font-size: 8pt;
+    line-height: 1.25;
+    color: #3d424d;
+}

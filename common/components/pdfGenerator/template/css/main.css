@@ -1,0 +1,169 @@
+
+
+body {
+    color: #000;
+    font-size: 12px;
+}
+
+table {
+    font-size: 12px;
+}
+table.t1 {
+    border-bottom: 0;
+}
+
+.site {
+    color:#052534;
+    font-weight:normal;
+    padding-top:15px;
+}
+
+.logo {
+    float:left;
+    width: 150px; 
+    text-align:center;
+    padding-top: 40px;
+}
+
+.head1 {
+    float:left;
+    width: 340px;
+    font-weight:bold;
+    font-size: 14px;
+    padding-top: 40px;
+}
+.head2 {
+    float:right;
+    width:180px;
+    padding-top:10px;
+}
+.head3 {
+    float:right;
+    width:150px;
+    padding-top:15px;
+    font-size: 10px;
+    color:#949494;
+}
+
+.title {
+    clear:both;
+    text-align:center;
+    padding-top: 20px;
+    font-weight:bold;
+    font-size: 18px;
+}
+.title2 {
+    clear:both;
+    text-align:center;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    font-weight:bold;
+    margin: 0 auto;
+}
+.title3 {
+    font-size: 15px;
+}
+
+.t1 {
+    border: 1px solid #000;
+    border-left: 0;
+    width: 100%;
+    
+}
+.t11 {
+    border: 1px solid #000;
+    width: 100%;
+    
+}
+.t2 {
+    border-left: 1px solid #000;
+    padding: 0 0 0 5px;
+    float: left;
+}
+.t22 {
+    text-align: center;
+    padding: 0;
+}
+.b {
+    font-weight: bold;
+}
+.t3 {
+    float: left;
+    font-style: italic;
+}
+.t32 {
+    float: left;
+}
+
+.t4 {
+    float: left;
+    width: 45%;
+    overflow: hidden;
+    padding-right: 5%;
+}
+
+.t7 {
+    float: left;
+    border-bottom: 1px solid #052534;
+    color:#052534;
+    font-style: italic;
+}
+.t8 {
+    float: left;
+    border-bottom: 1px solid #000;
+    color:#000;
+    font-style: italic;
+}
+.t5 {
+    border-bottom: 1px solid #000;
+    padding: 0 0 0 5px;
+    float: left;
+}
+
+
+
+.clear {
+    clear: both;
+}
+.tr {
+    clear: both;
+    border-bottom: 1px solid #000;
+}
+.tr2 {
+    clear: both;
+}
+.tr21 {
+    clear: both;
+    padding-bottom:8px;
+}
+.tr td {
+    border-bottom: 1px solid #000;
+}
+
+.title1 {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.t6 {
+    margin-left: 40px;
+}
+
+.hr {
+    border-bottom: 1px solid #000;
+}
+
+.value {
+    font-style: italic;
+}
+.value_underline {
+    float:right;
+}
+
+.strike {
+    text-decoration: line-through;
+}
+
+.underline {
+  border-bottom: 1px solid currentColor;
+}
