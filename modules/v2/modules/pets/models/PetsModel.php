@@ -1165,6 +1165,20 @@ class PetsModel
             ]);
         }
 
+        if (isset($filter['is_expired'])){
+			if($filter['is_expired'] === true) {
+				$query->andWhere([
+					'AND',
+					['not', ['pets.reg_expire_date' => null]],
+				]);
+			} else {
+				$query->andWhere([
+					'AND',
+					['pets.reg_expire_date' => null],
+				]);
+			}
+		}
+
         return $query;
     }
 
@@ -1202,6 +1216,7 @@ class PetsModel
             'entrepreneur' => null,
             'id_organization' => null,
             'pet_sex' => null,
+            'is_expired' => null,
         ];
 
         $filter = array_merge($empty_filter, $filter);
@@ -1210,7 +1225,7 @@ class PetsModel
             [['id_breed', 'id_species', 'id_ident_type', 'id_reg_organization', 'id_area', 'id_district', 'id_owner'], 'integer'],
             [['phone', 'owner_name', 'address', 'ogrn', 'snils', 'inn', 'pet_name'], 'string'],
             [['owner_name', 'address', 'pet_name'], FullTrimValidator::class],
-            [['entrepreneur', 'is_legal', 'only_duplicates', 'only_expired'], 'boolean'],
+            [['entrepreneur', 'is_legal', 'only_duplicates', 'only_expired', 'is_expired'], 'boolean'],
         ];
 
         $model = DynamicModel::validateData($filter, $rules);
