@@ -11965,11 +11965,11 @@ function shelters_information_xml($configuration)
                     } else {
                         $anamnesis_arr[] = $id_;
                     }
-                    echo '<anamnesis>' . implode(', ', $anamnesis_arr) . '</anamnesis>';
+                    echo '<anamnesis_rec>' . implode(', ', $anamnesis_arr) . '</anamnesis_rec>';
                 }
             }
         } else {
-            echo '<anamnesis>' . $row['anamnesis'] . '</anamnesis>';
+            echo '<anamnesis_rec>' . $row['anamnesis'] . '</anamnesis_rec>';
         }
         //
 
