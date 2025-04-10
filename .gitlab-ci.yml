@@ -1,45 +1,14 @@
 stages:
   - build
-  - deploy
 
-default:
-  tags: 
-    - $RUNNER #изначально переменная $RUNNER
-
-build container:
+build and deploy container:
   stage: build
-  image: "${DOCKERHUB_URL}/docker:20.10"
   script:
-    - docker login -u "${HARBOR_LOGIN}" -p $HARBOR_PASSWORD $HARBOR_REGISTRY
-    - DOCKER_BUILDKIT=1 docker build --no-cache --build-arg DOCKERHUB_URL=$DOCKERHUB_URL --build-arg APT_MIRROR=$APT_MIRROR --build-arg DEPLOY_ENV=$DEPLOY_ENV --progress=plain -f cicd/Dockerfile -t ${HARBOR_REGISTRY}/vetas/backend:$DOCKER_IMAGE_TAG .
-    - docker push ${HARBOR_REGISTRY}/vetas/backend:$DOCKER_IMAGE_TAG
-    - echo DEVOPS=$DEVOPS > build.env
-    - echo DOCKER_IMAGE_FULL_NAME=${HARBOR_REGISTRY}/vetas/backend:$DOCKER_IMAGE_TAG > build.env
-  variables:
-    DOCKER_IMAGE_TAG: "$DEPLOY_ENV" #изначально хардкод realese 
-  artifacts:
-    reports:
-      dotenv: build.env
+    - docker stop back && docker rm back && docker rmi back
+    - docker build --no-cache --tag back .
+    - docker run --name back -p 8080:80 -d back
   tags:
-    - $RUNNER #изначально переменная $RUNNER
+    - vetas-106
   only:
-    - realese #изначально 2 параметра - realese и main
+    - rc_test
   when: manual
-
-deploy:
-  stage: deploy
-  needs: 
-    - build container
-  script:
-    - curl --request POST
-      --form "token=$CI_JOB_TOKEN"
-      --form "ref=$DEPLOY_REF"
-      --form "variables[PARENT]=backend"
-      --form "variables[ENV]=$DEPLOY_ENV"
-      --form "variables[DOCKER_IMAGE_FULL_NAME]=$DOCKER_IMAGE_FULL_NAME"
-      --form "variables[RUNNER]=$RUNNER"
-      "$DEVOPS_TRIGGER"
-  when: on_success
-  only:
-    - realese #изначально 2 параметра - realese и main
-
