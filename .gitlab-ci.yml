@@ -10,5 +10,4 @@ build and deploy container:
   tags:
     - vetas-106
   only:
-    - rc_test
-  when: manual
+    - rc_test@LifeIT/vetas/backend
