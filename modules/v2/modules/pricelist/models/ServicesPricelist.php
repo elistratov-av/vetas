@@ -4,6 +4,7 @@ namespace app\modules\v2\modules\pricelist\models;
 
 use app\common\validators\FullTrimValidator;
 use app\models\db\GovServices;
+use app\models\db\GovServicesHistory;
 use app\models\db\Organizations;
 use app\models\db\Pricelists;
 use app\models\db\ServiceMeasures;
@@ -51,7 +52,7 @@ class ServicesPricelist extends Model
         if (!$pricelist = $this->getPricelist()) {
             return new Lists('services', [], 0, $page, $limit);
         }
-
+	
         $services = $pricelist->getServices();
         $services->andWhere(['deleted' => false]);
         if (isset($filter['id_service_type'])) {
@@ -81,7 +82,7 @@ class ServicesPricelist extends Model
         $services->with(['serviceType', 'serviceMeasures'])
             ->limit($limit)
             ->offset($limit * ($page - 1));
-
+		
         return new Lists(
             'services',
             $services->all(),
@@ -196,6 +197,13 @@ class ServicesPricelist extends Model
         }
 
         $service->save(false);
+		
+		$servicehist = new GovServicesHistory();
+        $servicehist->gov_service_id = $service->id;
+        $servicehist->action_type = 0; 
+        $servicehist->load_type = 0;
+        $servicehist->save(false);
+		
         return ['result' => true, 'id' => $service->id];
     }
 
@@ -247,6 +255,13 @@ class ServicesPricelist extends Model
         }
 
         $service->save(false);
+		
+		$servicehist = new GovServicesHistory();
+        $servicehist->gov_service_id = $id;
+        $servicehist->action_type = 1; 
+        $servicehist->load_type = 0;
+        $servicehist->save(false);
+		
         return ['result' => true];
     }
 
@@ -262,6 +277,13 @@ class ServicesPricelist extends Model
         $service = $this->findService($id);
         $service->deleted = true;
         $service->save(false);
+		
+        $servicehist = new GovServicesHistory();
+        $servicehist->gov_service_id = $id;
+        $servicehist->action_type = 2; 
+        $servicehist->load_type = 0;
+        $servicehist->save(false);
+		
         return ['result' => true];
     }
 
