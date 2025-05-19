@@ -93,6 +93,24 @@ class ServicesPricelist extends Model
     }
 
     /**
+     * Возвращает историю по услуге
+     *
+     * @param int $id_service
+     * @return array|ActiveRecord[]
+     */
+    public function getHistList($id_service)
+    {
+        if (!$history = GovServicesHistory::find()
+            ->select(['action_type','action_date'])    
+            ->where(['gov_service_id' => $id_service])
+            ->all()) {
+            throw new BadRequestHttpException("История по услуге не найдена");
+        }
+
+        return $history;
+    }
+
+    /**
      * @param array $codes
      * @return array
      */
