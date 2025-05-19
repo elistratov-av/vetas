@@ -72,21 +72,6 @@ class ServicesController extends BaseController
      * @return array
      * @throws BadRequestHttpException
      */
-    public function actionHistlist(int $id_service)
-    {
-        $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
-
-        return [
-            'result' => $this->getPricelist()->getHistList($id_service),
-        ];
-    }
-
-
-    /**
-     * @param int $id_service
-     * @return array
-     * @throws BadRequestHttpException
-     */
     public function actionGet(int $id_service)
     {
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
