@@ -45,11 +45,28 @@ class OrganizationsController extends BaseController
     /**
      * @param int $id_organization
      * @param array $filter
+     * @param ?string $org_status
      *
      * @return array
      */
-    public function actionTree($id_organization = null, $filter = [])
+    public function actionTree(
+        $id_organization = null,
+        $filter = [],
+        ?string $org_status = null)
     {
+        $org_status = strtolower(trim($org_status));
+        $orgStatusIsHidden = false;
+        $orgStatusAll = false;
+        if (strlen($org_status)) {
+            if ($org_status == 'hidden') {
+                $orgStatusIsHidden = true;
+            } else if($org_status == 'visible') {
+                $orgStatusIsHidden = false;
+            } else if($org_status == 'all') {
+                $orgStatusAll = true;
+            }
+        }
+
         /* @var $user UserModel */
         $user = \Yii::$app->user->getIdentity();
 
@@ -68,7 +85,7 @@ class OrganizationsController extends BaseController
         }
 
         $organizations = [];
-        $query = $organization->prepareTreeQuery(true, false);
+        $query = $organization->prepareTreeQuery(true, false, $orgStatusIsHidden, $orgStatusAll);
         if (!empty($filter)) {
             $this->prepareFilter($filter, $query);
         }
