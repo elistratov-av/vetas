@@ -92,16 +92,26 @@ class SpecialistController extends BaseController
      * @param int    $page
      * @param int    $limit
      * @param int    $visit_id          id приёма, чтобы получить флаг is_assigned_specialist для спеца, который ранее был назначен на приём
+     * @param array  $services          список идентификаторов услуг, которые были выбраны в рамках создания приема
      * @return DateLists
      * @throws BadRequestHttpException
      */
-    public function actionDatelist(int $id_organization, int $id_shift_type, string $date_from, string $type = Visits::TYPE_VISIT,
-                                   int $days_count = 14, int $page = 1, int $limit = 10, int $visit_id = null): DateLists
+    public function actionDatelist(
+        int $id_organization,
+        int $id_shift_type,
+        string $date_from,
+        string $type = Visits::TYPE_VISIT,
+        int $days_count = 14,
+        int $page = 1,
+        int $limit = 10,
+        int $visit_id = null,
+        array $services
+    ): DateLists
     {
 
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
 
-        $dateListModel = new DatelistModel(compact('id_organization', 'id_shift_type', 'date_from', 'type', 'days_count', 'page', 'limit', 'visit_id'));
+        $dateListModel = new DatelistModel(compact('id_organization', 'id_shift_type', 'date_from', 'type', 'days_count', 'page', 'limit', 'visit_id', 'services'));
 
         if (!$dateListModel->validate()) {
             $errors = $dateListModel->getErrorSummary(true);
