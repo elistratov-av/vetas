@@ -1151,33 +1151,35 @@ class PetsModel
             ]);
         }
 
-        if (isset($filter['only_expired']) && $filter['only_expired'] === true) {
-            $query->andWhere([
-                'AND',
-                ['not', ['pets.id_reg_expire_reason' => null]],
-                ['not', ['pets.reg_expire_date' => null]],
-            ]);
-        } else {
-            $query->andWhere([
-                'AND',
-                ['pets.id_reg_expire_reason' => null],
-                ['pets.reg_expire_date' => null],
-            ]);
-        }
-
-        if (isset($filter['is_expired'])){
-			if($filter['is_expired'] === true) {
+        $pet_status = strtolower(trim($filter['pet_status']));
+        if (strlen($pet_status)){
+			if($pet_status == 'expired') {
 				$query->andWhere([
 					'AND',
 					['not', ['pets.reg_expire_date' => null]],
 				]);
-			} else {
+			} else if($pet_status == 'active') {
 				$query->andWhere([
 					'AND',
 					['pets.reg_expire_date' => null],
 				]);
 			}
 		}
+        else{
+            if (isset($filter['only_expired']) && $filter['only_expired'] === true) {
+                $query->andWhere([
+                    'AND',
+                    ['not', ['pets.id_reg_expire_reason' => null]],
+                    ['not', ['pets.reg_expire_date' => null]],
+                ]);
+            } else {
+                $query->andWhere([
+                    'AND',
+                    ['pets.id_reg_expire_reason' => null],
+                    ['pets.reg_expire_date' => null],
+                ]);
+            }
+        }
 
         return $query;
     }
