@@ -1,40 +1,39 @@
 <?php
 
-namespace app\modules\v2\modules\pethotels\models;
+namespace app\modules\v2\modules\pricelist\models;
 
 use yii\base\Model;
-use yii\web\UploadedFile;
 
 /**
  * UploadForm is the model behind the upload form.
  */
-class ContractUploadForm extends Model
+class UploadForm extends Model
 {
     /**
      * @var int id attribute
      */
-    public $id;
+    public $pricelist_id;
 
     /**
      * @var UploadedFile file attribute
      */
     public $file;
-
+	
     /**
      * @return array the validation rules.
      */
     public function rules()
     {
         return [
-            [['id', 'file'], 'required'],
-            [['id'], 'integer'],
+            [['pricelist_id', 'file'], 'required'],
+            [['pricelist_id'], 'integer'],
             [['file'], 'file',
                 'skipOnEmpty' => false,
                 'checkExtensionByMimeType' => false,
-                'extensions' => ['pdf'],
-//                'mimeTypes' => 'application/pdf',
-                'maxSize' => 10485760, // 10Mb
-                'tooBig' => 'Limit is 10 Mb'
+                'extensions' => ['xlsx'],
+//                'mimeTypes' => 'application/xlsx',
+                'maxSize' => 104857600, // 100Mb
+                'tooBig' => 'Limit is 100 Mb'
             ],
         ];
     }

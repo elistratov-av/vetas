@@ -100,14 +100,10 @@ class ServicesPricelist extends Model
      */
     public function getHistList($id_service)
     {
-        if (!$history = GovServicesHistory::find()
+        return GovServicesHistory::find()
             ->select(['action_type','action_date'])    
             ->where(['gov_service_id' => $id_service])
-            ->all()) {
-            throw new BadRequestHttpException("История по услуге не найдена");
-        }
-
-        return $history;
+            ->all();
     }
 
     /**

@@ -3,6 +3,7 @@
 use app\commands\cron\AutoDuplicatesController;
 use app\commands\cron\LogCleanController;
 use app\commands\cron\TelevetController;
+use app\commands\cron\PricelistController;
 
 $params = require __DIR__ . '/params.php';
 if (file_exists(__DIR__ . '/db-local.php')) {
@@ -290,6 +291,9 @@ $config = [
         ],
         'auto-duplicates' => [
             'class' => AutoDuplicatesController::class
+        ],
+        'pricelist' => [
+            'class' => PricelistController::class
         ]
     ],
     /*
