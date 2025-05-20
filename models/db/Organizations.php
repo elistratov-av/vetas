@@ -254,21 +254,25 @@ class Organizations extends ActiveRecord
     /**
      * @param bool $withFiasAddresses
      * @param bool $fixShelters
+     * @param bool $orgStatusIsHidden
+     * @param bool $orgStatusAll
      *
      * @return \yii\db\ActiveQuery
      */
-    public function prepareTreeQuery($withFiasAddresses = false, $fixShelters = false)
+    public function prepareTreeQuery($withFiasAddresses = false, $fixShelters = false, $orgStatusIsHidden = false, $orgStatusAll = false)
     {
         $root = $this->isRoot() ? $this : ($this->rootOrganization ?? $this);
 
         $query = Organizations::find()
             ->innerJoin('organizations_tree', 'organizations_tree.id = organizations.id')
-            ->where(['organizations_tree.root_id' => $root->id])
-            ->andWhere(['hidden' => false])
-            ->orderBy([
-                'organizations_tree.path' => SORT_ASC,
-                'organizations.short_name' => SORT_ASC,
-            ]);
+            ->where(['organizations_tree.root_id' => $root->id]);
+        if (!$orgStatusAll) {
+            $query->andWhere(['hidden' => $orgStatusIsHidden]);
+        }
+        $query->orderBy([
+            'organizations_tree.path' => SORT_ASC,
+            'organizations.short_name' => SORT_ASC,
+        ]);
 
         if ($withFiasAddresses === true) {
             $query->joinWith('fias_addresses');
