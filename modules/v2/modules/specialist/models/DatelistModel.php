@@ -59,6 +59,10 @@ class DatelistModel extends Model
      * @var int id приёма, чтобы получить флаг is_assigned_specialist для спеца, который ранее был назначен на приём
      */
     public $visit_id;
+    /**
+     * @var array список идентификаторов услуг, которые были выбраны в рамках создания приема
+     */
+    public $services;
 
     /**
      * @var array
@@ -352,6 +356,14 @@ SQL;
             ])
             ->join('RIGHT JOIN', 'users_specializations us', "us.id_user = specialists.id_user");
 
+        if ($this->services) {
+            $query->join(
+                'RIGHT JOIN',
+                'services_specialists ss',
+                "ss.id_specialist = specialists.id and ss.id_organization = specialists.id_organization"
+            )
+            ->andWhere(['IN', 'ss.id_service', $this->services]);
+        }
 
 //        $subQuery = (new Query())
 //            ->select([
@@ -403,6 +415,16 @@ SQL;
                 ['>=', 'expel_date', $this->dateTimeFrom->format('Y-m-d')],
             ])
             ->andWhere(['NOT IN', 'specialists.id', $excludedIds]);
+
+        if ($this->services) {
+            $query2->join(
+                'RIGHT JOIN',
+                'services_specialists ss',
+                "ss.id_specialist = specialists.id and ss.id_organization = specialists.id_organization"
+            )
+            ->andWhere(['IN', 'ss.id_service', $this->services]);
+        }
+
         return $query2;
     }
 
