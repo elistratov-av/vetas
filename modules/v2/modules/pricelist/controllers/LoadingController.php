@@ -23,7 +23,7 @@ class LoadingController extends BaseController
         $rules = parent::behaviors();
         $rules[] = [
             'class' => AccessControl::class,
-            'only' => ['flc', 'load', 'loadondate', 'export'],
+            'only' => ['flc', 'load', 'loadondate', 'export', 'cancel'],
             'rules' => [
                 [
                     'allow' => true,
@@ -101,6 +101,21 @@ class LoadingController extends BaseController
         $func = \Yii::$app->db->createCommand("select admin.load_pricelist(".$id.",'{".$data."}', 'load') as c1");
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         return $func->queryOne()['c1'];
+    }
+
+    public function actionCancel($id) {
+        $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
+		if (!\Yii::$app->request->isPost) 
+            return ['errors' => ['POST expected'],'status' => 'error'];
+
+        \Yii::$app->db->createCommand()->update(
+            'admin.pricelist_loading', 
+            ['status_loading' => 4],
+            'id=:id',
+            [':id' => $id]
+    	)->execute();
+        
+        return ['errors' => [], 'status' => 'ok' ];
     }
 
     public function actionLoadondate($id, $plan_load_date) {
