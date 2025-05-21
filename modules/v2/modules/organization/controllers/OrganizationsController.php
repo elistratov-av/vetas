@@ -51,19 +51,23 @@ class OrganizationsController extends BaseController
      */
     public function actionTree(
         $id_organization = null,
-        $filter = [],
-        ?string $org_status = null)
+        $filter = []
+    )
     {
-        $org_status = strtolower(trim($org_status));
         $orgStatusIsHidden = false;
         $orgStatusAll = false;
-        if (strlen($org_status)) {
-            if ($org_status == 'hidden') {
-                $orgStatusIsHidden = true;
-            } else if($org_status == 'visible') {
-                $orgStatusIsHidden = false;
-            } else if($org_status == 'all') {
-                $orgStatusAll = true;
+        if (!empty($filter['org_status'])) {
+            $org_status = strtolower(trim($filter['org_status']));
+            if (strlen($org_status)) {
+                if ($org_status == 'hidden') {
+                    $orgStatusIsHidden = true;
+                } else if($org_status == 'visible') {
+                    $orgStatusIsHidden = false;
+                } else if($org_status == 'all') {
+                    $orgStatusAll = true;
+                } else {
+                    throw new BadRequestHttpException('Передано неверное значение параметра фильтра org_status');
+                }
             }
         }
 
