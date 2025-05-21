@@ -162,9 +162,11 @@ $descriptions = $newDescriptionsArray;
 
         <div class="wrapper">
             <div class="content">
-                <div class="title_vd" style="text-align: center; font-size: 22px; font-weight: bold; margin-top: 30px; margin-bottom: 30px;">
-                    Амбулаторный приём №<?php echo $visit->id ?> от «<?php echo $visitDate['d']; ?>
-                    » <?php echo $visitDate['M']; ?> <?php echo $visitDate['Y']; ?> г
+                <div class="title_vd" style="text-align: center; font-size: 22px; font-weight: bold; margin-top: 30px; margin-bottom: 3px;">
+                    Амбулаторный приём №<?php echo $visit->id ?>
+                </div>
+                <div class="title_vd" style="text-align: center; font-size: 14px; margin-top: 3px; margin-bottom: 30px;">
+                    от <?php echo $visitDate['d']; ?> <?php echo $visitDate['M']; ?> <?php echo $visitDate['Y']; ?> г
                 </div>
                 <div class="table-container">
                     <table class="table">

@@ -62,7 +62,22 @@ use yii\web\View;
      ?>
     <br><br>
     <div>
-        <div class="t32" style="width: 100px;">Дата</div>
+        <div class="t32" style="width: 120px;">Ветврач</div>
+        <div class="t5" style="width: 200px;">&nbsp;</div>
+        <div class="t32" style="width: 12px;">&nbsp;</div>
+        <div class="t5" style="width: 300px;">( <span class="value"><?= isset($data['P33_SpecialistFIO']) ? $data['P33_SpecialistFIO'] : '&nbsp;' ?></span> )</div>
+    </div>
+    <div>
+        <div class="t32" style="width: 200px;">&nbsp;</div>
+        <div class="t32" style="width: 250px;">подпись</div>
+        <div class="t32" style="width: 100px;">Ф.И.О. врача</div>
+    </div>
+	<br>
+	<div>
+        <div class="t32" style="width: 120px;">&nbsp;</div>
+        <div class="t32" style="width: 200px; padding: 0 0 0 5px;">&nbsp;</div>
+        <div class="t32" style="width: 12px;">&nbsp;</div>
+        <div class="t32" style="width: 100px; padding: 0 0 0 5px;">Дата</div>
         <div class="t32" style="width: 200px;">
             <?php
             if (isset($data['P3_Visitstartdate'])) {
@@ -73,18 +88,6 @@ use yii\web\View;
                 «&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;»____________________20__ года
             <?php } ?>
         </div>
-    </div>
-    <br>
-    <div>
-        <div class="t32" style="width: 120px;">Ветврач</div>
-        <div class="t5" style="width: 200px;">&nbsp;</div>
-        <div class="t32" style="width: 12px;">&nbsp;</div>
-        <div class="t5" style="width: 300px;">( <span class="value"><?= isset($data['P33_SpecialistFIO']) ? $data['P33_SpecialistFIO'] : '&nbsp;' ?></span> )</div>
-    </div>
-    <div>
-        <div class="t32" style="width: 200px;">&nbsp;</div>
-        <div class="t32" style="width: 250px;">подпись</div>
-        <div class="t32" style="width: 100px;">Ф.И.О. врача</div>
     </div>
 </div>
 
