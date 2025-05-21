@@ -71,6 +71,7 @@ class LoadingController extends BaseController
 				$func = \Yii::$app->db->createCommand("select admin.load_pricelist(".\Yii::$app->db->getlastinsertid().",'{".$data."}', 'flc') as c1");
 				$funcres = $func->queryOne();
 				
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
 				return $funcres['c1'];
             } else {
                 $errors = $form->getErrorSummary(true);
@@ -98,6 +99,7 @@ class LoadingController extends BaseController
 
         $data = pg_escape_bytea(file_get_contents($upload_path));
         $func = \Yii::$app->db->createCommand("select admin.load_pricelist(".$id.",'{".$data."}', 'load') as c1");
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         return $func->queryOne()['c1'];
     }
 
