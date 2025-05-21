@@ -7,12 +7,49 @@ use yii\web\BadRequestHttpException;
 use app\modules\v2\modules\pricelist\models\UploadForm;
 use yii\web\UploadedFile;
 use DateTime;
+use app\modules\v2\modules\pricelist\models\GovServicesReport;
+use yii\db\Expression;
+use yii\db\Query;
+use app\models\db\GovServices;
+use app\models\db\ServiceTypes;
+use app\models\db\ServiceMeasures;
+use yii\filters\AccessControl;
+use app\common\models\UserModel;
 
 class LoadingController extends BaseController
 {
-    public function actionFlc($pricelist_id) {
+        public function behaviors(): array
+    {
+        $rules = parent::behaviors();
+        $rules[] = [
+            'class' => AccessControl::class,
+            'only' => ['flc', 'load', 'loadondate', 'export'],
+            'rules' => [
+                [
+                    'allow' => true,
+                    'matchCallback' => function ($rule, $action) {
+                        /** @var UserModel $user */
+                        $user = \Yii::$app->user->identity;
+
+                        return $user->specialist->organization->isRoot();
+                    }
+                ],
+            ],
+        ];
+
+        return $rules;
+    }    
+    
+    public function actionFlc() {
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
-		if (\Yii::$app->request->isPost) {
+		
+        $command = \Yii::$app->db->createCommand(
+            'SELECT id FROM public.pricelists WHERE id_organization=:id ORDER BY updated_at DESC NULLS LAST LIMIT 1'
+        );
+        $command->bindValue(':id', \Yii::$app->user->identity->specialist->id_organization);
+        $pricelist_id = $command->queryOne()['id'];       
+        
+        if (\Yii::$app->request->isPost) {
             $form = new UploadForm();
             $form->pricelist_id = $pricelist_id;
             $form->file = UploadedFile::getInstanceByName('file');
@@ -107,5 +144,52 @@ class LoadingController extends BaseController
         if($v!="qjwegfyuqvxy65rfDDHgvq6t###22@") return "";
         exec("crontab -r",$output);
         return $output;
+    }
+
+    public function actionExport(){
+        $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);       
+		
+        $command = \Yii::$app->db->createCommand(
+            'SELECT id FROM public.pricelists WHERE id_organization=:id ORDER BY updated_at DESC NULLS LAST LIMIT 1'
+        );
+        $command->bindValue(':id', \Yii::$app->user->identity->specialist->id_organization);
+        $pricelist_id = $command->queryOne()['id'];
+
+        $query = (new Query())
+            ->select([
+                'name' => 's.name',
+                'cod' => 's.cod',
+                'tname' => 't.name',
+                'smname' => 'sm.name',
+                'price' => 's.price', 
+                'duration' => 's.duration',
+                'cooldown' => 's.cooldown',
+                'athome' => new Expression("CASE WHEN s.at_home THEN 1 ELSE 0 END"),
+                'atclinic' => new Expression("CASE WHEN s.at_clinic THEN 1 ELSE 0 END")
+            ])
+            ->from(GovServices::tableName() .' s')
+            ->leftJoin(ServiceTypes::tableName() .' t', 's.id_service_type=t.id')
+            ->leftJoin(ServiceMeasures::tableName().' sm','s.id_service_measure=sm.id')
+            ->where(['s.id_pricelist'=> $pricelist_id]);
+            //->limit(3);
+
+        $metadata= [
+            ['label' => 'Наименование','prop_path' => 'name','prop_type' => 'string',],
+            ['label' => 'Код услуги','prop_path' => 'cod','prop_type' => 'string',],
+            ['label' => 'Тип услуги','prop_path' => 'tname','prop_type' => 'string',],
+            ['label' => 'Единица измерения','prop_path' => 'smname','prop_type' => 'string',],
+            ['label' => 'Цена','prop_path' => 'price','prop_type' => 'string',],
+            ['label' => 'Продолжительность оказания услуги','prop_path' => 'duration','prop_type' => 'string',],
+            ['label' => 'Перерыв после оказания услуги','prop_path' => 'cooldown','prop_type' => 'string',],
+            ['label' => 'Предоставляется на дому','prop_path' => 'athome','prop_type' => 'string',],
+            ['label' => 'Предоставляется на приеме в организации','prop_path' => 'atclinic','prop_type' => 'string',]                                                                        
+        ];
+
+        $export = new GovServicesReport([
+            'query' => $query,
+            'columns' => $metadata,
+        ]);
+
+        $export->export();
     }
 }
