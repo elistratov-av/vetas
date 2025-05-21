@@ -7,6 +7,7 @@ use app\models\db\GovServices;
 use app\models\db\Shifts;
 use app\models\db\ShiftType;
 use app\models\db\Specialists;
+use app\models\db\ServicesSpecialists;
 use app\models\db\Timesheets;
 use app\models\db\Visits;
 use app\models\db\VisitsGovServices;
@@ -357,12 +358,16 @@ SQL;
             ->join('RIGHT JOIN', 'users_specializations us', "us.id_user = specialists.id_user");
 
         if ($this->services) {
-            $query->join(
-                'RIGHT JOIN',
-                'services_specialists ss',
-                "ss.id_specialist = specialists.id and ss.id_organization = specialists.id_organization"
+            $countServices = count($this->services);
+            $specialistTable = Specialists::tableName();
+            $servicesSpecialistsTable = ServicesSpecialists::tableName();
+            $query->leftJoin(
+                $servicesSpecialistsTable,
+                "{$servicesSpecialistsTable}.id_specialist = {$specialistTable}.id and {$servicesSpecialistsTable}.id_organization = {$specialistTable}.id_organization"
             )
-            ->andWhere(['IN', 'ss.id_service', $this->services]);
+            ->andWhere(['IN', "{$servicesSpecialistsTable}.id_service", $this->services])
+            ->groupBy("{$specialistTable}.id, fio, reg_date, expel_date")
+            ->having("COUNT({$specialistTable}.id) = {$countServices}");
         }
 
 //        $subQuery = (new Query())
@@ -417,12 +422,16 @@ SQL;
             ->andWhere(['NOT IN', 'specialists.id', $excludedIds]);
 
         if ($this->services) {
-            $query2->join(
-                'RIGHT JOIN',
-                'services_specialists ss',
-                "ss.id_specialist = specialists.id and ss.id_organization = specialists.id_organization"
+            $countServices = count($this->services);
+            $specialistTable = Specialists::tableName();
+            $servicesSpecialistsTable = ServicesSpecialists::tableName();
+            $query2->leftJoin(
+                $servicesSpecialistsTable,
+                "{$servicesSpecialistsTable}.id_specialist = {$specialistTable}.id and {$servicesSpecialistsTable}.id_organization = {$specialistTable}.id_organization"
             )
-            ->andWhere(['IN', 'ss.id_service', $this->services]);
+            ->andWhere(['IN', "{$servicesSpecialistsTable}.id_service", $this->services])
+            ->groupBy("{$specialistTable}.id, fio, reg_date, expel_date")
+            ->having("COUNT({$specialistTable}.id) = {$countServices}");
         }
 
         return $query2;
