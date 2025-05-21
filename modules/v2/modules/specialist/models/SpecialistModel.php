@@ -11,6 +11,7 @@ use app\models\db\ShiftType;
 use app\models\db\Specialists;
 use app\models\db\Timesheets;
 use app\models\db\Visits;
+use app\models\db\ServicesSpecialists;
 use app\modules\v2\modules\emergency\models\EmergencyModel;
 use app\modules\v2\modules\specialist\skeletons\specialist\Lists;
 use app\modules\v2\modules\specialist\skeletons\specialist\Specialist;
@@ -31,6 +32,7 @@ class SpecialistModel
     private $startToday;
     private $endToday;
     private $visitsTable;
+    private $servicesSpecialistsTable;
 
     public const
         TIMESLOT_FREE = 'FREE',
@@ -52,6 +54,7 @@ class SpecialistModel
         $this->shiftTypeTable = ShiftType::tableName();
         $this->timeSheetsTable = Timesheets::tableName();
         $this->visitsTable = Visits::tableName();
+        $this->servicesSpecialistsTable = ServicesSpecialists::tableName();
     }
 
     /**
@@ -61,16 +64,23 @@ class SpecialistModel
      * @param int $idShiftType
      * @param int $page
      * @param int $limit
+     * @param ?array $services
      * @return Lists
      * @throws BadRequestHttpException
      */
-    public function getTimeLiveQueneList(int $idOrganization, int $idShiftType, int $page = 1, int $limit = 10): Lists
+    public function getTimeLiveQueneList (
+        int $idOrganization,
+        int $idShiftType,
+        int $page = 1,
+        int $limit = 10,
+        ?array $services = null
+    ): Lists
     {
         if (ShiftType::find()->where(['type' => ShiftType::ASSIGN_SHIFT_TYPE_FOR_LIVE_QUEUE])->one()->id !== $idShiftType) {
             throw new BadRequestHttpException('id_shift_type имеет тип, отличный от ЖО');
         }
 
-        $specialistsQuery = $this->prepareSpecialistsQuery($idOrganization, $idShiftType);
+        $specialistsQuery = $this->prepareSpecialistsQuery($idOrganization, $idShiftType, $services);
         $specialists = $this->getSpecialistsWithTimeLiveQueue($specialistsQuery, $page, $limit);
         $times = $this->getTimesWithTimeLiveQueue($specialists);
 
@@ -89,9 +99,10 @@ class SpecialistModel
      *
      * @param $idOrganization
      * @param $idShiftType
+     * @param $services
      * @return ActiveQuery
      */
-    private function prepareSpecialistsQuery($idOrganization, $idShiftType): ActiveQuery
+    private function prepareSpecialistsQuery($idOrganization, $idShiftType, $services = null): ActiveQuery
     {
         $dateExpression = new Expression("(date && tsrange('{$this->startToday}', '{$this->endToday}', '[)'))");
 
@@ -108,8 +119,17 @@ class SpecialistModel
                 ["{$this->specialistTable}.expel_date" => NULL],
                 ['>', "{$this->specialistTable}.expel_date", new Expression('NOW()')]
             ])
-            ->andWhere($dateExpression)
-            ->orderBy("{$this->specialistTable}.id");
+            ->andWhere($dateExpression);
+
+        if ($services) {
+            $query->rightJoin(
+                $this->servicesSpecialistsTable,
+                "{$this->servicesSpecialistsTable}.id_specialist = {$this->specialistTable}.id and {$this->servicesSpecialistsTable}.id_organization = {$this->specialistTable}.id_organization"
+            )
+            ->andWhere(['IN', "{$this->servicesSpecialistsTable}.id_service", $services]);
+        }
+
+        $query->orderBy("{$this->specialistTable}.id");
 
         return $query;
     }

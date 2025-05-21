@@ -20,11 +20,11 @@ class SpecialistController extends BaseController
      * Метод выбора специалиста или специализации для записи в ЖО
      * https://jira.altarix.ru/browse/VETAIS-836
      *
-     * @param int $id_organization
-     *
-     * @param int $id_shift_type
-     * @param int $page
-     * @param int $limit
+     * @param int   $id_organization
+     * @param int   $id_shift_type
+     * @param int   $page
+     * @param int   $limit
+     * @param array $services список идентификаторов услуг, которые были выбраны в рамках создания приема
      * @return Lists
      * @throws \yii\web\BadRequestHttpException
      */
@@ -32,13 +32,15 @@ class SpecialistController extends BaseController
         int $id_organization,
         int $id_shift_type,
         int $page = 1,
-        int $limit = 10): Lists
+        int $limit = 10,
+        array $services
+    ): Lists
     {
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
 
         $specialistModel = new SpecialistModel();
 
-        return $specialistModel->getTimeLiveQueneList($id_organization, $id_shift_type, $page, $limit);
+        return $specialistModel->getTimeLiveQueneList($id_organization, $id_shift_type, $page, $limit, $services);
     }
 
     /**
