@@ -84,10 +84,18 @@ class SpecialistModel
         $specialists = $this->getSpecialistsWithTimeLiveQueue($specialistsQuery, $page, $limit);
         $times = $this->getTimesWithTimeLiveQueue($specialists);
 
+        $query = Specialists::find()
+            ->select('specialists.*')
+            ->addSelect(Specialists::personalAttributes())
+            ->joinWith('user', false)
+            ->where(['IN', "{$this->specialistTable}.id", $specialistsQuery->select(["{$this->specialistTable}.id"])]);
+
+        $specialists_data = $this->getSpecialistsWithTimeLiveQueue($query, $page, $limit);
+
         $result = new Lists(
-            $specialists->all(),
+            $specialists_data->all(),
             $times,
-            $specialists->count()
+            $specialists_data->count()
         );
         $result->customPagination($page, $limit);
 
@@ -107,8 +115,7 @@ class SpecialistModel
         $dateExpression = new Expression("(date && tsrange('{$this->startToday}', '{$this->endToday}', '[)'))");
 
         $query = Specialists::find()
-            ->select('specialists.*')
-            ->addSelect(Specialists::personalAttributes())
+            ->select("{$this->specialistTable}.id")
             ->joinWith('user', false)
             ->leftJoin($this->timeSheetsTable, "{$this->timeSheetsTable}.id_specialist = {$this->specialistTable}.id")
             ->leftJoin($this->shiftTable, "{$this->shiftTable}.id = {$this->timeSheetsTable}.id_shift")
@@ -122,11 +129,14 @@ class SpecialistModel
             ->andWhere($dateExpression);
 
         if ($services) {
-            $query->rightJoin(
+            $countServices = count($services);
+            $query->leftJoin(
                 $this->servicesSpecialistsTable,
                 "{$this->servicesSpecialistsTable}.id_specialist = {$this->specialistTable}.id and {$this->servicesSpecialistsTable}.id_organization = {$this->specialistTable}.id_organization"
             )
-            ->andWhere(['IN', "{$this->servicesSpecialistsTable}.id_service", $services]);
+            ->andWhere(['IN', "{$this->servicesSpecialistsTable}.id_service", $services])
+            ->groupBy("{$this->specialistTable}.id")
+            ->having("COUNT({$this->specialistTable}.id) = {$countServices}");
         }
 
         $query->orderBy("{$this->specialistTable}.id");
