@@ -198,9 +198,9 @@ class GovServicesReport extends BaseObject
             ->getFont()
             ->setBold(true);
 
-        foreach ($spreadsheet->getActiveSheet()->getColumnIterator() as $column) {
+        /*foreach ($spreadsheet->getActiveSheet()->getColumnIterator() as $column) {
             $sheet->getColumnDimension($column->getColumnIndex())->setAutoSize(true);
-        }
+        }*/
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save($this->tempfile);
