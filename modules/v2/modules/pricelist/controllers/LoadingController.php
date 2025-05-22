@@ -15,6 +15,7 @@ use app\models\db\ServiceTypes;
 use app\models\db\ServiceMeasures;
 use yii\filters\AccessControl;
 use app\common\models\UserModel;
+use yii\helpers\FileHelper;
 
 class LoadingController extends BaseController
 {
@@ -163,6 +164,14 @@ class LoadingController extends BaseController
         return $output;
     }
 
+    public function actionCronlog(){
+        $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
+        return \Yii::$app->getResponse()->sendFile(
+                \Yii::getAlias('@runtime/logs/cron.log'), "cronlog",
+                ['mimeType' => FileHelper::getMimeTypeByExtension("txt")]
+        );
+    }
+
     public function actionExport(){
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);       
 		
@@ -187,7 +196,8 @@ class LoadingController extends BaseController
             ->from(GovServices::tableName() .' s')
             ->leftJoin(ServiceTypes::tableName() .' t', 's.id_service_type=t.id')
             ->leftJoin(ServiceMeasures::tableName().' sm','s.id_service_measure=sm.id')
-            ->where(['s.id_pricelist'=> $pricelist_id]);
+            ->where(['s.id_pricelist'=> $pricelist_id])
+            ->andWhere('s.deleted<>true');
             //->limit(3);
 
         $metadata= [
