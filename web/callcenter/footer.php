@@ -1,5 +1,5 @@
 <?php
-function footer_site(){
+function footer_site($view = NULL){
 ?>
 
 <div class="row footer main_row">
@@ -11,7 +11,7 @@ function footer_site(){
 	</div>
 	<div class="col-xl-2 col-lg-1 d-none d-sm-none d-md-none d-lg-block d-xl-block"></div>
 </div>
-
+<?php if ($view) $view->endBody(); ?>
 </body>
 </html>
 

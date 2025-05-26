@@ -1426,6 +1426,26 @@ function save_contacts($configuration){
     }
 }
 
+function vallidateTokenYii($configuration) {
+    if ($_COOKIE['login'] && $_COOKIE['token']) {
+        error_reporting(0);//отключаем ошибки
+
+        if (Yii::$app->getSecurity()->validatePassword($_COOKIE['login'], $_COOKIE['token'])) {
+            //всё ок - обвновляем время токена
+            setcookie('token', $_COOKIE['token'], time() + $configuration['token_time'], '/');
+            setcookie('login', $_COOKIE['login'], time() + $configuration['token_time'], '/');
+            setcookie('organization', $_COOKIE['organization'], time() + $configuration['token_time'], '/');
+
+            return 1;
+        }
+
+        setcookie('token', '', time() + $configuration['token_time'], '/');
+        setcookie('login', '', time() + $configuration['token_time'], '/');
+    }
+
+    return 0;
+}
+
 function vallidateToken($configuration){
     if($_COOKIE['login'] && $_COOKIE['token']){
         error_reporting(0);//отключаем ошибки

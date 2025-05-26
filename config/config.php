@@ -379,6 +379,9 @@ return [
                 ],
                 'sign/<controller:\w+>' => 'sign/<controller>',
                 'sign/<controller:[\w-]+>/<action:[\w-]+>' => 'sign/<controller>/<action>',
+
+                '<controller:[\w\-]+>/<action:[\w\-]+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:[\w\-]+>/<action:[\w\-]+>' => '<controller>/<action>',
             ],
         ],
         'user'       => [
