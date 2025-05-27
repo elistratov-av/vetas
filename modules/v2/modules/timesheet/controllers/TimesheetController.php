@@ -130,6 +130,7 @@ class TimesheetController extends BaseController
         return [
             'result' => true,
             'count_visits_to_transfer' => $count_visits_to_transfer,
+            'data' => $model->visits_to_transfer
         ];
     }
 

@@ -169,6 +169,13 @@ class TimesheetsSave extends Model
      */
     const VACCINATION_STATION_DATE_FORMAT = 'Y-m-d';
 
+    /*
+    массив значений перенесенных приемов:
+        id - Идентификатор приема (поле visits.id)
+        date_create - Дата создания приема (поле visits.created_at)
+    */
+    public $visits_to_transfer = [];
+
     /**
      * @inheritdoc
      */
@@ -423,9 +430,12 @@ class TimesheetsSave extends Model
             return 0;
         }
 
+        $visits_data = Visits::find()->select(['id','created_at as data_create'])->where(['IN', 'id', $visits_list])->asArray()->all();
         $result = Visits::updateAll(['status' => VisitStatus::TRANSFER], ['IN', 'id', $visits_list]);
 
         if ($result) {
+            $this->visits_to_transfer = array_merge($this->visits_to_transfer,  $visits_data);
+
             /** @var Visits $visit */
             $visit = Visits::find()->where(['id' => $visits_list[0]])->one();
 
@@ -1483,14 +1493,21 @@ SQL;
                 ['IN', 'status', VisitStatus::reverseAvailableSwitch(VisitStatus::TRANSFER)],
             ]);
 
+        $visits_data = Visits::find()->select(['id','created_at as data_create'])->where(['IN', 'id', $visits_query])->asArray()->all();    
         // Проставляем статус "к переносу"
-        return Visits::updateAll([
+        $result = Visits::updateAll([
             'status' => VisitStatus::TRANSFER
         ], [
             'IN',
             'id',
             $visits_query
         ]);
+
+        if ($result) {
+            $this->visits_to_transfer = array_merge($this->visits_to_transfer,  $visits_data);
+        }
+
+        return $result;
     }
 
     /**
