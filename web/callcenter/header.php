@@ -1,5 +1,5 @@
 <?php
-function header_site($size, $config, $title = NULL, $point = NULL){
+function header_site($size, $config, $title = NULL, $point = NULL, $view = NULL){
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
@@ -127,6 +127,7 @@ if($point == 'support'){
 <link href="https://egip.mos.ru/jsapi/lib/ol-ext-3.0.1.css" rel="stylesheet" type="text/css" /> -->
 
 <link rel="shortcut icon" href="/images/favicon.svg" />
+<?php if ($view) $view->head(); ?>
 </head>
 
 <?php
@@ -136,7 +137,7 @@ if($size){
 }else{
     echo '<body>';
 }
-
+if ($view) $view->beginBody();
 ?>
 
 <div id="JxChartTooltip" class="JxChart tooltip_"></div>
@@ -349,6 +350,8 @@ function menu_site($configuration, $point = NULL, $action = NULL){
         }else if($action == 'diseases'){echo 'Заболевания';
         }else if($action == 'breeds'){echo 'Породы';
         }else if($action == 'species'){echo 'Виды';
+        } else if ($action == 'question') {
+            echo 'Вопросы пользователей';
         }
     }else if($point == 'duplicates'){
         if($action != 'autoduplicate' && $action != 'duplicate_archive'){
@@ -583,17 +586,18 @@ function menu_site($configuration, $point = NULL, $action = NULL){
 		echo '<li><a href="./?action=organizations">Организации</a></li>';
 		echo '<li><a href="./?action=visits">Приёмы</a></li>';
 		echo '<li><a href="./?action=specialists">Специалисты</a></li>';
-        
+        echo '<li><a href="./?action=pets">Животные</a></li>';
+
         echo '</ul>';
 
         echo '<ul style="display: inline-block; vertical-align: top;border-right: 1px solid #E39632; margin-right: 30px; padding-right: 30px;">';
-        echo '<li><a href="./?action=pets">Животные</a></li>';
 		echo '<li><a href="./?action=owners">Владельцы</a></li>';
         echo '<li><a href="./?action=found_pet">Сервис "Поиск животных"</a></li>';
         echo '<li><a href="./?action=mosru">MOS.RU</a></li>';
         echo '<li><a href="./?action=statuses_mosru">Отправка статусов MOS.RU</a></li>';
         
         echo '<li><a href="./?action=informing">Информирование</a></li>';
+        echo '<li><a href="./question">Вопросы пользователей</a></li>';
         
         echo '</ul>';
 
