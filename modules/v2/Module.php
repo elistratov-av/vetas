@@ -72,6 +72,7 @@ class Module extends YiiModule
             'vaccination-station' => modules\vaccinationStation\Module::class,
             'visit' => modules\visit\Module::class,
             'recovery-password' => modules\recoveryPassword\Module::class,
+            'userquestions' => modules\userQuestions\Module::class,
         ];
     }
 }

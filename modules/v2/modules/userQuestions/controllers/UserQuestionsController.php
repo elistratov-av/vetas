@@ -3,7 +3,7 @@
 namespace app\modules\v2\modules\userQuestions\controllers;
 
 use app\modules\v2\modules\BaseController;
-use app\modules\v2\modules\userquestions\models\UserQuestionsModel;
+use app\modules\v2\modules\userQuestions\models\UserQuestionsModel;
 use app\modules\v2\modules\userQuestions\models\QuestionUploadForm;
 use yii\web\UploadedFile;
 use yii\web\BadRequestHttpException;
@@ -23,7 +23,7 @@ class UserQuestionsController extends BaseController
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
 
         return [
-            'result' => (new UserquestionsModel())->get($id)
+            'result' => (new UserQuestionsModel())->get($id)
         ];
     }
 
@@ -48,11 +48,11 @@ class UserQuestionsController extends BaseController
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
 
         return [
-            'result' => (new UserquestionsModel())->list($filter, $page, $limit, $type, $attribute_name)
+            'result' => (new UserQuestionsModel())->list($filter, $page, $limit, $type, $attribute_name)
         ];
     }
 
-     /**
+    /**
      * Возвращает отфильтванный список вопросов
      *
      * @param $date_create Дата создания
@@ -80,7 +80,7 @@ class UserQuestionsController extends BaseController
         ];
 
         return [
-            'result' => (new UserquestionsModel())->list($filter, $page, $limit)
+            'result' => (new UserQuestionsModel())->list($filter, $page, $limit)
         ];
     }
 
@@ -116,7 +116,7 @@ class UserQuestionsController extends BaseController
         ];
 
         return [
-            'result' => (new UserquestionsModel())->list($filter, $page, $limit, 'basic')
+            'result' => (new UserQuestionsModel())->list($filter, $page, $limit, 'basic')
         ];
     }
 
@@ -145,7 +145,7 @@ class UserQuestionsController extends BaseController
         ];
 
         return [
-            'result' => (new UserquestionsModel())->list($filter, $page, $limit, 'answer')
+            'result' => (new UserQuestionsModel())->list($filter, $page, $limit, 'answer')
         ];
     }
 
@@ -167,7 +167,7 @@ class UserQuestionsController extends BaseController
     {
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
 
-        $userQuestion = (new UserquestionsModel())->create('support', $question, $answer, $keywords);
+        $userQuestion = (new UserQuestionsModel())->create('support', $question, $answer, $keywords);
         return [
             'result' => true,
             'id' => $userQuestion->id
@@ -202,7 +202,7 @@ class UserQuestionsController extends BaseController
                     $uploaded_file = $upload_path . $intr_file_name;
                 }
 
-                $userQuestion = (new UserquestionsModel())->create(
+                $userQuestion = (new UserQuestionsModel())->create(
                     'user',
                     $form->question,
                     null,
@@ -250,7 +250,7 @@ class UserQuestionsController extends BaseController
     {
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
 
-        (new UserquestionsModel())->edit($id, $question, $answer, $keywords);
+        (new UserQuestionsModel())->edit($id, $question, $answer, $keywords);
 
         return [
             'result' => true
