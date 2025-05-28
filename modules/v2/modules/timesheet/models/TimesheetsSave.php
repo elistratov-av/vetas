@@ -430,7 +430,7 @@ class TimesheetsSave extends Model
             return 0;
         }
 
-        $visits_data = Visits::find()->select(['id','created_at as data_create'])->where(['IN', 'id', $visits_list])->asArray()->all();
+        $visits_data = Visits::find()->select(['id','created_at'])->where(['IN', 'id', $visits_list])->asArray()->all();
         $result = Visits::updateAll(['status' => VisitStatus::TRANSFER], ['IN', 'id', $visits_list]);
 
         if ($result) {
@@ -1493,7 +1493,7 @@ SQL;
                 ['IN', 'status', VisitStatus::reverseAvailableSwitch(VisitStatus::TRANSFER)],
             ]);
 
-        $visits_data = Visits::find()->select(['id','created_at as data_create'])->where(['IN', 'id', $visits_query])->asArray()->all();    
+        $visits_data = Visits::find()->select(['id','created_at'])->where(['IN', 'id', $visits_query])->asArray()->all();    
         // Проставляем статус "к переносу"
         $result = Visits::updateAll([
             'status' => VisitStatus::TRANSFER
