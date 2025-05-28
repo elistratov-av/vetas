@@ -34,12 +34,15 @@ class QuestionsList extends CommonList
                 ];
             } elseif ($type == 'basic') {
                 $list[] = [
+                    'id' => $element['id'],
                     'create_date' => $element['create_date_short'],
                     'question' => $element['question'],
-                    'answer' => $element['answer']
+                    'answer' => $element['answer'],
+                    'keywords' => $element['keywords']
                 ];
             } elseif ($type == 'answer') {
                 $list[] = [
+                    'id' => $element['id'],
                     'answer' => $element['answer']
                 ];
             }
