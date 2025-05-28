@@ -101,13 +101,13 @@ class UserQuestionsModel
         if (!empty($filter['keywords']) && is_array($filter['keywords'])) {
             if (isset($filter['keywords_or'])) {
                 $where = ['OR'];
-                foreach ($filter['keywords'] as $keyword) {
-                    $where[] = ['ILIKE', "{$this->userQuestionsTable}.keywords", $keyword];
-                }
-                $query->andFilterWhere($where);
             } else {
-                $query->andWhere(['ILIKE', "{$this->userQuestionsTable}.keywords", $filter['keywords']]);
+                $where = ['AND'];
             }
+            foreach ($filter['keywords'] as $keyword) {
+                $where[] = ['ILIKE', "{$this->userQuestionsTable}.keywords", ';' . $keyword . ';'];
+            }
+            $query->andFilterWhere($where);
         }
 
         $queryCount = clone $query;
@@ -159,7 +159,7 @@ class UserQuestionsModel
             $userQuestion->answer_status = 0;
         }
         $userQuestion->search_status = 1;
-        $userQuestion->keywords = $keywords ? implode(';', $keywords) : null;
+        $userQuestion->keywords = $keywords ? ';' . implode(';', $keywords) . ';' : null;
         $userQuestion->real_file_name = $real_file_name;
         $userQuestion->intr_file_name = $intr_file_name;
 
@@ -205,7 +205,7 @@ class UserQuestionsModel
             $userQuestion->answer_status = 1;
         }
         if ($keywords) {
-            $userQuestion->keywords = implode(';', $keywords);
+            $userQuestion->keywords = ';' . implode(';', $keywords) . ';';
         }
 
         if (!$userQuestion->save()) {
