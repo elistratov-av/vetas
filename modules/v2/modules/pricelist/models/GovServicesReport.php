@@ -5,6 +5,7 @@ namespace app\modules\v2\modules\pricelist\models;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as ReaderXlsx;
 use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Color;
 use yii\helpers\FileHelper;
 use yii\web\ServerErrorHttpException;
 use Ramsey\Uuid\Uuid;
@@ -193,14 +194,39 @@ class GovServicesReport extends BaseObject
                 ]
             );
 
+        $sheet->getRowDimension(1)->setRowHeight(28);
+
         $sheet
             ->getStyle('A1:' . $col . '1')
             ->getFont()
             ->setBold(true);
 
-        /*foreach ($spreadsheet->getActiveSheet()->getColumnIterator() as $column) {
-            $sheet->getColumnDimension($column->getColumnIndex())->setAutoSize(true);
-        }*/
+        $sheet
+            ->getStyle('A1:' . $col . '1')
+            ->getAlignment()
+            ->setWrapText(true)
+            ->setHorizontal('center')
+            ->setVertical('center');
+        
+        $sheet
+            ->getStyle('A1:' . $col . '1')
+            ->getFill()
+            ->setFillType('solid')
+            ->setStartColor(new Color('ffd9d9d9'));
+
+        //foreach ($spreadsheet->getActiveSheet()->getColumnIterator() as $column) {
+        //    $sheet->getColumnDimension($column->getColumnIndex())->setAutoSize(true);
+        //}
+
+        $sheet->getColumnDimension('A')->setWidth(90);
+        $sheet->getColumnDimension('B')->setWidth(10);
+        $sheet->getColumnDimension('C')->setWidth(33);
+        $sheet->getColumnDimension('D')->setWidth(18);
+        $sheet->getColumnDimension('E')->setWidth(8);
+        $sheet->getColumnDimension('F')->setWidth(18);
+        $sheet->getColumnDimension('G')->setWidth(17);
+        $sheet->getColumnDimension('H')->setWidth(15);
+        $sheet->getColumnDimension('I')->setWidth(22);
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save($this->tempfile);
