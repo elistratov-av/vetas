@@ -11,6 +11,7 @@ COPY models models
 COPY modules modules
 COPY common common
 COPY web web
+COPY views views
 COPY controllers controllers
 COPY cicd/vendor.tar.gz ./
 COPY cicd/envs/test-lifeit.env .env
