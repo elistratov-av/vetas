@@ -109,7 +109,7 @@ class UserQuestionsModel
                 $where = ['AND'];
             }
             foreach ($filter['keywords'] as $keyword) {
-                $where[] = ['ILIKE', "{$this->userQuestionsTable}.keywords", ';' . $keyword . ';'];
+                $where[] = ['ILIKE', "{$this->userQuestionsTable}.keywords", ';' . trim($keyword) . ';'];
             }
             $query->andFilterWhere($where);
         }
@@ -165,8 +165,7 @@ class UserQuestionsModel
             $userQuestion->search_status = 0;
         }
         if (isset($keywords)) {
-            array_map('trim', $keywords);
-            $userQuestion->keywords = ';' . implode(';', $keywords) . ';';
+            $userQuestion->keywords = ';' . implode(';', array_map('trim', $keywords)) . ';';
         }
         $userQuestion->real_file_name = $real_file_name;
         $userQuestion->intr_file_name = $intr_file_name;
@@ -228,8 +227,7 @@ class UserQuestionsModel
             $userQuestion->search_status = $search_status;
         }
         if (isset($keywords)) {
-            array_map('trim', $keywords);
-            $userQuestion->keywords = ';' . implode(';', $keywords) . ';';
+            $userQuestion->keywords = ';' . implode(';', array_map('trim', $keywords)) . ';';
         }
 
         if (!$userQuestion->save()) {
