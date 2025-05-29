@@ -192,8 +192,8 @@ class UserQuestionsModel
         ?int $answer_status = null,
         ?int $search_status = null)
     {
-        if (!$question && !$answer && !$keywords) {
-            throw new BadRequestHttpException('Не передан ни один из параметров: question, answer или keywords');
+        if (!$question && !$answer && !$keywords && !$answer_status && !$search_status) {
+            throw new BadRequestHttpException('Не передан ни один из параметров: question, answer, keywords, answer_status, search_status');
         }
 
         if ($answer_status && $answer_status != 0 && $answer_status != 1) {
