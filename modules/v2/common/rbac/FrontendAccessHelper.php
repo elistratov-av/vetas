@@ -172,6 +172,9 @@ class FrontendAccessHelper
             // Аналитика
             'analytics' => $app_user->can('activity.analytics.menu'),
 
+            //Инструкции для пользователей
+            'instructions-for-users' => $app_user->can('instructions_for_users.menu'),
+
             // Типы смен
             'shift-type-ref/shift-type-ref/create' => $app_user->can('data.shift_type_ref.admin'),
             'shift-type-ref/shift-type-ref/delete' => $app_user->can('data.shift_type_ref.admin'),
