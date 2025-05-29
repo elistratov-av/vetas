@@ -74,7 +74,9 @@ class UserQuestionsModel
             ->joinWith('questionUser', false);
 
         if (isset($filter['status'])) {
-            if ($filter['status'] == 'has_answer') {
+            if ($filter['status'] == 'all') {
+                $query->andWhere("(({$this->userQuestionsTable}.answer IS NOT NULL AND {$this->userQuestionsTable}.answer_status = 1) OR ({$this->userQuestionsTable}.answer IS NULL AND {$this->userQuestionsTable}.answer_status = 0))");
+            } elseif ($filter['status'] == 'has_answer') {
                 $query->andWhere(['NOT', ['answer' => null]]);
                 $query->andWhere(['answer_status' => 1]);
             } elseif ($filter['status'] == 'wait_answer') {
@@ -152,7 +154,7 @@ class UserQuestionsModel
         $userQuestion->question_user_id = $id_user;
         $userQuestion->question_type = $question_type;
         $userQuestion->question = $question;
-        if ($answer) {
+        if (isset($answer)) {
             $userQuestion->answer = $answer;
             $userQuestion->answer_user_id = $id_user;
             $userQuestion->answer_date = date('Y-M-d H:i:s');
@@ -162,7 +164,10 @@ class UserQuestionsModel
             $userQuestion->answer_status = 0;
             $userQuestion->search_status = 0;
         }
-        $userQuestion->keywords = $keywords ? ';' . implode(';', $keywords) . ';' : null;
+        if (isset($keywords)) {
+            array_map('trim', $keywords);
+            $userQuestion->keywords = ';' . implode(';', $keywords) . ';';
+        }
         $userQuestion->real_file_name = $real_file_name;
         $userQuestion->intr_file_name = $intr_file_name;
 
@@ -192,37 +197,38 @@ class UserQuestionsModel
         ?int $answer_status = null,
         ?int $search_status = null)
     {
-        if (!$question && !$answer && !$keywords && !$answer_status && !$search_status) {
+        if (!isset($question) && !isset($answer) && !isset($keywords) && !isset($answer_status) && !isset($search_status)) {
             throw new BadRequestHttpException('Не передан ни один из параметров: question, answer, keywords, answer_status, search_status');
         }
 
-        if ($answer_status && $answer_status != 0 && $answer_status != 1) {
+        if (isset($answer_status) && $answer_status != 0 && $answer_status != 1) {
             throw new BadRequestHttpException('Статус ответа может иметь значение 0 или 1');
         }
 
-        if ($search_status && $search_status != 0 && $search_status != 1) {
+        if (isset($search_status) && $search_status != 0 && $search_status != 1) {
             throw new BadRequestHttpException('Статус использования вопроса для поиска может иметь значение 0 или 1');
         }
 
         $userQuestion = $this->get($id);
 
-        if ($question) {
+        if (isset($question)) {
             $userQuestion->question = $question;
         }
-        if ($answer) {
-            if (!$userQuestion->answer || $userQuestion->answer != $answer) {
+        if (isset($answer)) {
+            if (!isset($userQuestion->answer) || $userQuestion->answer != $answer) {
+                $userQuestion->answer = $answer;
                 $userQuestion->answer_user_id = \Yii::$app->user->getId();
                 $userQuestion->answer_date = date('Y-M-d H:i:s');
             }
-            $userQuestion->answer = $answer;
         }
-        if ($answer_status) {
+        if (isset($answer_status)) {
             $userQuestion->answer_status = $answer_status;
         }
-        if ($search_status) {
+        if (isset($search_status)) {
             $userQuestion->search_status = $search_status;
         }
-        if ($keywords) {
+        if (isset($keywords)) {
+            array_map('trim', $keywords);
             $userQuestion->keywords = ';' . implode(';', $keywords) . ';';
         }
 
