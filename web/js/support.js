@@ -4491,9 +4491,13 @@ function saveInforming(){
 }
 
 
-function closeInformingWindow(){
+function closeInformingWindow(empty = false){
 	$("#background").fadeOut();
 	$("#container").hide();
+	$("#container").hide();
+	if (empty) {
+		$('#sub_container').empty();
+	}
 }
 
 function deleteInformings(Id){

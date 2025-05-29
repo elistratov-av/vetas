@@ -2455,6 +2455,7 @@ use Mpdf\Tag\Tr;
 					
 			$query.='GROUP BY pet_owners.id, visits_specialists.id_specialist, visits.id, organizations.short_name, addresses.name ';
 			$query.='ORDER BY visits.time_range ';
+            $query.='LIMIT 100';
 			#echo $query;
 						
 			$result = pg_query($query) or die('Ошибка запроса: ' . pg_last_error());

@@ -584,7 +584,7 @@ function menu_site($configuration, $point = NULL, $action = NULL){
         echo '<li><a href="./?action=roles">Роли</a></li>';
         echo '<li><a href="./?action=elements">Элементы</a></li>';
 		echo '<li><a href="./?action=organizations">Организации</a></li>';
-		echo '<li><a href="./?action=visits">Приёмы</a></li>';
+		echo '<li><a href="./visit">Приёмы</a></li>';
 		echo '<li><a href="./?action=specialists">Специалисты</a></li>';
         echo '<li><a href="./?action=pets">Животные</a></li>';
 

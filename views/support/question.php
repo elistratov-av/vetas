@@ -1,38 +1,6 @@
 <?php
 $this->title = 'Вопросы пользователей';
 ?>
-<style>
-    .styled-checkbox {
-        width: 24px;
-        height: 24px;
-        appearance: none;
-        -webkit-appearance: none;
-        background-color: #fff;
-        border: 2px solid #14CC8F !important;
-        border-radius: 4px;
-        cursor: pointer;
-        position: relative;
-        transition: background-color 0.3s, border-color 0.3s;
-    }
-
-    .styled-checkbox:checked {
-        background-color: #14CC8F;
-        border: 2px solid #14CC8F;
-    }
-
-    .styled-checkbox:checked::before {
-        content: '';
-        position: absolute;
-        top: 4px;
-        left: 8px;
-        width: 6px;
-        height: 12px;
-        border: solid white;
-        border-width: 0 2px 2px 0;
-        transform: rotate(45deg);
-    }
-
-</style>
 <h1>Поиск вопросов</h1>
 
 <div class="alert alert-danger" id="info" style="display: none;"></div>
