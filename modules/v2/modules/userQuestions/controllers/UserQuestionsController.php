@@ -245,12 +245,14 @@ class UserQuestionsController extends BaseController
         int $id,
         ?string $question = null,
         ?string $answer = null,
-        ?array $keywords = null
+        ?array $keywords = null,
+        ?int $answer_status = null,
+        ?int $search_status = null
     )
     {
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
 
-        (new UserQuestionsModel())->edit($id, $question, $answer, $keywords);
+        (new UserQuestionsModel())->edit($id, $question, $answer, $keywords, $answer_status, $search_status);
 
         return [
             'result' => true
