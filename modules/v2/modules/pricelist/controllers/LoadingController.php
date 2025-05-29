@@ -144,7 +144,7 @@ class LoadingController extends BaseController
         $dt = new DateTime($plan_load_date);
             
         exec("crontab -l > {$cron_file} && [ -f {$cron_file} ] || > {$cron_file}");
-        exec("echo '". $dt->format('i H d m *')." /usr/bin/php /var/www/html/yii pricelist/load {$id} \"".$dt->format('i H d m *')."\" >>".$logfile." 2>&1' >>".$cron_file);
+        exec("echo '". $dt->format('i H d m *')." php /var/www/html/yii pricelist/load {$id} \"".$dt->format('i H d m *')."\" >>".$logfile." 2>&1' >>".$cron_file);
         exec("crontab {$cron_file}");
         exec("rm {$cron_file}");
         

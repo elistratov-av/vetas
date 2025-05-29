@@ -65,7 +65,7 @@ class UserQuestions extends ActiveRecord
             [['question_user_id', 'answer_user_id'], 'integer'],
             //[['question'], 'unique'],
             [['question', 'answer', 'keywords'], 'string'],
-            [['question', 'answer'], FullTrimValidator::class],
+            [['question', 'answer', 'keywords'], FullTrimValidator::class],
             ['answer_status', 'in', 'range' => [0, 1]],
             ['search_status', 'in', 'range' => [0, 1]],
             [
