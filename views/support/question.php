@@ -1,17 +1,51 @@
 <?php
 $this->title = 'Вопросы пользователей';
 ?>
+<style>
+    .styled-checkbox {
+        width: 24px;
+        height: 24px;
+        appearance: none;
+        -webkit-appearance: none;
+        background-color: #fff;
+        border: 2px solid #14CC8F !important;
+        border-radius: 4px;
+        cursor: pointer;
+        position: relative;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .styled-checkbox:checked {
+        background-color: #14CC8F;
+        border: 2px solid #14CC8F;
+    }
+
+    .styled-checkbox:checked::before {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 8px;
+        width: 6px;
+        height: 12px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+</style>
 <h1>Поиск вопросов</h1>
 
 <div class="alert alert-danger" id="info" style="display: none;"></div>
 <form id="form_search_quest" onsubmit="searchQuests(); return false;">
     <div class="row my-3">
         <div class="col-4">
+            <label for="date1">Дата создания</label>
             <div class="d-flex justify-content-between">
                 <input type="date" id="date1" name="date1"> <span class="ml-3 mr-3">-</span> <input type="date" id="date2" name="date2">
             </div>
         </div>
         <div class="col-4">
+            <label for="status">Состояние вопроса</label>
             <select id="status" name="status">
                 <option value="">Все вопросы</option>
                 <option value="G">Предоставлен ответ</option>
@@ -19,15 +53,19 @@ $this->title = 'Вопросы пользователей';
             </select>
         </div>
         <div class="col-4">
+            <label for="login">Пользователь</label>
             <input type="text" id="login" name="login" class="w-100" placeholder="Логин пользователя. Например: UserUU.">
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-4">
+            <label for="keyword">Ключевое слово</label>
             <input type="text" id="keyword" name="keyword" class="w-100" placeholder="Ключевое слово.">
         </div>
-        <div class="col-4">
-            <label><input type="checkbox" id="use_search" name="use_search"> Использовать для поиска</label>
+        <div class="col-4 d-flex">
+            <div class="form-check align-self-end">
+                <label><input type="checkbox" class="styled-checkbox" id="use_search" name="use_search"> Использовать для поиска</label>
+            </div>
         </div>
     </div>
     <div class="row mb-3">
@@ -63,17 +101,17 @@ $this->title = 'Вопросы пользователей';
                 </div>
                 <div class="col-12">Ключевые слова:</div>
                 <div class="col-12 mb-3">
-                    <input type="text" id="keywords" name="keywords" autocomplete="off" style="width: 150px;">
+                    <input type="text" id="keywords" name="keywords" autocomplete="off">
                 </div>
 
                 <div class="col-12">Дан ответ:</div>
                 <div class="col-12 mb-3">
-                    <input type="checkbox" id="give_answer" name="give_answer">
+                    <input type="checkbox" class="styled-checkbox" id="give_answer" name="give_answer">
                 </div>
 
                 <div class="col-12">Использовать для поиска:</div>
                 <div class="col-12 mb-3">
-                    <input type="checkbox" id="use_search" name="use_search">
+                    <input type="checkbox" class="styled-checkbox" id="use_search" name="use_search">
                 </div>
             </div>
 
@@ -95,7 +133,7 @@ $this->title = 'Вопросы пользователей';
 
     function checkBox(val) {
         const checked = val ? ' checked' : '';
-        return '<input type="checkbox" onclick="return false"' + checked + ' class="">';
+        return '<input type="checkbox" class="styled-checkbox" onclick="return false"' + checked + ' class="">';
     }
 
     function fileLink(hasFile, id) {
@@ -154,7 +192,7 @@ $this->title = 'Вопросы пользователей';
             html += '<th>Пользователь</th>';
             html += '<th>Вопрос</th>';
             html += '<th>Приложение к вопросу</th>';
-            html += '<th>Отчет службы поддержки</th>';
+            html += '<th>Ответ службы поддержки</th>';
             html += '<th>Ключевые слова</th>';
             html += '<th>Дан ответ</th>';
             html += '<th>Использовать для поиска</th>';
