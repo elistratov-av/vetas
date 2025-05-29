@@ -76,8 +76,10 @@ class UserQuestionsModel
         if (isset($filter['status'])) {
             if ($filter['status'] == 'has_answer') {
                 $query->andWhere(['NOT', ['answer' => null]]);
+                $query->andWhere(['answer_status' => 1]);
             } elseif ($filter['status'] == 'wait_answer') {
                 $query->andWhere(['answer' => null]);
+                $query->andWhere(['answer_status' => 0]);
             }
         }
         if (isset($filter['question_type'])) {
@@ -155,10 +157,11 @@ class UserQuestionsModel
             $userQuestion->answer_user_id = $id_user;
             $userQuestion->answer_date = date('Y-M-d H:i:s');
             $userQuestion->answer_status = 1;
+            $userQuestion->search_status = 1;
         } else {
             $userQuestion->answer_status = 0;
+            $userQuestion->search_status = 0;
         }
-        $userQuestion->search_status = 1;
         $userQuestion->keywords = $keywords ? ';' . implode(';', $keywords) . ';' : null;
         $userQuestion->real_file_name = $real_file_name;
         $userQuestion->intr_file_name = $intr_file_name;
@@ -185,10 +188,20 @@ class UserQuestionsModel
         int $id,
         ?string $question = null,
         ?string $answer = null,
-        ?array $keywords = null)
+        ?array $keywords = null,
+        ?int $answer_status = null,
+        ?int $search_status = null)
     {
         if (!$question && !$answer && !$keywords) {
             throw new BadRequestHttpException('Не передан ни один из параметров: question, answer или keywords');
+        }
+
+        if ($answer_status && $answer_status != 0 && $answer_status != 1) {
+            throw new BadRequestHttpException('Статус ответа может иметь значение 0 или 1');
+        }
+
+        if ($search_status && $search_status != 0 && $search_status != 1) {
+            throw new BadRequestHttpException('Статус использования вопроса для поиска может иметь значение 0 или 1');
         }
 
         $userQuestion = $this->get($id);
@@ -202,7 +215,12 @@ class UserQuestionsModel
                 $userQuestion->answer_date = date('Y-M-d H:i:s');
             }
             $userQuestion->answer = $answer;
-            $userQuestion->answer_status = 1;
+        }
+        if ($answer_status) {
+            $userQuestion->answer_status = $answer_status;
+        }
+        if ($search_status) {
+            $userQuestion->search_status = $search_status;
         }
         if ($keywords) {
             $userQuestion->keywords = ';' . implode(';', $keywords) . ';';
