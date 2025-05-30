@@ -3650,7 +3650,7 @@ HTML;
 		echo '<div style="margin-top: 30px;" id="ListRecs" class="recs row main_row"></div>';
 		sub_footer__site();
 	}
-
+/*
 	function viewVisits(){
 		sub_header__site();
 		echo '<h1>Приёмы</h1>';
@@ -3690,7 +3690,7 @@ HTML;
 
 		echo '<div style="margin-top: 30px;" id="ListRecs" class="recs row main_row"></div>';
 		sub_footer__site();
-	}
+	}*/
 
 	function viewVisitsLogs(){
 		sub_header__site();
@@ -4283,7 +4283,7 @@ HTML;
 		if(vallidateToken($configuration)){support_add_user_org($configuration);}else{invalidToken($configuration);}
 	}else if($action == 'add_user'){
 		if(vallidateToken($configuration)){support_add_user($configuration);}else{invalidToken($configuration);}
-	}else if($action == 'close_visit'){
+	}/*else if($action == 'close_visit'){
 		if(vallidateToken($configuration)){support_close_visit($configuration);}else{invalidToken($configuration);}
 	}else if($action == 'work_visit'){
 		if(vallidateToken($configuration)){support_work_visit($configuration);}else{invalidToken($configuration);}
@@ -4291,7 +4291,7 @@ HTML;
 		if(vallidateToken($configuration)){support_cancel_visit($configuration);}else{invalidToken($configuration);}
 	}else if($action == 'cancel_visit_paid'){
 		if(vallidateToken($configuration)){support_cancel_visit_paid($configuration);}else{invalidToken($configuration);}
-	}else if($action == 'get_user_password'){
+	}*/else if($action == 'get_user_password'){
 		if(vallidateToken($configuration)){support_get_user_password($configuration);}else{invalidToken($configuration);}
 	}else if($action == 'orgs'){
 		if(vallidateToken($configuration)){support_orgs_xml($configuration);}else{invalidToken($configuration);}
@@ -4891,9 +4891,9 @@ HTML;
 					echo '</ul>';
 
 					sub_footer__site();
-				}else if($action == 'visits'){
+				}/*else if($action == 'visits'){
 					viewVisits($configuration);
-				}else if($action == 'visits_logs'){
+				}*/else if($action == 'visits_logs'){
 					viewVisitsLogs($configuration);
 				}else if($action == 'found_pet'){
 					viewFoundPet($configuration);

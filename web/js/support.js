@@ -315,6 +315,7 @@ function dismissSpecialist(Id){
 	}
 }
 
+/*
 function cancelVisits() {
 	$('.for_cancel_visits:checked').each(function() {
 		jQuery.ajax({
@@ -336,6 +337,7 @@ function cancelVisits() {
 		});
 	});
 }
+*/
 
 
 function deleteSpecialist(Id){
@@ -381,6 +383,7 @@ function returnSpecialist(Id){
 		});
 	}
 }
+/*
 
 function closeVisit(Id){
 	if(Id){
@@ -469,6 +472,7 @@ function cancelVisitPaid(Id){
 		});
 	}
 }
+*/
 
 function ListShowPetsRecs(){
 	jQuery.ajax({
@@ -1808,6 +1812,7 @@ function ListShowMosruISPKLogs(){
 		}
 	});
 }
+/*
 
 function ListShowVisitsRecs(){
 	jQuery.ajax({
@@ -1960,6 +1965,7 @@ function ListShowVisitsRecs(){
 		}
 	});
 }
+*/
 
 function ListShowVisitsLogsRecs(){
 	jQuery.ajax({
