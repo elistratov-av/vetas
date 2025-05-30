@@ -76,7 +76,8 @@ class UserQuestionsController extends BaseController
             'question_type' => 'support',
             'date_create' => $date_create,
             'user_login' => $user_login,
-            'keywords' => $keywords
+            'keywords' => $keywords,
+            'keywords_or' => 1
         ];
 
         return [
