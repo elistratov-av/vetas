@@ -69,18 +69,19 @@ class UserQuestionsModel
                 "{$this->usersTable}.o_fio",
                 "{$this->userQuestionsTable}.question",
                 "{$this->userQuestionsTable}.answer",
-                "{$this->userQuestionsTable}.keywords"
+                "{$this->userQuestionsTable}.keywords",
+                "{$this->userQuestionsTable}.answer_status",
+                "{$this->userQuestionsTable}.search_status"
             ])
             ->joinWith('questionUser', false);
 
         if (isset($filter['status'])) {
             if ($filter['status'] == 'all') {
-                $query->andWhere("(({$this->userQuestionsTable}.answer IS NOT NULL AND {$this->userQuestionsTable}.answer_status = 1) OR ({$this->userQuestionsTable}.answer IS NULL AND {$this->userQuestionsTable}.answer_status = 0))");
+                $query->andWhere("(({$this->userQuestionsTable}.answer IS NOT NULL AND {$this->userQuestionsTable}.answer_status = 1) OR {$this->userQuestionsTable}.answer_status = 0)");
             } elseif ($filter['status'] == 'has_answer') {
                 $query->andWhere(['NOT', ['answer' => null]]);
                 $query->andWhere(['answer_status' => 1]);
             } elseif ($filter['status'] == 'wait_answer') {
-                $query->andWhere(['answer' => null]);
                 $query->andWhere(['answer_status' => 0]);
             }
         }
@@ -116,7 +117,7 @@ class UserQuestionsModel
 
         $queryCount = clone $query;
 
-        $query->orderBY( "{$this->userQuestionsTable}.create_date")->limit($limit)->offset($limit * ($page - 1));
+        $query->orderBy("{$this->userQuestionsTable}.create_date DESC")->limit($limit)->offset($limit * ($page - 1));
 		
         return new QuestionsList(
             $type,
