@@ -352,6 +352,8 @@ function menu_site($configuration, $point = NULL, $action = NULL){
         }else if($action == 'species'){echo 'Виды';
         } else if ($action == 'question') {
             echo 'Вопросы пользователей';
+        } else if ($action == 'visit') {
+            echo 'Приёмы';
         }
     }else if($point == 'duplicates'){
         if($action != 'autoduplicate' && $action != 'duplicate_archive'){
