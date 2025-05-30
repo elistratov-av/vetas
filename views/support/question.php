@@ -41,7 +41,7 @@ $this->title = 'Вопросы пользователей';
         <div class="col-4">
             <label for="date1">Дата создания</label>
             <div class="d-flex justify-content-between">
-                <input type="date" id="date1" name="date1"> <span class="ml-3 mr-3">-</span> <input type="date" id="date2" name="date2">
+                <input type="date" id="date1" name="date1" class="w-auto" style="min-width: 145px;"> <span class="mx-1">-</span> <input type="date" id="date2" name="date2" class="w-auto" style="min-width: 145px;">
             </div>
         </div>
         <div class="col-4">
@@ -59,7 +59,7 @@ $this->title = 'Вопросы пользователей';
     </div>
     <div class="row mb-3">
         <div class="col-4">
-            <label for="keyword">Ключевое слово</label>
+            <label for="keyword">Ключевые слова</label>
             <input type="text" id="keyword" name="keyword" class="w-100" placeholder="Ключевое слово.">
         </div>
         <div class="col-4 d-flex">
@@ -69,7 +69,7 @@ $this->title = 'Вопросы пользователей';
         </div>
     </div>
     <div class="row mb-3">
-        <div class="offset-8 col-2">
+        <div class="offset-8 col-4">
             <div class="d-flex justify-content-between">
                 <button type="reset">Сбросить</button>
                 <button type="submit" class="ml-3">Применить</button>
@@ -104,7 +104,7 @@ $this->title = 'Вопросы пользователей';
                     <input type="text" id="keywords" name="keywords" autocomplete="off">
                 </div>
 
-                <div class="col-12">Дан ответ:</div>
+                <div class="col-12">Предоставлен ответ:</div>
                 <div class="col-12 mb-3">
                     <input type="checkbox" class="styled-checkbox" id="give_answer" name="give_answer">
                 </div>
@@ -194,7 +194,7 @@ $this->title = 'Вопросы пользователей';
             html += '<th>Приложение к вопросу</th>';
             html += '<th>Ответ службы поддержки</th>';
             html += '<th>Ключевые слова</th>';
-            html += '<th>Дан ответ</th>';
+            html += '<th>Предоставлен ответ</th>';
             html += '<th>Использовать для поиска</th>';
             html += '<th></th>';
             html += '</tr>';

@@ -140,6 +140,8 @@ class SupportController extends AppController
     private const ANSWER_GIVE = 'G';
     private const ANSWER_WAIT = 'W';
 
+    private const KEYWORDS_SEP = ';';
+
     private function findQuestions($options)
     {
         $query = (new Query())
@@ -167,13 +169,17 @@ class SupportController extends AppController
             $query->andWhere(['ilike', 'login', $options['login']]);
         }
         if (!empty($options['keyword'])) {
-            $query->andWhere(['ilike', 'keywords', $options['keyword']]);
+            $keywords = $this->explodeKeywords($options['keyword']);
+            if (!empty($keywords)) {
+                $query->andWhere(['or ilike', 'keywords', $keywords]);
+            }
         }
         if (isset($options['use_search'])) {
             if ($options['use_search']) {
                 $query->andWhere(['search_status' => 1]);
             }
         }
+        //$sql = $query->createCommand()->getSql();
         return $query->all();
     }
 
@@ -192,11 +198,53 @@ class SupportController extends AppController
             ->update('user_questions', [
                 'answer' => $answer['answer'],
                 'answer_user_id' => $answer['answer_user_id'],
-                'keywords' => $answer['keywords'],
+                'keywords' => $this->normalizeKeywords($answer['keywords']),
                 'answer_date' => new Expression('NOW()::timestamp(0)'),
                 'answer_status' => $answer['give_answer'],
                 'search_status' => $answer['use_search'],
             ], ['id' => $answer['id']])->execute();
+    }
+
+    private function explodeKeywords($keywords)
+    {
+        if (empty($keywords)) {
+            return [];
+        }
+
+        $keys = [];
+        foreach (explode(self::KEYWORDS_SEP, $keywords) as $keyword) {
+            $k = trim($keyword);
+            if (!empty($k)) {
+                $keys[] = self::KEYWORDS_SEP . $k . self::KEYWORDS_SEP;
+            }
+        }
+
+        return $keys;
+    }
+
+    private function normalizeKeywords($keywords)
+    {
+        if (empty($keywords)) {
+            return $keywords;
+        }
+
+        $keys = [];
+        foreach (explode(self::KEYWORDS_SEP, $keywords) as $keyword) {
+            $k = trim($keyword);
+            if (!empty($k)) {
+                $keys[] = $k;
+            }
+        }
+
+        if (empty($keys)) {
+            return '';
+        }
+
+        $keywords = implode(self::KEYWORDS_SEP, $keys);
+        if (empty($keywords)) {
+            return '';
+        }
+        return self::KEYWORDS_SEP . $keywords . self::KEYWORDS_SEP;
     }
 
     // endregion
