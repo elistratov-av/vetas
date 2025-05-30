@@ -20,6 +20,10 @@ class QuestionsList extends CommonList
     {
         $list = [];
         foreach ($elements as $element) {
+            $answer = null;
+            if (isset($element['answer_status']) && $element['answer_status'] == 1) {
+                $answer = $element['answer'];
+            }
             if ($type == 'all') {
                 $list[] = [
                     'id' => $element['id'],
@@ -37,13 +41,14 @@ class QuestionsList extends CommonList
                     'id' => $element['id'],
                     'create_date' => $element['create_date_short'],
                     'question' => $element['question'],
-                    'answer' => $element['answer'],
+                    'answer' => $answer,
                     'keywords' => $element['keywords']
                 ];
             } elseif ($type == 'answer') {
                 $list[] = [
                     'id' => $element['id'],
-                    'answer' => $element['answer']
+                    'answer' => $element['answer'],
+                    'keywords' => $element['keywords']
                 ];
             }
         }
