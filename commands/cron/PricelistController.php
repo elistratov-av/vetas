@@ -28,7 +28,7 @@ class PricelistController extends Controller
 		$filename = \Yii::$app->getSecurity()->generateRandomString(32);
         $cron_file = $temppath . $filename;
         $basedir = \Yii::getAlias('@app');
-        $task = "{$date} php {$basedir}/yii pricelist/load {$id} \"{$date}\" >>".$logfile." 2>&1";       
+        $task = "{$date} /usr/bin/php {$basedir}/yii pricelist/load {$id} \"{$date}\" >>".$logfile." 2>&1";       
 
         exec("crontab -l > {$cron_file} && [ -f {$cron_file} ] || > {$cron_file}");
         $cron_array = file($cron_file, FILE_IGNORE_NEW_LINES);
