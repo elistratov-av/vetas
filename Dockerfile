@@ -40,7 +40,7 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 RUN chmod -R +x /opt/scripts
 RUN unlink /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 COPY cicd/apache-config/mpm_prefork.conf /etc/apache2/mods-available/mpm_prefork.conf
-RUN ln -s /usr/local/bin/php /usr/bin/php
+RUN ln -s /usr/local/bin/php /usr/bin/php && usermod -aG root www-data
 RUN service apache2 restart
 
 EXPOSE 80
