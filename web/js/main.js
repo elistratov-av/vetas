@@ -493,12 +493,16 @@ function makeAppointment(){
 	});
 }
 
-function showLoading(Temp){
-	$('#'+Temp+'').html('<div class="loading"></div');
+function showLoading(id){
+	$('#' + id).html('<div class="loading"></div');
 }
 
-function closeLoading(Temp){
-	$('#'+Temp+'').removeClass('loading');
+function forceLoading(id){
+	$('#' + id).addClass('loading');
+}
+
+function closeLoading(id){
+	$('#' + id).removeClass('loading');
 }
 
 function showTopLoading(){
@@ -721,14 +725,20 @@ function closeVisitsWindow(){
 	$("#container").hide();
 }
 
-function showMessageWindow(Message){
+function showMessageWindow(Message, Button = 'Закрыть', Title = 'Сообщение'){
 	let TempContent='';
+	if (!Button) {
+		Button = 'Закрыть';
+	}
+	if (!Title) {
+		Title = 'Сообщение';
+	}
 
 	TempContent+='<div class="window message col-xl-4 col-lg-5 col-12">';
 	TempContent+='<div class="close" onclick="closeMessageWindow();"></div>';
-	TempContent+='<div class="top">Сообщение</div>';
-	TempContent+='<div>'+Message+'</div>';
-	TempContent+='<div class="controls"><button class="ok" style="width: 120px;" onclick="closeMessageWindow();">Закрыть</button></div>';
+	TempContent+='<div class="top">' + Title + '</div>';
+	TempContent+='<div>' + Message + '</div>';
+	TempContent+='<div class="controls"><button class="ok" style="width: 120px;" onclick="closeMessageWindow();">' + Button + '</button></div>';
 	TempContent+='</div>';
 
 	document.getElementById("sub_container_m").innerHTML=TempContent;

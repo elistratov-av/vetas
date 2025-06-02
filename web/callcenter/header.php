@@ -335,7 +335,6 @@ function menu_site($configuration, $point = NULL, $action = NULL){
         }else if($action == 'roles'){echo 'Роли';
         }else if($action == 'elements'){echo 'Элементы';
         }else if($action == 'organizations'){echo 'Организации';
-        }else if($action == 'visits'){echo 'Приёмы';
         }else if($action == 'visits_logs'){echo 'Логи приёмов';
         }else if($action == 'pets'){echo 'Животные';
         }else if($action == 'owners'){echo 'Владельцы';
@@ -352,6 +351,8 @@ function menu_site($configuration, $point = NULL, $action = NULL){
         }else if($action == 'species'){echo 'Виды';
         } else if ($action == 'question') {
             echo 'Вопросы пользователей';
+        } else if ($action == 'visit') {
+            echo 'Приёмы';
         }
     }else if($point == 'duplicates'){
         if($action != 'autoduplicate' && $action != 'duplicate_archive'){
@@ -584,7 +585,7 @@ function menu_site($configuration, $point = NULL, $action = NULL){
         echo '<li><a href="./?action=roles">Роли</a></li>';
         echo '<li><a href="./?action=elements">Элементы</a></li>';
 		echo '<li><a href="./?action=organizations">Организации</a></li>';
-		echo '<li><a href="./?action=visits">Приёмы</a></li>';
+		echo '<li><a href="./visit">Приёмы</a></li>';
 		echo '<li><a href="./?action=specialists">Специалисты</a></li>';
         echo '<li><a href="./?action=pets">Животные</a></li>';
 
