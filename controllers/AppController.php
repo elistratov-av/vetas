@@ -4,10 +4,57 @@ namespace app\controllers;
 
 use Yii;
 use yii\db\Query;
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\UnauthorizedHttpException;
+
+include_once $_SERVER['DOCUMENT_ROOT'].'/callcenter/functions.php';
 
 class AppController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            if (Yii::$app->request->isAjax) {
+                                return $this->validateToken();
+                            }
+                            return true;
+                        },
+                    ],
+                ],
+                'denyCallback' => function ($rule, $action) {
+                    throw new UnauthorizedHttpException('Вы не аутентифицированы в системе');
+                },
+            ],
+        ];
+    }
+
+    function validateToken($token_time = 3600) {
+        if ($_COOKIE['login'] && $_COOKIE['token']) {
+            error_reporting(0); // отключаем ошибки
+
+            if (Yii::$app->getSecurity()->validatePassword($_COOKIE['login'], $_COOKIE['token'])) {
+                // всё ок - обвновляем время токена
+                setcookie('token', $_COOKIE['token'], time() + $token_time, '/');
+                setcookie('login', $_COOKIE['login'], time() + $token_time, '/');
+                setcookie('organization', $_COOKIE['organization'], time() + $token_time, '/');
+
+                return true;
+            }
+
+            setcookie('token', '', time() + $token_time, '/');
+            setcookie('login', '', time() + $token_time, '/');
+        }
+
+        return false;
+    }
+
     public function init()
     {
         parent::init();
