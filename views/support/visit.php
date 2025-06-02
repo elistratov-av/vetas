@@ -188,10 +188,12 @@ AutocompleteAsset::register($this);
     }
 
     function buildResponseTable(data) {
+        const MAX_COUNT = 100;
         let TempContent='';
         let count = 0;
 
         if (data && data.length) {
+            count = data.length;
             for (let i = 0; i < data.length; ++i) {
                 const d = data[i];
                 const id = d.id;
@@ -205,13 +207,14 @@ AutocompleteAsset::register($this);
 
                 html += '</div>';
 
-                ++count;
                 TempContent += html;
             }
         }
 
         if (count == 0) {
             TempContent = '<div class="message">По данному запросу не найдено записей.</div>';
+        } else if (count == MAX_COUNT) {
+            TempContent += '<div class="message">Отображены первые ' + MAX_COUNT + ' записей согласно указанным критериям отбора</div>';
         }
         return TempContent;
     }
@@ -406,7 +409,6 @@ AutocompleteAsset::register($this);
         $('#ListRecs input:checkbox:checked').each(function() {
             ids.push(+$(this).attr('data-id'));
         });
-        console.log(ids);
 
         if (ids && ids.length) {
             showCancelVisitsForm(ids);

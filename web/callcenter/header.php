@@ -335,7 +335,6 @@ function menu_site($configuration, $point = NULL, $action = NULL){
         }else if($action == 'roles'){echo 'Роли';
         }else if($action == 'elements'){echo 'Элементы';
         }else if($action == 'organizations'){echo 'Организации';
-        }else if($action == 'visits'){echo 'Приёмы';
         }else if($action == 'visits_logs'){echo 'Логи приёмов';
         }else if($action == 'pets'){echo 'Животные';
         }else if($action == 'owners'){echo 'Владельцы';
