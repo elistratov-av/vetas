@@ -505,7 +505,7 @@ class SupportController extends AppController
         }
 
         $query->groupBy(['own.id', 'vsp.id_specialist', 'u.id', 'v.id', 'o.short_name', 'a.name']);
-        $query->limit(100);
+        $query->limit(101);
 
         //$sql = $query->createCommand()->getSql();
         return $query->all();

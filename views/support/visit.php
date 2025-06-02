@@ -194,7 +194,10 @@ AutocompleteAsset::register($this);
 
         if (data && data.length) {
             count = data.length;
-            for (let i = 0; i < data.length; ++i) {
+            if (count > MAX_COUNT) {
+                count = MAX_COUNT;
+            }
+            for (let i = 0; i < count; ++i) {
                 const d = data[i];
                 const id = d.id;
 
@@ -213,7 +216,7 @@ AutocompleteAsset::register($this);
 
         if (count == 0) {
             TempContent = '<div class="message">По данному запросу не найдено записей.</div>';
-        } else if (count == MAX_COUNT) {
+        } else if (data.length > MAX_COUNT) {
             TempContent += '<div class="message">Отображены первые ' + MAX_COUNT + ' записей согласно указанным критериям отбора</div>';
         }
         return TempContent;
