@@ -3,6 +3,7 @@ FROM php:7.3.33-buster as build
 WORKDIR /opt/app
 COPY yii ./
 COPY runtime runtime
+COPY assets assets
 COPY config config
 COPY migrations migrations
 COPY components components
