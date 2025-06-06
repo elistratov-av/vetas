@@ -1,5 +1,5 @@
 <?php
-function header_site($size, $config, $title = NULL, $point = NULL, $view = NULL){
+function header_site($size, $config, $title = NULL, $point = NULL, $view = NULL, $action = NULL){
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
@@ -40,7 +40,7 @@ if($point == 'support'){
     echo '<script type="text/javascript" src="/js/support.js"></script>';
     echo '<script type="text/javascript" src="/js/jxchart.js"></script>';
     echo '<script type="text/javascript" src="/js/jxtag.js"></script>';
-    echo '<script type="text/javascript" src="/js/jxselect.js"></script>';
+//    echo '<script type="text/javascript" src="/js/jxselect.js"></script>';
 }
 
 if($point == 'analytics'):?>
@@ -66,6 +66,7 @@ if($point == 'callcenter'){
     echo '<script type="text/javascript" src="/js/daterangepicker.min.js"></script>';
     echo '<link rel="stylesheet" type="text/css" href="/images/daterangepicker.min.css" />';
     echo '<script type="text/javascript" src="/js/jxtag.js"></script>';
+    if($action == 'logrecord') echo '<script type="text/javascript" src="/js/logrecord.js"></script>';
 }
 
 if($point == 'service'){
@@ -90,7 +91,7 @@ if($point == 'shelters'):
 <?endif;?>
 
 <link href="/images/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="/images/sumoselect.min.css" rel="stylesheet" type="text/css" />
+<!--<link href="/images/sumoselect.min.css" rel="stylesheet" type="text/css" />-->
 <link href="/images/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
 <link href="/images/bootstrap-multiselect.min.css" rel="stylesheet" type="text/css" />
 <?php
@@ -116,7 +117,7 @@ if($point == 'shelters'){
 if($point == 'support'){
     echo '<link href="/images/jxchart.css" rel="stylesheet" type="text/css" />';
     echo '<link href="/images/jxtag.css" rel="stylesheet" type="text/css" />';
-    echo '<link href="/images/jxselect.css" rel="stylesheet" type="text/css" />';
+//    echo '<link href="/images/jxselect.css" rel="stylesheet" type="text/css" />';
 }
 
 ?>
@@ -146,6 +147,7 @@ if ($view) $view->beginBody();
 <div class="background" id="background-sch" style="display: none;"></div>
 <div class="background_m" id="background_m" style="display: none;"></div>
 <div class="background_t" id="background_t" style="display: none;"></div>
+<div class="background_reason" id="background_reason" style="display: none;"></div>
 
 <?php
 
@@ -153,6 +155,9 @@ if($point == 'callcenter'){
 
 if(string_formating_for_sql($_COOKIE['organization'])){
 ?>
+
+
+
 
 <div class="pcontainer" id="container-schedule" style="display: none;">
     <div class="sub_pcontainer" id="sub_container_sch">
@@ -221,11 +226,50 @@ if(string_formating_for_sql($_COOKIE['organization'])){
 }
 
 ?>
+
+
 <div class="pcontainer" id="container" style="display: none;"><div class="sub_pcontainer" id="sub_container"></div></div>
 <div class="pcontainer_m" id="container_m" style="display: none;"><div class="sub_pcontainer_m" id="sub_container_m"></div></div>
 <div class="pcontainer_t" id="container_t" style="display: none;"><div class="sub_pcontainer_t" id="sub_container_t"></div></div>
 <div class="background" id="background-faq" style="display: none;"></div>
 <div class="pcontainer" id="container-faq" style="display: none;"><div class="sub_pcontainer" id="sub_container_faq"></div></div>
+
+<?php
+    if($point == 'callcenter'){
+?>
+<div class="pcontainer_reason" id="container_reason" style="display: none;">
+    <div class="sub_pcontainer_reason" id="sub_container_reason">
+
+<div class="window col-xl-6 col-lg-8 col-12" id="reason_view">
+    <div class="close" onclick="$('#background_reason').fadeOut(); $('#container_reason').hide();"></div>
+    <div class="top"><b></b></div>
+<form id="form_reschedule" onsubmit="$('#background_reason').fadeOut(); $('#container_reason').hide(); return false;">
+    <div class="row main_row" style="height: 130px;">
+        <div class="col-xl-12 col-lg-12">
+            <br/><br/>
+            <select id="reason_select" name="reason_select" required>
+                <option value="" disabled selected hidden>Выбирите причину из перечня</option>
+                <option value="4">Живая очередь</option>
+                <option value="3">Запись по телефону</option>
+                <option value="2">mos.ru</option>
+                <option value="1">По направлению</option>
+                <option value="10">Неотложная помощь</option>
+            </select>
+
+        </div>
+    </div>
+
+    <div class="controls"><button class="ok" style="width: 200px;" type="submit">Отменить прием</button></div>
+</form>
+</div>
+</div>
+</div>    
+
+</div></div>
+
+<?php
+}
+?>
 
 <?php
     if($point == 'analytics'){
@@ -414,7 +458,13 @@ function menu_site($configuration, $point = NULL, $action = NULL){
             echo 'Список связей врачей и услуг';
         }
     }else if($point == 'callcenter'){
-        echo 'Контактный центр';
+        if (!$action) {
+            echo 'Контактный центр';
+        } else if ($action == 'logcall') {
+            echo 'Журнал обработанных звонков';
+        } else if ($action == 'logrecord') {
+            echo 'Журнал записей на приём к ветеринарным врачам';
+        }
     }
     
     echo '</div>';
@@ -463,8 +513,14 @@ function menu_site($configuration, $point = NULL, $action = NULL){
     }
 
     if($point == 'callcenter'){
-        echo '<button onclick="showScheduleWindow();">Просмотр расписания врача</button>&nbsp;<button onclick="showVisitsWindow();">Список приёмов</button>';
-    }
+        if (!$action) {
+            echo '<button onclick="showScheduleWindow();">Просмотр расписания врача</button>&nbsp;<button onclick="showVisitsWindow();">Список приёмов</button>';
+        } else if ($action == 'logrecord') {
+            echo '<button onclick="">Статистика по приёмам</button>&nbsp;<button onclick="">Записать на приём</button>';
+        } else if ($action == 'logcall') {
+            echo '<button onclick="">Статистика по звонкам</button>&nbsp;<button onclick="">Зарегистрировать звонок</button>';
+        }
+     }
 
     if($point == 'analytics' && $action == 'faq'){
         echo '<button onclick="showFaqAddGroup();">Добавить раздел</button>';
@@ -636,7 +692,11 @@ function menu_site($configuration, $point = NULL, $action = NULL){
         echo '</ul>';
     }else if($point == 'callcenter'){
         echo '<ul>';
-        echo '<li><a href="./">Контактный центр</a></li>';
+        echo '<li><a href="./">Контактный центр</a>';
+        echo '<ul style="padding-left: 20px;">';
+        echo '<li><a href="./?action=logrecord">Журнал записей на приём</a></li>';
+        echo '<li><a href="./?action=logcall">Журнал обработанных звонков</a></li>';
+        echo '</ul></li>';
         echo '</ul>';
     }else if($point == 'duplicates'){
         echo '<ul>';

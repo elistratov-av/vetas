@@ -104,7 +104,7 @@ input::placeholder {
     padding: 0.275rem 1.25rem 0.375rem 0.25rem;
 }
 
-input.date, input[type=text], input[type=password], input[type=date], select {
+input.date, input[type=text], input[type=password], input[type=date], select, input[type=datetime-local] {
     display: inline-flex;
     width: 100%;
     height: calc(1.5em + 0.75rem + 2px);
@@ -149,7 +149,7 @@ input.date {
     padding-top: 5px;
 }
 
-input[type=text], input[type=number], input[type=time] {
+input[type=text], input[type=number], input[type=time], input[type=datetime-local] {
     display: inline-flex;
     width: 100%;
     height: calc(1.5em + 0.75rem + 2px);
@@ -372,6 +372,37 @@ label {
     position: fixed;
     z-index: 53;
 }
+
+.background_reason {
+    display: none;
+    background-color: #dadeed;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 61;
+}
+
+.pcontainer_reason {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    position: fixed;
+    z-index: 62;
+}
+
+.sub_pcontainer_reason {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 63;
+}
+
+
 
 .background_t {
     display: none;

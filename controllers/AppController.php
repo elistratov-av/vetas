@@ -93,4 +93,9 @@ class AppController extends Controller
         }
         return null;
     }
+
+    protected function getCurrentUserOrgId()
+    {
+        return $_COOKIE['organization'];
+    }
 }

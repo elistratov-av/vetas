@@ -3,6 +3,8 @@
 /* CONFIG */
 $configuration = require __DIR__ . '/config.php';
 include_once 'functions.php';
+include_once 'logrecord.php';
+include_once 'logcall.php';
 include_once 'header.php';
 include_once 'footer.php';
 /* CONFIG */
@@ -237,20 +239,29 @@ else if($action == 'schedule'){
     if(vallidateToken($configuration)){show_notifications_xml($configuration);}else{invalidToken($configuration);}
 }else if($action == 'addresses' && $mode == 'xml'){
     if(vallidateToken($configuration)){show_addresses_xml($configuration);}else{invalidToken($configuration);}
+}else if($action == 'list_log_record' && $mode == 'xml'){
+    if(vallidateToken($configuration)){show_log_records_xml($configuration);}else{invalidToken($configuration);}
 }else if($action == 'fias_tokken' && $mode == 'xml'){if(vallidateToken($configuration)){$fias_tokken=fias_request($configuration);header("Content-type: text/xml; charset=utf-8");echo '<?xml version="1.0" encoding="UTF-8"?>';echo '<xml>';echo '<fias_tokken>'.$fias_tokken->access_token.'</fias_tokken>';echo '</xml>';}else{invalidToken($configuration);}
 }else{
     if($_COOKIE['token']){
         if(vallidateToken($configuration)){
-            header_site(0,$configuration, 'Контактный центр','callcenter');
+            header_site(0,$configuration, 'Контактный центр','callcenter', NULL, $action);
 			sub_header_site($configuration);
 			menu_site($configuration, 'callcenter', $action);
 
             informings_site($configuration);
 			//пользователь авторизован//
-
-			viewCallCenter($configuration);
-            viewRescheduleWindow($configuration);
-								
+         
+            if($action == 'logrecord'){
+                viewLogRecord($configuration);
+                viewRescheduleWindow($configuration);
+            } else if ($action == 'logcall') {
+                viewLogCall($configuration);
+            }else{
+    			viewCallCenter($configuration);
+                viewRescheduleWindow($configuration);
+            }
+           
 			sub_footer_site();
 			footer_site();
 

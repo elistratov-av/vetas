@@ -513,7 +513,7 @@ function viewAuthUser($entry_point = NULL){
 
 function viewRescheduleWindow($config){
     echo '<div class="window col-xl-10 col-lg-10 col-12" id="reschedule" style="display: none;">';
-    echo '<div class="close" onclick="closeMessageWindow();"></div>';
+    echo '<div class="close" onclick="closeMessageWindow();	$(\'#reschedule\').hide(); $(\'body\').append($(\'#reschedule\'));"></div>';
 
     echo '<div class="top">Список слотов для переноса приёма</div>';
 	echo '<div>';
@@ -559,7 +559,7 @@ function viewRescheduleWindow($config){
 
     echo '</div>';
 
-    echo '<div class="controls"><button class="ok" style="width: 120px;" onclick="closeMessageWindow();">Закрыть</button></div>';
+    echo '<div class="controls"><button class="ok" style="width: 120px;" onclick="closeMessageWindow(); $(\'#reschedule\').hide(); $(\'body\').append($(\'#reschedule\'));">Закрыть</button></div>';
 
     echo '</div>';
 	echo '</div>';
@@ -3495,6 +3495,8 @@ function show_visits_xml($config){
     $date=$_GET["date"];
     $owner_name=$_GET["name"];
     $owner_telephone=$_GET["telephone"];
+    $id_visit=$_GET["id"];
+file_put_contents('c:/log.t2t', $id_visit . PHP_EOL, FILE_APPEND); 
 
     $dateFrom = $_GET["date-from"] ?? null;
     $dateTo = $_GET["date-to"] ?? null;
@@ -3520,7 +3522,8 @@ function show_visits_xml($config){
     $query.='(LOWER(VISITS.TIME_RANGE)::time) AS start_time,';
 	$query.='(UPPER(VISITS.TIME_RANGE)::time) AS end_time,';
     $query.='(LOWER(VISITS.TIME_RANGE)::date) AS start_date, ';
-    $query.='string_agg(contacts.id::character varying, \',\') AS contacts ';
+    $query.='string_agg(contacts.id::character varying, \',\') AS contacts, ';
+    $query.='organizations.id AS org_id ';
     $query.='FROM visits ';
     $query.='LEFT JOIN pet_owners ON visits.id_owner=pet_owners.id ';
     $query.='LEFT JOIN contacts ON pet_owners.id=contacts.entity_id ';#контакты
@@ -3528,28 +3531,33 @@ function show_visits_xml($config){
     $query.='LEFT JOIN visits_specialists ON visits.id=visits_specialists.id_visit ';
     $query.='LEFT JOIN addresses ON organizations.id_address=addresses.id ';
     $query.='WHERE ';
-    $query.='visits.status=\'N\' AND visits.channel=3 ';
+    if($id_visit == '') $query.='visits.status=\'N\' AND visits.channel=3 ';
     
-    $query.='AND ((LOWER(VISITS.TIME_RANGE)::date) + (LOWER(VISITS.TIME_RANGE)::time)+ INTERVAL \'3 hour\') >= NOW() AND ';
+    if($id_visit == '') $query.='AND ((LOWER(VISITS.TIME_RANGE)::date) + (LOWER(VISITS.TIME_RANGE)::time)+ INTERVAL \'3 hour\') >= NOW() AND ';
     //$query.='AND (LOWER(VISITS.TIME_RANGE)::date) >= NOW() AND ';
 
-    if($config['debug'] == 1){
-        $query.='visits.created_by = '.$id_user.' ';
-    }else{
-        ###ищем все визиты операторов контактного центра
-        $query_='SELECT id_user FROM auth_assignment WHERE item_name=\'callCenterOperator\'';
-        $query.='(';
-        $result_ = pg_query($query_) or die('Ошибка запроса: ' . pg_last_error());
-        $a=0;
-        while ($row_ = pg_fetch_assoc($result_)) {
-            if($a>0){$query.=' OR ';}
-            $query.='visits.created_by = '.$row_['id_user'].' ';
-            $a++;
-        }
-        pg_free_result($result_);
-        $query.=')';
-        ###ищем все визиты операторов контактного центра
+    if($id_visit != ''){
+        $query.=' visits.id = '.$id_visit.' ';   
     }
+    else{
+        if($config['debug'] == 1){
+            $query.='visits.created_by = '.$id_user.' ';
+        }else{
+            ###ищем все визиты операторов контактного центра
+            $query_='SELECT id_user FROM auth_assignment WHERE item_name=\'callCenterOperator\'';
+            $query.='(';
+            $result_ = pg_query($query_) or die('Ошибка запроса: ' . pg_last_error());
+            $a=0;
+            while ($row_ = pg_fetch_assoc($result_)) {
+                if($a>0){$query.=' OR ';}
+                $query.='visits.created_by = '.$row_['id_user'].' ';
+                $a++;
+            }
+            pg_free_result($result_);
+            $query.=')';
+            ###ищем все визиты операторов контактного центра
+        }
+    } 
     
     if($owner_name != ''){
         $query.=' AND (';
@@ -3594,12 +3602,12 @@ function show_visits_xml($config){
         $query.=' AND ('.$query_d.')'."\n";
     }
 
-    $query.='GROUP BY pet_owners.id, visits_specialists.id_specialist, visits.id, organizations.short_name, addresses.name ';
+    $query.='GROUP BY pet_owners.id, visits_specialists.id_specialist, visits.id, organizations.short_name, addresses.name, organizations.id ';
     $query.='ORDER BY visits.time_range ';
     if(!$flag_date_exists){
         $query.='LIMIT 10';
     }
-
+file_put_contents('c:/log.t2t', $query . PHP_EOL, FILE_APPEND);  
     $result = pg_query($query) or die('Ошибка запроса: ' . pg_last_error());
     while ($row = pg_fetch_assoc($result)) {
         $query_='SELECT users.fullname FROM specialists ';
@@ -3613,6 +3621,8 @@ function show_visits_xml($config){
         echo '<rec>';
         echo '<rec_id>'.$row['id'].'</rec_id>';
         echo '<rec_specialist_name>'.$specialist_name.'</rec_specialist_name>';
+        echo '<rec_specialist_id>'.$row['specialist_id'].'</rec_specialist_id>';
+        echo '<rec_org_id>'.$row['org_id'].'</rec_org_id>';
         echo '<rec_org_name>'.$row['org_name'].'</rec_org_name>';
         echo '<rec_org_address>'.$row['org_address'].'</rec_org_address>';
         echo '<rec_status>'.$row['status'].'</rec_status>';
@@ -3631,6 +3641,7 @@ function show_visits_xml($config){
         echo '<rec_services>';
         while ($row_ = pg_fetch_assoc($result_)) {
             echo '<service>';
+            echo '<id>'.$row_['id'].'</id>';
             echo '<name>'.$row_['name'].'</name>';
             echo '</service>';
         }
