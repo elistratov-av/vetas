@@ -284,7 +284,7 @@ $this->title = 'Животные, содержащиеся в приютах';
             }
         }).always(() => {
             closeTopLoading();
-        });
+        }).fail(handleError);
         closeInformingWindow(true);
         return deferred;
     }
@@ -332,7 +332,7 @@ $this->title = 'Животные, содержащиеся в приютах';
             }
         }).always(() => {
             closeTopLoading();
-        });
+        }).fail(handleError);
         closeInformingWindow(true);
         return deferred;
     }
@@ -360,6 +360,6 @@ $this->title = 'Животные, содержащиеся в приютах';
             }
         }).always(() => {
             closeTopLoading();
-        });
+        }).fail(handleError);
     }
 </script>

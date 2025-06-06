@@ -21,15 +21,15 @@ class AppController extends Controller
                     [
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {
-                            if (Yii::$app->request->isAjax) {
-                                return $this->validateToken();
-                            }
-                            return true;
+                            return $this->validateToken();
                         },
                     ],
                 ],
                 'denyCallback' => function ($rule, $action) {
-                    throw new UnauthorizedHttpException('Вы не аутентифицированы в системе');
+                    if (Yii::$app->request->isAjax) {
+                        throw new UnauthorizedHttpException('Вы не аутентифицированы в системе');
+                    }
+                    $this->redirect('index.php');
                 },
             ],
         ];
