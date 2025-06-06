@@ -131,6 +131,41 @@ class SupportController extends AppController
         return $failed ?? [];
     }
 
+    // Shelter
+
+    public function actionShelter()
+    {
+        $shelters = $this->getShelters();
+        return $this->render('shelter', ['shelters' => $shelters]);
+    }
+
+    public function actionSearchPets()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $params = $this->bindSearchPets();
+        return $this->findPets($params);
+    }
+
+    public function actionChangePetShelter(int $id)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $params = $this->bindChangeShelter();
+        return $this->changeShelter($id, $params['shelter_to_id']);
+    }
+
+    public function actionChangePetStatus(int $id)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $params = $this->bindChangePetStatus();
+        return $this->changePetStatus($id, $params['status_new']);
+    }
+
+    public function actionDeletePet(int $id)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return $this->deletePet($id);
+    }
+
     // region Helpers
 
     // region Question
@@ -648,6 +683,221 @@ class SupportController extends AppController
             ]);
         //$sql = $query->createCommand()->getSql();
         return $query->all();
+    }
+
+    // endregion
+
+    // region Shelter
+
+    private const DIR_ASC = 0;
+    private const DIR_DESC = 1;
+
+    private function bindSearchPets()
+    {
+        $options = [];
+        $shelter_id = filter_var($_GET['shelter_id'], FILTER_VALIDATE_INT);
+        if ($shelter_id !== false) {
+            $options['shelter_id'] = $shelter_id;
+        }
+        if (!empty($_GET['idcode'])) {
+            $options['idcode'] = $_GET['idcode'];
+        }
+        if (!empty($_GET['name'])) {
+            $options['name'] = $_GET['name'];
+        }
+        if (!empty($_GET['sort'])) {
+            $sort = $_GET['sort'];
+            if (in_array($sort, ['shelter', 'idcode', 'name', 'status', 'spec'])) {
+                $options['sort'] = $sort;
+            }
+        }
+        if (!empty($_GET['dir'])) {
+            $dir = filter_var($_GET['dir'], FILTER_VALIDATE_INT);
+            if ($dir !== false && ($dir === self::DIR_ASC || $dir === self::DIR_DESC)) {
+                $options['dir'] = $dir;
+            }
+        }
+
+        return $options;
+    }
+
+    private function findPets($params)
+    {
+        $sqlStatus = <<<SQL
+(CASE WHEN sg.status = 'IN_ISOLATION' THEN 'В изоляторе'
+     WHEN sg.status = 'IN_SHELTER' THEN 'В приюте'
+     WHEN sg.status = 'DEPARTURED' THEN 'Выбыло'
+     WHEN sg.status = 'QUARANTINE' THEN 'Карантин'
+     WHEN sg.status = 'QUARANTINE_OTHER' THEN 'Карантин (продлен)'
+     WHEN sg.status = 'IN_HOSPITAL' THEN 'В стационаре'
+     ELSE ''
+END) AS status
+SQL;
+        $query = (new Query())
+            ->select(['p.id id', 'o.id shelter_id', 'o.short_name shelter',
+                'pid.identification_code idcode', 'sg.status statuscode', new Expression($sqlStatus), 'p.name name',
+                'spec.id spec_id', 'spec.name spec'])
+            ->from('shelter_guests sg')
+            ->leftJoin('pets p', 'sg.id_pet = p.id')
+            ->leftJoin('pet_identification as pid', 'p.id = pid.id_pet')
+            ->leftJoin('species as spec', 'p.id_species = spec.id')
+            ->leftJoin('organizations o', 'sg.id_organization = o.id')
+            ->where(['!=', 'sg.status', 'DEACTIVATED']);
+
+        if (!empty($params['shelter_id'])) {
+            $query->andWhere(['o.id' => $params['shelter_id']]);
+        }
+
+        if (!empty($params['idcode'])) {
+            $query->andWhere(['ilike', 'pid.identification_code', $params['idcode']]);
+        }
+
+        if (!empty($params['name'])) {
+            $query->andWhere(['ilike', 'p.name', $params['name']]);
+        }
+
+        if (!empty($params['sort'])) {
+            $sort = $params['sort'];
+
+            $dir = self::DIR_ASC;
+            if (!empty($params['dir'])) {
+                $dir = $params['dir'];
+            }
+
+            $queryBy = $sort . ($dir === self::DIR_ASC ? ' ASC NULLS LAST' : ' DESC NULLS LAST');
+            $query->orderBy(new Expression($queryBy));
+        }
+
+        $query->limit(101);
+
+        //$sql = $query->createCommand()->getRawSql();
+        return $query->all();
+    }
+
+    private function getPetShelterInfo($pet_id)
+    {
+        $query = (new Query())
+            ->select(['sg.id_pet id', 'o.id shelter_id', 'sg.status'])
+            ->from('shelter_guests sg')
+            ->leftJoin('organizations o', 'sg.id_organization = o.id')
+            ->where(['sg.id_pet' => $pet_id]);
+        //$sql = $query->createCommand()->getRawSql();
+        return $query->one();
+    }
+
+    private function getShelters()
+    {
+        $query = (new Query())
+            ->select(['o.id', 'o.short_name AS value'])
+            ->from('organizations as o')
+            ->where(['o.id_org_type' => [45, 50, 39]])
+            ->orderBy('value');
+
+        //$sql = $query->createCommand()->getRawSql();
+        return $query->all();
+    }
+
+    private function bindChangeShelter()
+    {
+        $options = [];
+        if (!empty($_POST['pet_id'])) {
+            $options['pet_id'] = $_POST['pet_id'];
+        }
+        if (!empty($_POST['shelter_to_id'])) {
+            $options['shelter_to_id'] = $_POST['shelter_to_id'];
+        }
+
+        return $options;
+    }
+
+    private function changeShelter($pet_id, $shelter_to_id)
+    {
+        $petShelter = $this->getPetShelterInfo($pet_id);
+        if (empty($petShelter)) {
+            throw new NotFoundHttpException("Информация о животном #{$pet_id} в приюте не найдена");
+        }
+        if ($petShelter['shelter_id'] == $shelter_to_id) {
+            return false;
+        }
+        $userId = $this->getCurrentUserId();
+
+        $cmd = Yii::$app->db->createCommand()->update('shelter_guests', [
+            'status' => 'DEPARTURED',
+            'departure_reason' => 'TRANSFER_TO_OTHER_SHELTER',
+            'departure_date' => new Expression('NOW()::timestamp(0)'),
+            'updated_by' => $userId,
+            'updated_at' => new Expression('NOW()::timestamp(0)'),
+        ], ['id_pet' => $pet_id]);
+        //$sql = $cmd->getRawSql();
+        $cmd->execute();
+
+        $cmd = Yii::$app->db->createCommand()->insert('shelter_guests', [
+            'id_organization' => $shelter_to_id,
+            'id_pet' => $pet_id,
+            'status' => 'IN_SHELTER',
+            'arrival_date' => new Expression('NOW()::timestamp(0)'),
+            'arrival_reason' => 'TRANSFER_FROM_OTHER_SHELTER',
+            'departure_date' => new Expression('NOW()::timestamp(0)'),
+            'created_by' => $userId,
+            'created_at' => new Expression('NOW()::timestamp(0)'),
+            'updated_by' => $userId,
+            'updated_at' => new Expression('NOW()::timestamp(0)'),
+        ]);
+        //$sql = $cmd->getRawSql();
+        $cmd->execute();
+        return true;
+    }
+
+    private function bindChangePetStatus()
+    {
+        $options = [];
+        if (!empty($_POST['pet_id'])) {
+            $options['pet_id'] = $_POST['pet_id'];
+        }
+        if (!empty($_POST['status_new'])) {
+            $options['status_new'] = $_POST['status_new'];
+        }
+
+        return $options;
+    }
+
+    private function changePetStatus($pet_id, $status_new)
+    {
+        $petShelter = $this->getPetShelterInfo($pet_id);
+        if (empty($petShelter)) {
+            throw new NotFoundHttpException("Информация о животном #{$pet_id} в приюте не найдена");
+        }
+        if ($petShelter['status'] == $status_new) {
+            return false;
+        }
+        $userId = $this->getCurrentUserId();
+
+        $cmd = Yii::$app->db->createCommand()->update('shelter_guests', [
+            'status' => $status_new,
+            'updated_by' => $userId,
+            'updated_at' => new Expression('NOW()::timestamp(0)'),
+        ], ['id_pet' => $pet_id]);
+        //$sql = $cmd->getRawSql();
+        $cmd->execute();
+        return true;
+    }
+
+    private function deletePet($pet_id)
+    {
+        $petShelter = $this->getPetShelterInfo($pet_id);
+        if (empty($petShelter)) {
+            return false;
+        }
+        $userId = $this->getCurrentUserId();
+
+        $cmd = Yii::$app->db->createCommand()->update('shelter_guests', [
+            'status' => 'DEACTIVATED',
+            'updated_by' => $userId,
+            'updated_at' => new Expression('NOW()::timestamp(0)'),
+        ], ['id_pet' => $pet_id]);
+        //$sql = $cmd->getRawSql();
+        $cmd->execute();
+        return true;
     }
 
     // endregion

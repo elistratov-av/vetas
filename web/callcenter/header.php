@@ -353,6 +353,8 @@ function menu_site($configuration, $point = NULL, $action = NULL){
             echo 'Вопросы пользователей';
         } else if ($action == 'visit') {
             echo 'Приёмы';
+        } else if ($action == 'shelter') {
+            echo 'Животные, содержащиеся в приютах';
         }
     }else if($point == 'duplicates'){
         if($action != 'autoduplicate' && $action != 'duplicate_archive'){
@@ -599,6 +601,7 @@ function menu_site($configuration, $point = NULL, $action = NULL){
         
         echo '<li><a href="./?action=informing">Информирование</a></li>';
         echo '<li><a href="./question">Вопросы пользователей</a></li>';
+        echo '<li><a href="./shelter">Животные, содержащиеся в приютах</a></li>';
         
         echo '</ul>';
 

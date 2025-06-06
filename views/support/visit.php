@@ -26,7 +26,7 @@ AutocompleteAsset::register($this);
                 <option value="N">Новый</option>
                 <option value="F">Завершенный</option>
                 <option value="O">Завершенный (неоплачен)</option>
-                <option value="A">Отмененный</option>
+                <option value="A">Отменен</option>
                 <option value="T">Перенесён</option>
                 <option value="B">Бронирован</option>
             </select>
@@ -148,6 +148,25 @@ AutocompleteAsset::register($this);
         });
     });
 
+    function plural(num, zero, one, two, five) {
+        if (num === 0) return zero;
+        let count = num;
+        if (count < 0) count = -count;
+
+        count %= 100;
+        if (count >= 5 && count <= 20) {
+            return num + ' ' + five
+        }
+        count %= 10;
+        if (count === 1) {
+            return num + ' ' + one
+        }
+        if (count >= 2 && count <= 4) {
+            return num + ' ' + two
+        }
+        return num + ' ' + five
+    }
+
     function getReponseError(err, defaultMessage) {
         if (err && err.errors && err.errors.length) {
             const e = err.errors[0];
@@ -231,7 +250,8 @@ AutocompleteAsset::register($this);
 
     function visitColumn(d, id) {
         let html = '<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 col-12 text-reset info-text">';
-        html += 'Приём <strong>№ ' + d.id + '</strong><br/>';
+        html += 'Приём <a href="<?= Yii::$app->params['url_main_site'] ?>/visits/' + d.id + '/main-info" target="_blank">' +
+            '<strong>№ ' + d.id + '</strong></a><br/>';
         html += 'Канал: <strong>' + getChannel(+d.channel) + '</strong><br/>';
         html += 'Статус: <strong>' + getStatus(d.status) + '</strong><br/>';
         const date = d.start_date;
@@ -438,7 +458,7 @@ AutocompleteAsset::register($this);
     }
 
     function fmtCountVisit(count) {
-        return count + ' приема';
+        return plural(count, '0 приемов', 'прием', 'приема', 'приемов');
     }
 
     function saveCancelVisitsForm() {
