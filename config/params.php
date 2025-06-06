@@ -6,6 +6,7 @@ use \yii\helpers\ArrayHelper;
 $params = [
     'adminEmail' => 'admin@vetas.mos.ru',
     'url_api' => 'https://api-vetas.mos.ru',
+    'url_main_site' => 'http://192.168.10.105',
     'pagination_offset' => 0,
     'pagination_limit'  => 10,
     'static_routes' => ['v1/files'],
