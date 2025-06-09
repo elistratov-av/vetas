@@ -40,7 +40,7 @@ class DuplicatesController extends BaseController
     public function actionSearchForOneEntity(
         int $user_id,
         string $name,
-        string $phone,
+        array $phone,
         string $address,
         string $address_fact
     )

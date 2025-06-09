@@ -1021,16 +1021,22 @@ class PetOwnersModel extends Model
     public function duplicatesSearchForOneEntity(
         int $user_id,
         string $name,
-        string $phone,
+        array $phone,
         string $address,
         string $address_fact
     )
     {
+        if (!empty($phone)) {
+            $phone = implode(',', array_map(function ($val) { return "'".$val."'"; }, $phone));
+        } else {
+            throw new BadRequestHttpException('Массив phone должен быть не пустой');
+        }
+
         $select = "SELECT admin.pet_owners_duplicates(".
             "p_user_id=>$user_id,".
             "p_mode=>'search_for_one_entity',".
             "p_name=>'$name',".
-            "p_phone=>'$phone',".
+            "p_phone=>array[$phone],".
             "p_address=>'$address',".
             "p_address_fact=>'$address_fact'".
         ") as column_1";
@@ -1100,7 +1106,11 @@ class PetOwnersModel extends Model
             }
         }
 
-        $pet_owners_ids = implode(',', $pet_owners_ids);
+        if (!empty($pet_owners_ids)) {
+            $pet_owners_ids = implode(',', $pet_owners_ids);
+        } else {
+            throw new BadRequestHttpException('Массив pet_owners_ids должен быть не пустой');
+        }
 
         $select = "SELECT admin.pet_owners_duplicates(".
             "p_user_id=>$user_id,".
