@@ -14,6 +14,93 @@ use yii\web\BadRequestHttpException;
 class DuplicatesController extends BaseController
 {
     /**
+     * admin.pet_owners_duplicates_reestr
+     */
+    public function actionList(
+        ?string $date_start = null,
+        ?string $date_end = null,
+        ?string $name = null,
+        ?string $phone = null,
+        ?string $address = null,
+        ?string $automatic = null,
+        int $limit = 10, 
+        int $offset = 0
+    )
+    {
+        $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
+
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+
+        return (new PetOwnersModel())->duplicatesList($date_start, $date_end, $name, $phone, $address, $automatic, $limit, $offset);
+    }
+
+    /**
+     * admin.pet_owners_duplicates ( mode => search_for_one_entity )
+     */
+    public function actionSearchForOneEntity(
+        int $user_id,
+        string $name,
+        string $phone,
+        string $address,
+        string $address_fact
+    )
+    {
+        $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
+  
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+
+        return (new PetOwnersModel())->duplicatesSearchForOneEntity($user_id, $name, $phone, $address, $address_fact);
+    }
+
+    /**
+     * admin.pet_owners_duplicates ( mode => search_and_link )
+     */
+    public function actionSearchAndLink(
+        int $user_id,
+        string $date_start,
+        string $date_end
+    )
+    {
+        $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
+  
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        
+        return (new PetOwnersModel())->duplicatesSearchAndLink($user_id, $date_start, $date_end);
+    }
+
+    /**
+     * admin.pet_owners_duplicates ( mode => search_for_delete )
+     */
+    public function actionSearchForDelete(
+        int $user_id,
+        string $date_start,
+        string $date_end        
+    )
+    {
+        $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
+  
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        
+        return (new PetOwnersModel())->duplicatesSearchForDelete($user_id, $date_start, $date_end);
+    }
+
+    /**
+     * admin.pet_owners_duplicates ( mode => soft_delete ( default ) or hard_delete )
+     */
+    public function actionDelete(
+        int $user_id,
+        array $pet_owners_ids,
+        ?string $mode = 'soft_delete'
+    )
+    {
+        $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
+  
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        
+        return (new PetOwnersModel())->duplicatesDelete($user_id, $pet_owners_ids, $mode);
+    }
+
+    /**
      * Метод подбора дублирующих записей владельцев (первый шаг объединения дублей)
      * (п.1.3 https://confluence.altarix.ru/confluence/pages/viewpage.action?pageId=124203916)
      *
