@@ -65,7 +65,7 @@ $this->title = 'Животные, содержащиеся в приютах';
 
         <form class="form-window main_row" id="change-shelter-form">
             <div class="main_row">
-                <input type="hidden" id="pet_id" name="pet_id">
+                <input type="hidden" id="guest_id" name="guest_id">
 
                 <div class="col-12 mb-4">
                     <label for="shelter_to_id" class="form-label mb-2 required">Приют</label>
@@ -97,7 +97,7 @@ $this->title = 'Животные, содержащиеся в приютах';
 
         <form class="form-window main_row" id="change-status-form">
             <div class="main_row">
-                <input type="hidden" id="pet_id" name="pet_id">
+                <input type="hidden" id="guest_id" name="guest_id">
 
                 <div class="col-12 mb-4">
                     <label for="status_new" class="form-label mb-2 required">Статус</label>
@@ -234,28 +234,28 @@ $this->title = 'Животные, содержащиеся в приютах';
         html += '<td>' + enc(data.spec) + '</td>';
         html += '<td>' + enc(data.status) + '</td>';
         html += '<td><div class="d-inline-flex flex-column">';
-        html += '<button class="button btn-mini mb-1" onclick="showChangeStatusForm(' + data.id + ', \'' + data.statuscode + '\');">Изменить статус</button>';
-        html += '<button class="button btn-mini mb-1" onclick="showChangeShelterForm(' + data.id + ', ' + data.shelter_id + ');">Изменить приют</button>';
+        html += '<button class="button btn-mini mb-1" onclick="showChangeStatusForm(' + data.guest_id + ', \'' + data.statuscode + '\');">Изменить статус</button>';
+        html += '<button class="button btn-mini mb-1" onclick="showChangeShelterForm(' + data.guest_id + ', ' + data.shelter_id + ');">Изменить приют</button>';
         html += '<button class="btn-secondary btn-mini mb-1" onclick="confirmDeletePet(' + data.id + ');">Удалить</button>';
         html += '</div></td></tr>';
         return html;
     }
 
-    function showChangeShelterForm(petId, shelter_id) {
-        if (!petId) return;
+    function showChangeShelterForm(guestId, shelter_id) {
+        if (!guestId) return;
         const cardTemplate = document.querySelector('#change-shelter-card').content;
         const card = cardTemplate.querySelector('#change-shelter-window').cloneNode(true);
         const $subContainer = $('#sub_container');
 
         card.querySelector('#error-message').textContent = '';
-        card.querySelector('#pet_id').value = petId;
+        card.querySelector('#guest_id').value = guestId;
         const curOption = card.querySelector('#shelter_to_id option[value="' + shelter_id + '"]');
         if (curOption) {
             curOption.disabled = true;
         }
         card.querySelector('#change-shelter-form').addEventListener('submit', (ev) => {
             ev.preventDefault();
-            movePetToShelter(petId);
+            movePetToShelter();
         });
 
         $subContainer.empty();
@@ -265,7 +265,7 @@ $this->title = 'Животные, содержащиеся в приютах';
         $('#container').show();
     }
 
-    function movePetToShelter(petId) {
+    function movePetToShelter() {
         const $form = $('#change-shelter-window #change-shelter-form');
         const formData = $form.serializeArray();
 
@@ -275,7 +275,7 @@ $this->title = 'Животные, содержащиеся в приютах';
             'cache': false,
             'type': 'POST',
             'data': formData,
-            'url': 'change-pet-shelter/' + petId,
+            'url': 'change-pet-shelter',
             'beforeSend': function() {
                 showTopLoading();
             },
@@ -289,21 +289,21 @@ $this->title = 'Животные, содержащиеся в приютах';
         return deferred;
     }
 
-    function showChangeStatusForm(petId, statuscode) {
-        if (!petId) return;
+    function showChangeStatusForm(guestId,  statuscode) {
+        if (!guestId) return;
         const cardTemplate = document.querySelector('#change-status-card').content;
         const card = cardTemplate.querySelector('#change-status-window').cloneNode(true);
         const $subContainer = $('#sub_container');
 
         card.querySelector('#error-message').textContent = '';
-        card.querySelector('#pet_id').value = petId;
+        card.querySelector('#guest_id').value = guestId;
         const curOption = card.querySelector('#status_new option[value="' + statuscode + '"]');
         if (curOption) {
             curOption.disabled = true;
         }
         card.querySelector('#change-status-form').addEventListener('submit', (ev) => {
             ev.preventDefault();
-            changePetStatus(petId);
+            changePetStatus();
         });
 
         $subContainer.empty();
@@ -313,7 +313,7 @@ $this->title = 'Животные, содержащиеся в приютах';
         $('#container').show();
     }
 
-    function changePetStatus(petId) {
+    function changePetStatus() {
         const $form = $('#change-status-window #change-status-form');
         const formData = $form.serializeArray();
 
@@ -323,7 +323,7 @@ $this->title = 'Животные, содержащиеся в приютах';
             'cache': false,
             'type': 'POST',
             'data': formData,
-            'url': 'change-pet-status/' + petId,
+            'url': 'change-pet-status',
             'beforeSend': function() {
                 showTopLoading();
             },

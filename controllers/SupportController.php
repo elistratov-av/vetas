@@ -146,18 +146,18 @@ class SupportController extends AppController
         return $this->findPets($params);
     }
 
-    public function actionChangePetShelter(int $id)
+    public function actionChangePetShelter()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $params = $this->bindChangeShelter();
-        return $this->changeShelter($id, $params['shelter_to_id']);
+        return $this->changeShelter($params['guest_id'], $params['shelter_to_id']);
     }
 
-    public function actionChangePetStatus(int $id)
+    public function actionChangePetStatus()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $params = $this->bindChangePetStatus();
-        return $this->changePetStatus($id, $params['status_new']);
+        return $this->changePetStatus($params['guest_id'], $params['status_new']);
     }
 
     public function actionDeletePet(int $id)
@@ -734,7 +734,7 @@ class SupportController extends AppController
 END) AS status
 SQL;
         $query = (new Query())
-            ->select(['p.id id', 'o.id shelter_id', 'o.short_name shelter',
+            ->select(['sg.id guest_id', 'p.id id', 'o.id shelter_id', 'o.short_name shelter',
                 'pid.identification_code idcode', 'sg.status statuscode', new Expression($sqlStatus), 'p.name name',
                 'spec.id spec_id', 'spec.name spec'])
             ->from('shelter_guests sg')
@@ -774,13 +774,13 @@ SQL;
         return $query->all();
     }
 
-    private function getPetShelterInfo($pet_id)
+    private function getPetShelterInfo($guest_id)
     {
         $query = (new Query())
-            ->select(['sg.id_pet id', 'o.id shelter_id', 'sg.status'])
+            ->select(['sg.id guest_id', 'sg.id_pet id', 'o.id shelter_id', 'sg.status'])
             ->from('shelter_guests sg')
             ->leftJoin('organizations o', 'sg.id_organization = o.id')
-            ->where(['sg.id_pet' => $pet_id]);
+            ->where(['sg.id' => $guest_id]);
         //$sql = $query->createCommand()->getRawSql();
         return $query->one();
     }
@@ -800,8 +800,8 @@ SQL;
     private function bindChangeShelter()
     {
         $options = [];
-        if (!empty($_POST['pet_id'])) {
-            $options['pet_id'] = $_POST['pet_id'];
+        if (!empty($_POST['guest_id'])) {
+            $options['guest_id'] = $_POST['guest_id'];
         }
         if (!empty($_POST['shelter_to_id'])) {
             $options['shelter_to_id'] = $_POST['shelter_to_id'];
@@ -810,11 +810,11 @@ SQL;
         return $options;
     }
 
-    private function changeShelter($pet_id, $shelter_to_id)
+    private function changeShelter($guest_id, $shelter_to_id)
     {
-        $petShelter = $this->getPetShelterInfo($pet_id);
+        $petShelter = $this->getPetShelterInfo($guest_id);
         if (empty($petShelter)) {
-            throw new NotFoundHttpException("Информация о животном #{$pet_id} в приюте не найдена");
+            throw new NotFoundHttpException("Информация о животном #{$guest_id} в приюте не найдена");
         }
         if ($petShelter['shelter_id'] == $shelter_to_id) {
             return false;
@@ -827,13 +827,13 @@ SQL;
             'departure_date' => new Expression('NOW()::timestamp(0)'),
             'updated_by' => $userId,
             'updated_at' => new Expression('NOW()::timestamp(0)'),
-        ], ['id_pet' => $pet_id]);
+        ], ['id' => $guest_id]);
         //$sql = $cmd->getRawSql();
         $cmd->execute();
 
         $cmd = Yii::$app->db->createCommand()->insert('shelter_guests', [
             'id_organization' => $shelter_to_id,
-            'id_pet' => $pet_id,
+            'id_pet' => $petShelter['id'],
             'status' => 'IN_SHELTER',
             'arrival_date' => new Expression('NOW()::timestamp(0)'),
             'arrival_reason' => 'TRANSFER_FROM_OTHER_SHELTER',
@@ -851,8 +851,8 @@ SQL;
     private function bindChangePetStatus()
     {
         $options = [];
-        if (!empty($_POST['pet_id'])) {
-            $options['pet_id'] = $_POST['pet_id'];
+        if (!empty($_POST['guest_id'])) {
+            $options['guest_id'] = $_POST['guest_id'];
         }
         if (!empty($_POST['status_new'])) {
             $options['status_new'] = $_POST['status_new'];
@@ -861,11 +861,11 @@ SQL;
         return $options;
     }
 
-    private function changePetStatus($pet_id, $status_new)
+    private function changePetStatus($guest_id, $status_new)
     {
-        $petShelter = $this->getPetShelterInfo($pet_id);
+        $petShelter = $this->getPetShelterInfo($guest_id);
         if (empty($petShelter)) {
-            throw new NotFoundHttpException("Информация о животном #{$pet_id} в приюте не найдена");
+            throw new NotFoundHttpException("Информация о животном #{$guest_id} в приюте не найдена");
         }
         if ($petShelter['status'] == $status_new) {
             return false;
@@ -876,7 +876,7 @@ SQL;
             'status' => $status_new,
             'updated_by' => $userId,
             'updated_at' => new Expression('NOW()::timestamp(0)'),
-        ], ['id_pet' => $pet_id]);
+        ], ['id' => $guest_id]);
         //$sql = $cmd->getRawSql();
         $cmd->execute();
         return true;
@@ -884,10 +884,6 @@ SQL;
 
     private function deletePet($pet_id)
     {
-        $petShelter = $this->getPetShelterInfo($pet_id);
-        if (empty($petShelter)) {
-            return false;
-        }
         $userId = $this->getCurrentUserId();
 
         $cmd = Yii::$app->db->createCommand()->update('shelter_guests', [
