@@ -977,8 +977,8 @@ class PetOwnersModel extends Model
         ?string $phone = null,
         ?string $address = null,
         ?string $automatic = null,
-        int $limit = 10, 
-        int $offset = 0
+        int $page = 1, 
+        int $limit = 10
     )
     {
         if (isset($automatic)) {
@@ -1006,8 +1006,8 @@ class PetOwnersModel extends Model
             $phone.
             $address.
             $automatic.
-            "p_limit=>$limit,".
-            "p_offset=>$offset".
+            "p_page=>$page,".
+            "p_limit=>$limit".
         ") as column_1";
 
         $result = \Yii::$app->db->createCommand($select)->queryOne();

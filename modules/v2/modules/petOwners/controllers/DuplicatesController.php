@@ -23,22 +23,22 @@ class DuplicatesController extends BaseController
         ?string $phone = null,
         ?string $address = null,
         ?string $automatic = null,
-        int $limit = 10, 
-        int $offset = 0
+        int $page = 1, 
+        int $limit = 10
     )
     {
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
 
-        return (new PetOwnersModel())->duplicatesList($date_start, $date_end, $name, $phone, $address, $automatic, $limit, $offset);
+        return (new PetOwnersModel())->duplicatesList($date_start, $date_end, $name, $phone, $address, $automatic, $page, $limit);
     }
 
     /**
      * admin.pet_owners_duplicates ( mode => search_for_one_entity )
      */
     public function actionSearchForOneEntity(
-        int $user_id,
+        ?int $user_id = null,
         string $name,
         array $phone,
         string $address,
@@ -46,7 +46,9 @@ class DuplicatesController extends BaseController
     )
     {
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
-  
+
+        if (!isset($user_id)) { $user_id = \Yii::$app->user->getId(); }
+
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
 
         return (new PetOwnersModel())->duplicatesSearchForOneEntity($user_id, $name, $phone, $address, $address_fact);
@@ -56,13 +58,15 @@ class DuplicatesController extends BaseController
      * admin.pet_owners_duplicates ( mode => search_and_link )
      */
     public function actionSearchAndLink(
-        int $user_id,
+        ?int $user_id = null,
         string $date_start,
         string $date_end
     )
     {
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
   
+        if (!isset($user_id)) { $user_id = \Yii::$app->user->getId(); }
+
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         
         return (new PetOwnersModel())->duplicatesSearchAndLink($user_id, $date_start, $date_end);
@@ -72,13 +76,15 @@ class DuplicatesController extends BaseController
      * admin.pet_owners_duplicates ( mode => search_for_delete )
      */
     public function actionSearchForDelete(
-        int $user_id,
+        ?int $user_id = null,
         string $date_start,
         string $date_end        
     )
     {
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
-  
+
+        if (!isset($user_id)) { $user_id = \Yii::$app->user->getId(); }
+
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         
         return (new PetOwnersModel())->duplicatesSearchForDelete($user_id, $date_start, $date_end);
@@ -88,13 +94,15 @@ class DuplicatesController extends BaseController
      * admin.pet_owners_duplicates ( mode => soft_delete ( default ) or hard_delete )
      */
     public function actionDelete(
-        int $user_id,
+        ?int $user_id = null,
         array $pet_owners_ids,
         ?string $mode = 'soft_delete'
     )
     {
         $this->checkAccess($this->action->getUniqueId(), null, $this->actionParams);
-  
+
+        if (!isset($user_id)) { $user_id = \Yii::$app->user->getId(); }
+        
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         
         return (new PetOwnersModel())->duplicatesDelete($user_id, $pet_owners_ids, $mode);
