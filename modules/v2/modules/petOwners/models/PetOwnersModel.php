@@ -968,6 +968,152 @@ class PetOwnersModel extends Model
 
 
     /**
+     * admin.pet_owners_duplicates_reestr
+     */
+    public function duplicatesList(
+        ?string $date_start = null,
+        ?string $date_end = null,
+        ?string $name = null,
+        ?string $phone = null,
+        ?string $address = null,
+        ?string $automatic = null,
+        int $limit = 10, 
+        int $offset = 0
+    )
+    {
+        if (isset($automatic)) {
+            $automatic = strtolower(trim($automatic));
+            if ($automatic == '1') { $automatic = 'true'; }
+            elseif ($automatic == '' || $automatic == '0') { $automatic = 'false'; }
+            if (strlen($automatic)) {
+                if (!($automatic == 'true' || $automatic == 'false')) {
+                    throw new BadRequestHttpException('Параметр automatic должен быть true, либо false');
+                }
+            }
+        }
+
+        if (isset($date_start)) { $date_start = "p_date_start=>'$date_start',"; } else { $date_start = "p_date_start=>NULL,"; }
+        if (isset($date_end)) { $date_end = "p_date_end=>'$date_end',"; } else { $date_end = "p_date_end=>NULL,"; }
+        if (isset($name)) { $name = "p_name=>'$name',"; } else { $name = "p_name=>NULL,"; }
+        if (isset($phone)) { $phone = "p_phone=>'$phone',"; } else { $phone = "p_phone=>NULL,"; }
+        if (isset($address)) { $address = "p_address=>'$address',"; } else { $address = "p_address=>NULL,"; }
+        if (isset($automatic)) { $automatic = "p_automatic=>'$automatic',"; } else { $automatic = "p_automatic=>NULL,"; }
+
+        $select = "SELECT admin.pet_owners_duplicates_reestr(".
+            $date_start.
+            $date_end.
+            $name.
+            $phone.
+            $address.
+            $automatic.
+            "p_limit=>$limit,".
+            "p_offset=>$offset".
+        ") as column_1";
+
+        $result = \Yii::$app->db->createCommand($select)->queryOne();
+
+        return $result['column_1'];
+    }
+
+    /**
+     * admin.pet_owners_duplicates ( mode => search_for_one_entity )
+     */
+    public function duplicatesSearchForOneEntity(
+        int $user_id,
+        string $name,
+        string $phone,
+        string $address,
+        string $address_fact
+    )
+    {
+        $select = "SELECT admin.pet_owners_duplicates(".
+            "p_user_id=>$user_id,".
+            "p_mode=>'search_for_one_entity',".
+            "p_name=>'$name',".
+            "p_phone=>'$phone',".
+            "p_address=>'$address',".
+            "p_address_fact=>'$address_fact'".
+        ") as column_1";
+
+        $result = \Yii::$app->db->createCommand($select)->queryOne();
+
+        return $result['column_1'];
+    }
+
+    /**
+     * admin.pet_owners_duplicates ( mode => search_and_link )
+     */
+    public function duplicatesSearchAndLink(
+        int $user_id,
+        string $date_start,
+        string $date_end
+    )
+    {
+        $select = "SELECT admin.pet_owners_duplicates(".
+            "p_user_id=>$user_id,".
+            "p_mode=>'search_and_link',".
+            "p_date1=>'$date_start',".
+            "p_date2=>'$date_end'".
+        ") as column_1";
+
+        $result = \Yii::$app->db->createCommand($select)->queryOne();
+
+        return $result['column_1'];
+    }
+
+    /**
+     * admin.pet_owners_duplicates ( mode => search_for_delete )
+     */
+    public function duplicatesSearchForDelete(
+        int $user_id,
+        string $date_start,
+        string $date_end
+    )
+    {
+        $select = "SELECT admin.pet_owners_duplicates(".
+            "p_user_id=>$user_id,".
+            "p_mode=>'search_for_delete',".
+            "p_date1=>'$date_start',".
+            "p_date2=>'$date_end'".
+        ") as column_1";
+
+        $result = \Yii::$app->db->createCommand($select)->queryOne();
+
+        return $result['column_1'];
+    }
+
+    /**
+     * admin.pet_owners_duplicates ( mode => soft_delete ( default ) or hard_delete )
+     */
+    public function duplicatesDelete(
+        int $user_id,
+        array $pet_owners_ids,
+        ?string $mode = 'soft_delete'
+    )
+    {
+        if (isset($mode)) {
+            $mode = strtolower(trim($mode));
+            if (strlen($mode)) {
+                if (!($mode == 'soft_delete' || $mode == 'hard_delete')) {
+                    throw new BadRequestHttpException('Параметр mode должен быть soft_delete, либо hard_delete');
+                }
+            }
+        }
+
+        $pet_owners_ids = implode(',', $pet_owners_ids);
+
+        $select = "SELECT admin.pet_owners_duplicates(".
+            "p_user_id=>$user_id,".
+            "p_mode=>'$mode',".
+            "p_ids=>array[$pet_owners_ids]".
+        ") as column_1";
+
+        $result = \Yii::$app->db->createCommand($select)->queryOne();
+
+        return $result['column_1'];
+    }
+
+    /**
      * @param string $f_fio
      * @param string $i_fio
      * @param string $o_fio
