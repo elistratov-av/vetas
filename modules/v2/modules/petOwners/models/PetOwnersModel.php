@@ -1066,15 +1066,15 @@ class PetOwnersModel extends Model
      */
     public function duplicatesSearchForDelete(
         int $user_id,
-        string $date1,
-        string $date2
+        string $date_start,
+        string $date_end
     )
     {
         $select = "SELECT admin.pet_owners_duplicates(".
             "p_user_id=>$user_id,".
             "p_mode=>'search_for_delete',".
-            "p_date1=>'$date1',".
-            "p_date2=>'$date2'".
+            "p_date1=>'$date_start',".
+            "p_date2=>'$date_end'".
         ") as column_1";
 
         $result = \Yii::$app->db->createCommand($select)->queryOne();
